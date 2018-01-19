@@ -4,27 +4,32 @@
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 #include <directxmath.h>
+#include "Vector.h"
 
 using namespace DirectX;
 
 class Camera
 {
 private:
-	XMFLOAT3 _eye; 
-	XMFLOAT3 _at;
-	XMFLOAT3 _up;
+	Vector _eye; 
+	Vector _at;
+	Vector _up;
 
 	FLOAT _windowWidth;
 	FLOAT _windowHeight;
 	FLOAT _nearDepth;
 	FLOAT _farDepth;
+	FLOAT _fovY;
 
 	XMFLOAT4X4 _view;
 	XMFLOAT4X4 _projection;
 
+
 public:
-	Camera(XMFLOAT3 position, XMFLOAT3 at, XMFLOAT3 up, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
+	Camera(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
 	~Camera();
+
+	
 
 	void Update();
 
@@ -33,13 +38,15 @@ public:
 
 	XMFLOAT4X4 GetViewProjection() const;
 
-	XMFLOAT3 GetPosition() const { return _eye; }
-	XMFLOAT3 GetLookAt() const { return _at; }
-	XMFLOAT3 GetUp() const { return _up; }
+	Vector GetPosition() const { return _eye; }
+	Vector GetLookAt() const { return _at; }
+	Vector GetUp() const { return _up; }
 
-	void SetPosition(XMFLOAT3 position) { _eye = position; }
-	void SetLookAt(XMFLOAT3 lookAt) { _at = lookAt; }
-	void SetUp(XMFLOAT3 up) { _up = up; }
+	void SetLens(float fovY, float windowHeight, float windowWidth, float zn, float zf);
+	void SetLookAt(Vector position, Vector target, Vector worldUp);
+	void SetPosition(Vector position) { _eye = position; }
+	void SetLookAt(Vector lookAt) { _at = lookAt; }
+	void SetUp(Vector up) { _up = up; }
 
 	void Reshape(FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
 };

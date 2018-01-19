@@ -17,7 +17,12 @@ Vector::Vector(float initialX, float initialY, float initialZ)
 
 float Vector::GetMagnitude()
 {
-	return sqrtf((x*x) + (y*y) + (z*z));
+	return sqrtf(GetSqrMagnitude());
+}
+
+float Vector::GetSqrMagnitude()
+{
+	return ((x*x) + (y*y) + (z*z));
 }
 
 Vector Vector::GetNormalized()
@@ -42,9 +47,15 @@ Vector Vector::Cross(Vector v1, Vector v2)
 	return cross;
 }
 
-Vector Vector::Dot(Vector v1, Vector v2)
+float Vector::Dot(Vector v1, Vector v2)
 {
-	return Vector(v1.x*v2.x, v1.y*v2.y, v1.z*v2.z);
+	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
+}
+
+Vector Vector::Reflect(Vector v, Vector normal)
+{
+	normal.Normalize();
+	return v - (normal * (2.0f * Dot(v, normal)));
 }
 
 Vector Vector::operator*(float scaler)
@@ -52,9 +63,19 @@ Vector Vector::operator*(float scaler)
 	return Vector(x * scaler, y * scaler, z * scaler);
 }
 
+Vector Vector::operator/(float scaler)
+{
+	return Vector();
+}
+
 Vector Vector::operator+(const Vector & other)
 {
 	return Vector(x + other.x, y + other.y, z + other.z);
+}
+
+Vector Vector::operator-(const Vector & other)
+{
+	return Vector(x - other.x, y - other.y, z - other.z);
 }
 
 Vector Vector::operator+=(const Vector & other)
@@ -70,5 +91,29 @@ Vector Vector::operator-=(const Vector & other)
 	x -= other.x;
 	y -= other.y;
 	z -= other.z;
+	return *this;
+}
+
+bool Vector::operator==(const Vector & other)
+{
+	if (x == other.x && y == other.y && z == other.z)
+		return true;
+	else
+		return false;
+}
+
+bool Vector::operator!=(const Vector & other)
+{
+	if (x == other.x && y == other.y && z == other.z)
+		return false;
+	else
+		return true;
+}
+
+Vector Vector::operator=(const Vector & other)
+{
+	x = other.x;
+	y = other.y;
+	z = other.z;
 	return *this;
 }

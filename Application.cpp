@@ -23,12 +23,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-bool Application::HandleKeyboard(MSG msg)
+bool Application::HandleKeyboard()
 {
-	XMFLOAT3 cameraPosition = _camera->GetPosition();
+	DIMOUSESTATE mouseCurrState;
+	DIMouse->Acquire();
+	DIMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouseCurrState);
 
+	Vector cameraPosition = _camera->GetPosition();
+
+	//Escape to Quit
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		PostMessage(_hWnd, WM_DESTROY, 0, 0);
+
+	if(mouseCurrState.lX != mouseLastState.lX)
+		_cameraOrbitAngleYaw = _cameraSpeed * mouseCurrState.lX;
+	
+	if (mouseCurrState.lY != mouseLastState.lY)
+		_cameraOrbitAnglePitch = _cameraSpeed * mouseCurrState.lY;
+
+	/*
 	switch (msg.wParam)
 	{
+		
 	case VK_UP:
 		_cameraOrbitRadius = max(_cameraOrbitRadiusMin, _cameraOrbitRadius - (_cameraSpeed * 0.2f));
 		return true;
@@ -38,17 +54,21 @@ bool Application::HandleKeyboard(MSG msg)
 		_cameraOrbitRadius = min(_cameraOrbitRadiusMax, _cameraOrbitRadius + (_cameraSpeed * 0.2f));
 		return true;
 		break;
-
+		
 	case VK_RIGHT:
 		_cameraOrbitAngleXZ -= _cameraSpeed;
 		return true;
 		break;
-
+		
 	case VK_LEFT:
 		_cameraOrbitAngleXZ += _cameraSpeed;
 		return true;
 		break;
+		
 	}
+	*/
+
+	mouseLastState = mouseCurrState;
 
 	return false;
 }
@@ -81,32 +101,38 @@ Application::~Application()
 
 HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 {
-    if (FAILED(InitWindow(hInstance, nCmdShow)))
+	if (FAILED(InitWindow(hInstance, nCmdShow)))
 	{
-        return E_FAIL;
+		return E_FAIL;
 	}
 
-    RECT rc;
-    GetClientRect(_hWnd, &rc);
-    _WindowWidth = rc.right - rc.left;
-    _WindowHeight = rc.bottom - rc.top;
+	RECT rc;
+	GetClientRect(_hWnd, &rc);
+	_WindowWidth = rc.right - rc.left;
+	_WindowHeight = rc.bottom - rc.top;
 
-    if (FAILED(InitDevice()))
-    {
-        Cleanup();
+	if (FAILED(InitDevice()))
+	{
+		Cleanup();
 
-        return E_FAIL;
-    }
+		return E_FAIL;
+	}
+
+	if (FAILED(InitDirectInput(hInstance)))
+	{
+		MessageBox(0, L"Direct Input Inititalization - Failed", L"Error", MB_OK);
+		return E_FAIL;
+	}
 
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\stone.dds", nullptr, &_pTextureRV);
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\floor.dds", nullptr, &_pGroundTextureRV);
 
-    // Setup Camera
-	XMFLOAT3 eye = XMFLOAT3(0.0f, 2.0f, -1.0f);
-	XMFLOAT3 at = XMFLOAT3(0.0f, 2.0f, 0.0f);
-	XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
+	// Setup Camera
+	Vector eye = { 0.0f, 2.0f, -1.0f };
+	Vector at = { 0.0f, 2.0f, 0.0f };
+	Vector up = { 0.0f, 1.0f, 0.0f };
 
-	_camera = new Camera(eye, at, up, (float)_renderWidth, (float)_renderHeight, 0.01f, 200.0f);
+	_camera = new Camera(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 200.0f);
 
 	// Setup the scene's light
 	basicLight.AmbientLight = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -164,8 +190,6 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 HRESULT Application::InitShadersAndInputLayout()
 {
-	HRESULT hr;
-
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
     hr = CompileShaderFromFile(L"DX11 Framework.fx", "VS", "vs_4_0", &pVSBlob);
@@ -241,8 +265,6 @@ HRESULT Application::InitShadersAndInputLayout()
 
 HRESULT Application::InitVertexBuffer()
 {
-	HRESULT hr;
-
     // Create vertex buffer
     SimpleVertex vertices[] =
     {
@@ -321,8 +343,6 @@ HRESULT Application::InitVertexBuffer()
 
 HRESULT Application::InitIndexBuffer()
 {
-	HRESULT hr;
-
     // Create index buffer
     WORD indices[] =
     {
@@ -384,6 +404,22 @@ HRESULT Application::InitIndexBuffer()
 	return S_OK;
 }
 
+HRESULT Application::InitDirectInput(HINSTANCE hInstance)
+{
+	hr = DirectInput8Create(hInstance,
+		DIRECTINPUT_VERSION,
+		IID_IDirectInput8,
+		(void**)&DirectInput,
+		NULL);
+
+	hr = DirectInput->CreateDevice(GUID_SysMouse, &DIMouse, NULL);
+
+	hr = DIMouse->SetDataFormat(&c_dfDIMouse);
+	hr = DIMouse->SetCooperativeLevel(_hWnd, DISCL_EXCLUSIVE | DISCL_NOWINKEY | DISCL_FOREGROUND);
+
+	return hr;
+}
+
 HRESULT Application::InitWindow(HINSTANCE hInstance, int nCmdShow)
 {
     // Register class
@@ -420,7 +456,7 @@ HRESULT Application::InitWindow(HINSTANCE hInstance, int nCmdShow)
 
 HRESULT Application::CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
 {
-    HRESULT hr = S_OK;
+    hr = S_OK;
 
     DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined(DEBUG) || defined(_DEBUG)
@@ -452,7 +488,7 @@ HRESULT Application::CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoin
 
 HRESULT Application::InitDevice()
 {
-    HRESULT hr = S_OK;
+    hr = S_OK;
 
     UINT createDeviceFlags = 0;
 
@@ -659,6 +695,8 @@ void Application::Update()
     static float timeSinceStart = 0.0f;
     static DWORD dwTimeStart = 0;
 
+	HandleKeyboard();
+
     DWORD dwTimeCur = GetTickCount();
 
     if (dwTimeStart == 0)
@@ -673,12 +711,12 @@ void Application::Update()
 	}
 
 	// Update camera
-	float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleXZ);
+	float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleYaw);
 
 	float x = _cameraOrbitRadius * cos(angleAroundZ);
 	float z = _cameraOrbitRadius * sin(angleAroundZ);
 
-	XMFLOAT3 cameraPos = _camera->GetPosition();
+	Vector cameraPos = _camera->GetPosition();
 	cameraPos.x = x;
 	cameraPos.z = z;
 

@@ -1,10 +1,14 @@
 #pragma once
 
+#pragma comment (lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+
 #include <windows.h>
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 #include <directxmath.h>
 #include <directxcolors.h>
+#include <dinput.h>
 #include "DDSTextureLoader.h"
 #include "resource.h"
 #include "Camera.h"
@@ -61,7 +65,7 @@ struct ConstantBuffer
 
 	Light light;
 
-	XMFLOAT3 EyePosW;
+	Vector EyePosW;
 	float HasTexture;
 };
 
@@ -105,8 +109,9 @@ private:
 	float _cameraOrbitRadius = 7.0f;
 	float _cameraOrbitRadiusMin = 2.0f;
 	float _cameraOrbitRadiusMax = 50.0f;
-	float _cameraOrbitAngleXZ = -90.0f;
-	float _cameraSpeed = 2.0f;
+	float _cameraOrbitAngleYaw = -90.0f;
+	float _cameraOrbitAnglePitch = 20.0f;
+	float _cameraSpeed = 0.1f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;
@@ -121,6 +126,13 @@ private:
 	ID3D11RasterizerState* CCWcullMode;
 	ID3D11RasterizerState* CWcullMode;
 
+	HRESULT hr;
+
+	//Direct Input
+	IDirectInputDevice8* DIMouse;
+	DIMOUSESTATE mouseLastState;
+	LPDIRECTINPUT8 DirectInput;
+
 private:
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 	HRESULT InitDevice();
@@ -129,6 +141,7 @@ private:
 	HRESULT InitShadersAndInputLayout();
 	HRESULT InitVertexBuffer();
 	HRESULT InitIndexBuffer();
+	HRESULT InitDirectInput(HINSTANCE hInstance);
 
 	void moveForward(int objectNumber);
 
@@ -138,7 +151,7 @@ public:
 
 	HRESULT Initialise(HINSTANCE hInstance, int nCmdShow);
 
-	bool HandleKeyboard(MSG msg);
+	bool HandleKeyboard();
 
 	void Update();
 	void Draw();

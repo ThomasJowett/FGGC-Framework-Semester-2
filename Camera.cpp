@@ -1,13 +1,32 @@
 #include "Camera.h"
 
-Camera::Camera(XMFLOAT3 position, XMFLOAT3 at, XMFLOAT3 up, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
-	: _eye(position), _at(at), _up(up), _windowWidth(windowWidth), _windowHeight(windowHeight), _nearDepth(nearDepth), _farDepth(farDepth)
+Camera::Camera(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
+	: _eye(position), _at(at), _up(up)
 {
+	SetLens(fovY, windowHeight, windowWidth, nearDepth, farDepth);
 	Update();
 }
 
 Camera::~Camera()
 {
+}
+
+void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float nearDepth, float farDepth)
+{
+	//Cache properties
+	_fovY = fovY;
+	_windowHeight = windowHeight;
+	_windowWidth = windowWidth;
+	_nearDepth = nearDepth;
+	_farDepth = farDepth;
+
+	// Initialize the projection matrix
+	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(fovY, windowHeight / windowWidth, nearDepth, farDepth));
+}
+
+void Camera::SetLookAt(Vector position, Vector target, Vector worldUp)
+{
+	
 }
 
 void Camera::Update()
@@ -24,8 +43,7 @@ void Camera::Update()
 
 	XMStoreFloat4x4(&_view, XMMatrixLookAtLH(EyeVector, AtVector, UpVector));
 
-    // Initialize the projection matrix
-	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(0.25f * XM_PI, _windowWidth / _windowHeight, _nearDepth, _farDepth));
+    
 }
 
 void Camera::Reshape(FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
