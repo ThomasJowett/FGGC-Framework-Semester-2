@@ -12,6 +12,7 @@
 #include "DDSTextureLoader.h"
 #include "resource.h"
 #include "Camera.h"
+#include "OrbitCamera.h"
 
 #include <vector>
 /*
@@ -105,13 +106,17 @@ private:
 
 	vector<GameObject *> _gameObjects;
 
+	//Camera _StaticCamera;
+	OrbitCamera _OrbitCamera;
 	Camera * _camera;
+
+
 	float _cameraOrbitRadius = 7.0f;
 	float _cameraOrbitRadiusMin = 2.0f;
 	float _cameraOrbitRadiusMax = 50.0f;
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
-	float _cameraSpeed = 0.1f;
+	float _cameraSpeed = 0.01f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;

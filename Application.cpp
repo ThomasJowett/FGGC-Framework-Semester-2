@@ -35,38 +35,10 @@ bool Application::HandleKeyboard()
 	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		PostMessage(_hWnd, WM_DESTROY, 0, 0);
 
-	if(mouseCurrState.lX != mouseLastState.lX)
-		_cameraOrbitAngleYaw = _cameraSpeed * mouseCurrState.lX;
-	
+	if (mouseCurrState.lX != mouseLastState.lX)
+		_camera->Yaw(mouseCurrState.lX *_cameraSpeed);
 	if (mouseCurrState.lY != mouseLastState.lY)
-		_cameraOrbitAnglePitch = _cameraSpeed * mouseCurrState.lY;
-
-	/*
-	switch (msg.wParam)
-	{
-		
-	case VK_UP:
-		_cameraOrbitRadius = max(_cameraOrbitRadiusMin, _cameraOrbitRadius - (_cameraSpeed * 0.2f));
-		return true;
-		break;
-
-	case VK_DOWN:
-		_cameraOrbitRadius = min(_cameraOrbitRadiusMax, _cameraOrbitRadius + (_cameraSpeed * 0.2f));
-		return true;
-		break;
-		
-	case VK_RIGHT:
-		_cameraOrbitAngleXZ -= _cameraSpeed;
-		return true;
-		break;
-		
-	case VK_LEFT:
-		_cameraOrbitAngleXZ += _cameraSpeed;
-		return true;
-		break;
-		
-	}
-	*/
+		_camera->Pitch(mouseCurrState.lY * _cameraSpeed);
 
 	mouseLastState = mouseCurrState;
 
@@ -128,11 +100,14 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\floor.dds", nullptr, &_pGroundTextureRV);
 
 	// Setup Camera
-	Vector eye = { 0.0f, 2.0f, -1.0f };
-	Vector at = { 0.0f, 2.0f, 0.0f };
+	Vector eye = { 0.0f, 4.0f,-4.0f };
+	Vector at = { 0.0f, 0.0f, 0.0f };
 	Vector up = { 0.0f, 1.0f, 0.0f };
 
-	_camera = new Camera(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 200.0f);
+	//_StaticCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 200.0f);
+	_OrbitCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 10000.0f);
+	_OrbitCamera.SetDistance(3.0f);
+	_camera = &_OrbitCamera;
 
 	// Setup the scene's light
 	basicLight.AmbientLight = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -666,12 +641,6 @@ void Application::Cleanup()
 	if (CCWcullMode) CCWcullMode->Release();
 	if (CWcullMode) CWcullMode->Release();
 
-	if (_camera)
-	{
-		delete _camera;
-		_camera = nullptr;
-	}
-
 	for (auto gameObject : _gameObjects)
 	{
 		if (gameObject)
@@ -709,7 +678,7 @@ void Application::Update()
 	{
 		moveForward(1);
 	}
-
+	/*
 	// Update camera
 	float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleYaw);
 
@@ -719,8 +688,9 @@ void Application::Update()
 	Vector cameraPos = _camera->GetPosition();
 	cameraPos.x = x;
 	cameraPos.z = z;
+	*/
 
-	_camera->SetPosition(cameraPos);
+	//_camera->SetPosition(cameraPos);
 	_camera->Update();
 
 	// Update objects

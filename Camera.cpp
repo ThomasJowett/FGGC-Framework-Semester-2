@@ -1,14 +1,19 @@
 #include "Camera.h"
 
-Camera::Camera(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
-	: _eye(position), _at(at), _up(up)
+Camera::Camera()
 {
-	SetLens(fovY, windowHeight, windowWidth, nearDepth, farDepth);
-	Update();
 }
 
 Camera::~Camera()
 {
+}
+
+void Camera::Initialise(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
+{
+	SetLens(fovY, windowHeight, windowWidth, nearDepth, farDepth);
+	SetLookAt(at);
+	SetPosition(position);
+	SetUp(up);
 }
 
 void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float nearDepth, float farDepth)
@@ -21,12 +26,27 @@ void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float ne
 	_farDepth = farDepth;
 
 	// Initialize the projection matrix
-	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(fovY, windowHeight / windowWidth, nearDepth, farDepth));
+	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(fovY,  windowWidth / windowHeight, nearDepth, farDepth));
 }
 
-void Camera::SetLookAt(Vector position, Vector target, Vector worldUp)
+void Camera::Strafe(float d)
 {
-	
+}
+
+void Camera::Walk(float d)
+{
+}
+
+void Camera::Raise(float d)
+{
+}
+
+void Camera::Pitch(float angle)
+{
+}
+
+void Camera::Yaw(float angle)
+{
 }
 
 void Camera::Update()
@@ -42,8 +62,6 @@ void Camera::Update()
 	XMVECTOR UpVector = XMLoadFloat4(&up);
 
 	XMStoreFloat4x4(&_view, XMMatrixLookAtLH(EyeVector, AtVector, UpVector));
-
-    
 }
 
 void Camera::Reshape(FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)

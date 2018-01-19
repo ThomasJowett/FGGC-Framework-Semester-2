@@ -19,6 +19,7 @@
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="OrbitCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="OrbitCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
