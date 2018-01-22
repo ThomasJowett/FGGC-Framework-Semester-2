@@ -17,6 +17,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
     while (WM_QUIT != msg.message)
     {
+		// Update our time
+		static float timeSinceStart = 0.0f;
+		float oldTime = 0.0f;
+		static DWORD dwTimeStart = 0;
+
+		DWORD dwTimeCur = GetTickCount();
+
+		if (dwTimeStart == 0)
+			dwTimeStart = dwTimeCur;
+
+		timeSinceStart = (dwTimeCur - dwTimeStart) / 1000.0f;
+
+		//Calculate Delta Time
+		float deltaTime = timeSinceStart - oldTime;
+
+
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
 			TranslateMessage(&msg);
@@ -24,7 +40,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         else
         {
-			theApp->Update();
+			theApp->Update(deltaTime);
             theApp->Draw();
         }
     }

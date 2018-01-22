@@ -13,6 +13,7 @@
 #include "resource.h"
 #include "Camera.h"
 #include "OrbitCamera.h"
+#include "FreeLookCamera.h"
 
 #include <vector>
 /*
@@ -106,8 +107,9 @@ private:
 
 	vector<GameObject *> _gameObjects;
 
-	//Camera _StaticCamera;
+	Camera _StaticCamera;
 	OrbitCamera _OrbitCamera;
+	FreeLookCamera _FreeLookCamera;
 	Camera * _camera;
 
 
@@ -156,9 +158,9 @@ public:
 
 	HRESULT Initialise(HINSTANCE hInstance, int nCmdShow);
 
-	bool HandleKeyboard();
+	bool HandleKeyboard(float deltaTime);
 
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 };
 

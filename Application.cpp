@@ -23,24 +23,45 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-bool Application::HandleKeyboard()
+bool Application::HandleKeyboard(float deltaTime)
 {
-	DIMOUSESTATE mouseCurrState;
-	DIMouse->Acquire();
-	DIMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouseCurrState);
-
-	Vector cameraPosition = _camera->GetPosition();
-
 	//Escape to Quit
 	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
 		PostMessage(_hWnd, WM_DESTROY, 0, 0);
 
-	if (mouseCurrState.lX != mouseLastState.lX)
-		_camera->Yaw(mouseCurrState.lX *_cameraSpeed);
-	if (mouseCurrState.lY != mouseLastState.lY)
-		_camera->Pitch(mouseCurrState.lY * _cameraSpeed);
+	DIMOUSESTATE mouseCurrState;
+	DIMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouseCurrState);
+
+	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+	{
+		DIMouse->Acquire();
+
+		//Mouse Input
+		if (mouseCurrState.lX != mouseLastState.lX)
+			_camera->Yaw(mouseCurrState.lX *_cameraSpeed);
+		if (mouseCurrState.lY != mouseLastState.lY)
+			_camera->Pitch(mouseCurrState.lY * _cameraSpeed);
+
+		//Control Camera
+		if (GetAsyncKeyState('W') & 0x8000)
+			_camera->Walk(_cameraSpeed*deltaTime);
+		if (GetAsyncKeyState('S') & 0x8000)
+			_camera->Walk(-_cameraSpeed*deltaTime);
+		if (GetAsyncKeyState('A') & 0x8000)
+			_camera->Strafe(-_cameraSpeed*deltaTime);
+		if (GetAsyncKeyState('D') & 0x8000)
+			_camera->Strafe(_cameraSpeed*deltaTime);
+		if (GetAsyncKeyState('E') & 0x8000)
+			_camera->Raise(_cameraSpeed*deltaTime);
+		if (GetAsyncKeyState('Q') & 0x8000)
+			_camera->Raise(-_cameraSpeed*deltaTime);
+	}
+	else
+		DIMouse->Unacquire();
 
 	mouseLastState = mouseCurrState;
+
+	
 
 	return false;
 }
@@ -104,10 +125,11 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	Vector at = { 0.0f, 0.0f, 0.0f };
 	Vector up = { 0.0f, 1.0f, 0.0f };
 
-	//_StaticCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 200.0f);
+	_StaticCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 10000.0f);
 	_OrbitCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 10000.0f);
 	_OrbitCamera.SetDistance(3.0f);
-	_camera = &_OrbitCamera;
+	_FreeLookCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 10000.0f);
+	_camera = &_FreeLookCamera;
 
 	// Setup the scene's light
 	basicLight.AmbientLight = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -649,6 +671,12 @@ void Application::Cleanup()
 			gameObject = nullptr;
 		}
 	}
+
+	if (DIMouse)
+	{
+		DIMouse->Unacquire();
+		DIMouse->Release();
+	}
 }
 
 void Application::moveForward(int objectNumber)
@@ -658,20 +686,15 @@ void Application::moveForward(int objectNumber)
 	_gameObjects[objectNumber]->SetPosition(position);
 }
 
-void Application::Update()
+void Application::Update(float deltaTime)
 {
-    // Update our time
-    static float timeSinceStart = 0.0f;
-    static DWORD dwTimeStart = 0;
+    
 
-	HandleKeyboard();
+	HandleKeyboard(deltaTime);
 
     DWORD dwTimeCur = GetTickCount();
 
-    if (dwTimeStart == 0)
-        dwTimeStart = dwTimeCur;
-
-	timeSinceStart = (dwTimeCur - dwTimeStart) / 1000.0f;
+   
 
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
@@ -696,7 +719,7 @@ void Application::Update()
 	// Update objects
 	for (auto gameObject : _gameObjects)
 	{
-		gameObject->Update(timeSinceStart);
+		gameObject->Update(deltaTime);
 	}
 }
 

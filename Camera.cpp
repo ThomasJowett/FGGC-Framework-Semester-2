@@ -14,6 +14,9 @@ void Camera::Initialise(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT
 	SetLookAt(at);
 	SetPosition(position);
 	SetUp(up);
+	SetLook(at - position);
+	SetLook(GetLook().GetNormalized());
+	SetRight(GetRight().Cross(up, GetLook()));
 }
 
 void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float nearDepth, float farDepth)
@@ -29,39 +32,20 @@ void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float ne
 	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(fovY,  windowWidth / windowHeight, nearDepth, farDepth));
 }
 
-void Camera::Strafe(float d)
-{
-}
-
-void Camera::Walk(float d)
-{
-}
-
-void Camera::Raise(float d)
-{
-}
-
-void Camera::Pitch(float angle)
-{
-}
-
-void Camera::Yaw(float angle)
-{
-}
-
 void Camera::Update()
 {
     // Initialize the view matrix
 
 	XMFLOAT4 eye = XMFLOAT4(_eye.x, _eye.y, _eye.z, 1.0f);
-	XMFLOAT4 at = XMFLOAT4(_at.x, _at.y, _at.z, 1.0f);
+	XMFLOAT4 look = XMFLOAT4(_look.x, _look.y, _look.z, 0.0f);
 	XMFLOAT4 up = XMFLOAT4(_up.x, _up.y, _up.z, 0.0f);
+	XMFLOAT4 at = XMFLOAT4(eye.x + look.x, eye.y + look.y, eye.z +look.z, 0.0f);
 
 	XMVECTOR EyeVector = XMLoadFloat4(&eye);
-	XMVECTOR AtVector = XMLoadFloat4(&at);
+	XMVECTOR atVector = XMLoadFloat4(&at);
 	XMVECTOR UpVector = XMLoadFloat4(&up);
 
-	XMStoreFloat4x4(&_view, XMMatrixLookAtLH(EyeVector, AtVector, UpVector));
+	XMStoreFloat4x4(&_view, XMMatrixLookAtLH(EyeVector, atVector, UpVector));
 }
 
 void Camera::Reshape(FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)

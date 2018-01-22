@@ -58,6 +58,35 @@ Vector Vector::Reflect(Vector v, Vector normal)
 	return v - (normal * (2.0f * Dot(v, normal)));
 }
 
+Vector Vector::Replicate(float f)
+{
+	return Vector(f,f,f);
+}
+
+Vector Vector::MultiplyAdd(Vector v1, Vector v2, Vector v3)
+{
+	Vector Result;
+
+	Result.x = v1.x * v2.x + v3.x;
+	Result.y = v1.y * v2.y + v3.y;
+	Result.z = v1.z * v2.z + v3.z;
+
+	return Result;
+}
+/*
+Vector Vector::Transform(Vector v, XMMATRIX transform)
+{
+	XMFLOAT4X4 T;
+	Vector Result;
+
+	XMStoreFloat4x4(&T, transform);
+
+	Result.x = (v.x * T._11) + (v.y * T._12) + (v.z * T._13);
+	Result.y = (v.x * T._21) + (v.y * T._22) + (v.z * T._23);
+	Result.z = (v.x * T._31) + (v.y * T._32) + (v.z * T._33);
+	return Result;
+}
+*/
 Vector Vector::operator*(float scaler)
 {
 	return Vector(x * scaler, y * scaler, z * scaler);

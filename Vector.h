@@ -1,6 +1,8 @@
 #pragma once
 #include <directxmath.h>
 
+using namespace DirectX;
+
 class Vector
 {
 public:
@@ -18,6 +20,9 @@ public:
 	Vector Cross(Vector v1, Vector v2);
 	float Dot(Vector v1, Vector v2);
 	Vector Reflect(Vector vector, Vector normal);
+	Vector Replicate(float f);
+	Vector MultiplyAdd(Vector v1, Vector v2, Vector v3);
+	//Vector Transform(Vector v, XMMATRIX transform);
 	
 	//Operators
 	Vector operator*(float scaler);
