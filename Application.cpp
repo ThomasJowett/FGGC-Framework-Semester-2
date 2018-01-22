@@ -27,15 +27,18 @@ bool Application::HandleKeyboard(float deltaTime)
 {
 	//Escape to Quit
 	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+	{
 		PostMessage(_hWnd, WM_DESTROY, 0, 0);
+		return false;
+	}
 
 	DIMOUSESTATE mouseCurrState;
+	DIMouse->Acquire();
 	DIMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouseCurrState);
 
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 	{
-		DIMouse->Acquire();
-
+	}
 		//Mouse Input
 		if (mouseCurrState.lX != mouseLastState.lX)
 			_camera->Yaw(mouseCurrState.lX *_cameraSpeed);
@@ -55,13 +58,11 @@ bool Application::HandleKeyboard(float deltaTime)
 			_camera->Raise(_cameraSpeed*deltaTime);
 		if (GetAsyncKeyState('Q') & 0x8000)
 			_camera->Raise(-_cameraSpeed*deltaTime);
-	}
-	else
-		DIMouse->Unacquire();
+	
+	//else
+		//DIMouse->Unacquire();
 
 	mouseLastState = mouseCurrState;
-
-	
 
 	return false;
 }
@@ -165,9 +166,9 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specularPower = 0.0f;
 	
 	GameObject * gameObject = new GameObject("Floor", planeGeometry, noSpecMaterial);
-	gameObject->SetPosition(0.0f, 0.0f, 0.0f);
-	gameObject->SetScale(15.0f, 15.0f, 15.0f);
-	gameObject->SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
+	gameObject->GetTransform().SetPosition(0.0f, 0.0f, 0.0f);
+	gameObject->GetTransform().SetScale(15.0f, 15.0f, 15.0f);
+	gameObject->GetTransform().SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
 	gameObject->SetTextureRV(_pGroundTextureRV);
 
 	_gameObjects.push_back(gameObject);
@@ -175,8 +176,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	for (auto i = 0; i < 5; i++)
 	{
 		gameObject = new GameObject("Cube " + i, cubeGeometry, shinyMaterial);
-		gameObject->SetScale(0.5f, 0.5f, 0.5f);
-		gameObject->SetPosition(-4.0f + (i * 2.0f), 0.5f, 10.0f);
+		gameObject->GetTransform().SetScale(0.5f, 0.5f, 0.5f);
+		gameObject->GetTransform().SetPosition(-4.0f + (i * 2.0f), 0.5f, 10.0f);
 		gameObject->SetTextureRV(_pTextureRV);
 
 		_gameObjects.push_back(gameObject);
@@ -672,18 +673,16 @@ void Application::Cleanup()
 		}
 	}
 
-	if (DIMouse)
-	{
-		DIMouse->Unacquire();
-		DIMouse->Release();
-	}
+	DIMouse->Unacquire();
+	DIMouse->Release();
+	DirectInput->Release();
 }
 
 void Application::moveForward(int objectNumber)
 {
-	Vector position = _gameObjects[objectNumber]->GetPosition();
+	Vector position = _gameObjects[objectNumber]->GetTransform().GetPosition();
 	position.z -= 0.1f;
-	_gameObjects[objectNumber]->SetPosition(position);
+	_gameObjects[objectNumber]->GetTransform().SetPosition(position);
 }
 
 void Application::Update(float deltaTime)
@@ -772,7 +771,7 @@ void Application::Draw()
 		cb.surface.SpecularMtrl = material.specular;
 
 		// Set world matrix
-		cb.World = XMMatrixTranspose(gameObject->GetWorldMatrix());
+		cb.World = XMMatrixTranspose(gameObject->GetTransform().GetWorldMatrix());
 
 		// Set texture
 		if (gameObject->HasTexture())

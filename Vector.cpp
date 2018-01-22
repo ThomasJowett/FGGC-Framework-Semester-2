@@ -75,20 +75,7 @@ Vector Vector::MultiplyAdd(Vector v1, Vector v2, Vector v3)
 
 	return Result;
 }
-/*
-Vector Vector::Transform(Vector v, XMMATRIX transform)
-{
-	XMFLOAT4X4 T;
-	Vector Result;
 
-	XMStoreFloat4x4(&T, transform);
-
-	Result.x = (v.x * T._11) + (v.y * T._12) + (v.z * T._13);
-	Result.y = (v.x * T._21) + (v.y * T._22) + (v.z * T._23);
-	Result.z = (v.x * T._31) + (v.y * T._32) + (v.z * T._33);
-	return Result;
-}
-*/
 Vector Vector::operator*(float scaler)
 {
 	return Vector(x * scaler, y * scaler, z * scaler);

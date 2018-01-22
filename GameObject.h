@@ -39,7 +39,7 @@ public:
 
 	Material GetMaterial() const { return _material; }
 
-	XMMATRIX GetWorldMatrix() const { return XMLoadFloat4x4(&_world); }
+	Transform GetTransform() const { return _transform; }
 
 	void SetTextureRV(ID3D11ShaderResourceView * textureRV) { _textureRV = textureRV; }
 	ID3D11ShaderResourceView * GetTextureRV() const { return _textureRV; }

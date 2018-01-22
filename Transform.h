@@ -18,12 +18,15 @@ public:
 	void SetRotation(float x, float y, float z) { _rotation.x = x; _rotation.y = y; _rotation.z = z; }
 
 	void SetScale(Vector scale)			{ _position = scale; }
-	void SetScale(float x, float y, float z) { _scale.x = x; _scale.y = y; _scale.z = z; }
+	void SetScale(float x, float y, float z)	{ _scale.x = x; _scale.y = y; _scale.z = z; }
+
+	void SetWorldMatrix(XMFLOAT4X4 world) { _world = world; }
 
 	Vector GetPosition() const { return _position; }
 	Vector GetRotation() const { return _rotation; }
 	Vector GetScale() const    { return _scale; }
 	XMMATRIX GetWorldMatrix() const{return XMLoadFloat4x4(&_world);}
+	XMFLOAT4X4 GetWorldMatrix4x4() const { return _world; }
 
 	void UpdateWorldMatrix();
 

@@ -1,8 +1,6 @@
 #pragma once
-//#include <directxmath.h>
-#include <math.h>
 
-using namespace DirectX;
+#include <math.h>
 
 class Vector
 {
@@ -18,20 +16,13 @@ public:
 	float GetSqrMagnitude();
 	Vector GetNormalized();
 	void Normalize();
-<<<<<<< HEAD
-	Vector Cross(Vector v1, Vector v2);
-	float Dot(Vector v1, Vector v2);
-	Vector Reflect(Vector vector, Vector normal);
-	Vector Replicate(float f);
-	Vector MultiplyAdd(Vector v1, Vector v2, Vector v3);
-	//Vector Transform(Vector v, XMMATRIX transform);
-=======
 
 	static Vector Cross(Vector v1, Vector v2);
 	static float Dot(Vector v1, Vector v2);
 	static Vector Reflect(Vector vector, Vector normal);
->>>>>>> origin/master
-	
+	static Vector Replicate(float f);
+	static Vector MultiplyAdd(Vector v1, Vector v2, Vector v3);
+
 	//Operators
 	Vector operator*(float scaler);
 	Vector operator/(float scaler);
