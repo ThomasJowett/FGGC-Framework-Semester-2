@@ -8,11 +8,11 @@ Vector::Vector()
 	z = 0.0f;
 }
 
-Vector::Vector(float initialX, float initialY, float initialZ)
+Vector::Vector(float x, float y, float z)
 {
-	x = initialX;
-	y = initialY;
-	z = initialZ;
+	this->x = x;
+	this->y = y;
+	this->z = z;
 }
 
 float Vector::GetMagnitude()
@@ -33,9 +33,11 @@ Vector Vector::GetNormalized()
 
 void Vector::Normalize()
 {
-	x = GetNormalized().x;
-	y = GetNormalized().y;
-	z = GetNormalized().z;
+	Vector normalized = GetNormalized();
+
+	x = normalized.x;
+	y = normalized.y;
+	z = normalized.z;
 }
 
 Vector Vector::Cross(Vector v1, Vector v2)

@@ -1,7 +1,37 @@
 ﻿  Application.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\j005627b\documents\fggc semester 2\gameobject.h(42): error C2065: '_world': undeclared identifier
+c:\users\j005627b\documents\fggc semester 2\application.cpp(146): error C2039: 'SetPosition': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(147): error C2039: 'SetScale': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(148): error C2039: 'SetRotation': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(156): error C2039: 'SetScale': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(157): error C2039: 'SetPosition': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(656): error C2039: 'GetPosition': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+c:\users\j005627b\documents\fggc semester 2\application.cpp(658): error C2039: 'SetPosition': is not a member of 'GameObject'
+  c:\users\j005627b\documents\fggc semester 2\gameobject.h(31): note: see declaration of 'GameObject'
+  Camera.cpp
+c:\users\j005627b\documents\fggc semester 2\camera.cpp(32): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.cpp(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.cpp(40): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.cpp(44): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.cpp(48): warning C4100: 'angle': unreferenced formal parameter
   Main.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\j005627b\documents\fggc semester 2\gameobject.h(42): error C2065: '_world': undeclared identifier
+  GameObject.cpp
+c:\users\j005627b\documents\fggc semester 2\gameobject.h(42): error C2065: '_world': undeclared identifier
+c:\users\j005627b\documents\fggc semester 2\gameobject.cpp(25): error C2065: '_world': undeclared identifier
+  OrbitCamera.cpp
+c:\users\j005627b\documents\fggc semester 2\orbitcamera.cpp(33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\orbitcamera.cpp(34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\orbitcamera.cpp(35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Transform.cpp
+  Vector.cpp
+c:\users\j005627b\documents\fggc semester 2\vector.cpp(68): warning C4100: 'scaler': unreferenced formal parameter
   Generating Code...
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

@@ -1,5 +1,6 @@
 #pragma once
-#include <directxmath.h>
+//#include <directxmath.h>
+#include <math.h>
 
 class Vector
 {
@@ -9,15 +10,16 @@ public:
 	float z;
 
 	Vector();
-	Vector(float initialX, float initialY, float initialZ);
+	Vector(float x, float y, float z);
 
 	float GetMagnitude();
 	float GetSqrMagnitude();
 	Vector GetNormalized();
 	void Normalize();
-	Vector Cross(Vector v1, Vector v2);
-	float Dot(Vector v1, Vector v2);
-	Vector Reflect(Vector vector, Vector normal);
+
+	static Vector Cross(Vector v1, Vector v2);
+	static float Dot(Vector v1, Vector v2);
+	static Vector Reflect(Vector vector, Vector normal);
 	
 	//Operators
 	Vector operator*(float scaler);
