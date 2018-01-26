@@ -1,2 +1,6 @@
-DX11 Framework.VC.VC.opendb
-Debug/DX11 Framework.tlog/unsuccessfulbuild
+FGGC_Semester_2/Debug/
+*.exe
+*.pdb
+*.sdf
+*.db
+*.opendb
