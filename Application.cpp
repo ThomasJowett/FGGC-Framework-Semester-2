@@ -166,9 +166,9 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specularPower = 0.0f;
 	
 	GameObject * gameObject = new GameObject("Floor", planeGeometry, noSpecMaterial);
-	gameObject->GetTransform().SetPosition(0.0f, 0.0f, 0.0f);
-	gameObject->GetTransform().SetScale(15.0f, 15.0f, 15.0f);
-	gameObject->GetTransform().SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
+	gameObject->GetTransform()->SetPosition(0.0f, 0.0f, 0.0f);
+	gameObject->GetTransform()->SetScale( 15.0f, 15.0f, 15.0f);
+	gameObject->GetTransform()->SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
 	gameObject->SetTextureRV(_pGroundTextureRV);
 
 	_gameObjects.push_back(gameObject);
@@ -176,8 +176,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	for (auto i = 0; i < 5; i++)
 	{
 		gameObject = new GameObject("Cube " + i, cubeGeometry, shinyMaterial);
-		gameObject->GetTransform().SetScale(0.5f, 0.5f, 0.5f);
-		gameObject->GetTransform().SetPosition(-4.0f + (i * 2.0f), 0.5f, 10.0f);
+		gameObject->GetTransform()->SetScale( 0.5f, 0.5f, 0.5f );
+		gameObject->GetTransform()->SetPosition(-4.0f + (i * 2.0f), 0.5f, 10.0f);
 		gameObject->SetTextureRV(_pTextureRV);
 
 		_gameObjects.push_back(gameObject);
@@ -680,9 +680,9 @@ void Application::Cleanup()
 
 void Application::moveForward(int objectNumber)
 {
-	Vector position = _gameObjects[objectNumber]->GetTransform().GetPosition();
+	Vector position = _gameObjects[objectNumber]->GetTransform()->GetPosition();
 	position.z -= 0.1f;
-	_gameObjects[objectNumber]->GetTransform().SetPosition(position);
+	_gameObjects[objectNumber]->GetTransform()->SetPosition(position);
 }
 
 void Application::Update(float deltaTime)
@@ -771,7 +771,7 @@ void Application::Draw()
 		cb.surface.SpecularMtrl = material.specular;
 
 		// Set world matrix
-		cb.World = XMMatrixTranspose(gameObject->GetTransform().GetWorldMatrix());
+		cb.World = XMMatrixTranspose(gameObject->GetTransform()->GetWorldMatrix());
 
 		// Set texture
 		if (gameObject->HasTexture())

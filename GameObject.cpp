@@ -3,7 +3,7 @@
 GameObject::GameObject(string type, Geometry geometry, Material material) : _geometry(geometry), _type(type), _material(material)
 {
 	_parent = nullptr;
-	_transform = Transform();
+	_transform = new Transform();
 	_textureRV = nullptr;
 }
 
@@ -13,10 +13,11 @@ GameObject::~GameObject()
 
 void GameObject::Update(float t)
 {
-	_transform.UpdateWorldMatrix();
+	_transform->UpdateWorldMatrix();
+
 	if (_parent != nullptr)
 	{
-		XMStoreFloat4x4(&_transform.GetWorldMatrix4x4(), this->_transform.GetWorldMatrix() * _parent->_transform.GetWorldMatrix());
+		XMStoreFloat4x4(&_transform->GetWorldMatrix4x4(), this->_transform->GetWorldMatrix() * _parent->_transform->GetWorldMatrix());
 	}
 }
 

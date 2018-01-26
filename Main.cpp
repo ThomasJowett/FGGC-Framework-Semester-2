@@ -42,6 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         {
 			theApp->Update(deltaTime);
             theApp->Draw();
+			Sleep(15);
         }
     }
 
