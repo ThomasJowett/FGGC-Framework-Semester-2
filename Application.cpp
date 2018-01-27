@@ -139,14 +139,15 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	basicLight.SpecularPower = 20.0f;
 	basicLight.LightVecW = XMFLOAT3(0.0f, 1.0f, -1.0f);
 
-	Geometry cubeGeometry;
+
+	MeshData cubeGeometry;
 	cubeGeometry.indexBuffer = _pIndexBuffer;
 	cubeGeometry.vertexBuffer = _pVertexBuffer;
 	cubeGeometry.numberOfIndices = 36;
 	cubeGeometry.vertexBufferOffset = 0;
 	cubeGeometry.vertexBufferStride = sizeof(SimpleVertex);
 
-	Geometry planeGeometry;
+	MeshData planeGeometry;
 	planeGeometry.indexBuffer = _pPlaneIndexBuffer;
 	planeGeometry.vertexBuffer = _pPlaneVertexBuffer;
 	planeGeometry.numberOfIndices = 6;
@@ -164,21 +165,21 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	noSpecMaterial.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	noSpecMaterial.specularPower = 0.0f;
-	
-	GameObject * gameObject = new GameObject("Floor", planeGeometry, noSpecMaterial);
-	gameObject->GetTransform()->SetPosition(0.0f, 0.0f, 0.0f);
-	gameObject->GetTransform()->SetScale( 15.0f, 15.0f, 15.0f);
-	gameObject->GetTransform()->SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
-	gameObject->SetTextureRV(_pGroundTextureRV);
 
+	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundTextureRV);
+	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 15.0f, 15.0f, 15.0f });
+	ParticleModel* particle = new ParticleModel(0.0f);
+
+	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
 
 	for (auto i = 0; i < 5; i++)
 	{
-		gameObject = new GameObject("Cube " + i, cubeGeometry, shinyMaterial);
-		gameObject->GetTransform()->SetScale( 0.5f, 0.5f, 0.5f );
-		gameObject->GetTransform()->SetPosition(-4.0f + (i * 2.0f), 0.5f, 10.0f);
-		gameObject->SetTextureRV(_pTextureRV);
+		appearance = new Appearance(cubeGeometry, shinyMaterial, _pTextureRV);
+		transform = new Transform({ -4.0f + (i * 2.0f), 0.5f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f });
+		particle = new ParticleModel(10.0f);
+
+		gameObject = new GameObject("Cube " + i, appearance, transform, particle);
 
 		_gameObjects.push_back(gameObject);
 	}
@@ -763,7 +764,7 @@ void Application::Draw()
 	for (auto gameObject : _gameObjects)
 	{
 		// Get render material
-		Material material = gameObject->GetMaterial();
+		Material material = gameObject->GetAppearance()->GetMaterial();
 
 		// Copy material to shader
 		cb.surface.AmbientMtrl = material.ambient;
@@ -774,9 +775,9 @@ void Application::Draw()
 		cb.World = XMMatrixTranspose(gameObject->GetTransform()->GetWorldMatrix());
 
 		// Set texture
-		if (gameObject->HasTexture())
+		if (gameObject->GetAppearance()->HasTexture())
 		{
-			ID3D11ShaderResourceView * textureRV = gameObject->GetTextureRV();
+			ID3D11ShaderResourceView * textureRV = gameObject->GetAppearance()->GetTextureRV();
 			_pImmediateContext->PSSetShaderResources(0, 1, &textureRV);
 			cb.HasTexture = 1.0f;
 		}

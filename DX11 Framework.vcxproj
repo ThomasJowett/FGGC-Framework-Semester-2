@@ -370,6 +370,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Appearance.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
@@ -377,6 +378,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="OrbitCamera.cpp" />
+    <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
@@ -387,12 +389,15 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Appearance.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Commons.h" />
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="OrbitCamera.h" />
+    <ClInclude Include="ParticleModel.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
@@ -400,6 +405,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\floor.dds" />
+    <Image Include="Resources\NULL.dds" />
     <Image Include="Resources\stone.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

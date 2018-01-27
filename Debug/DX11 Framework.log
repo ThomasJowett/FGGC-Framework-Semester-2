@@ -1,6 +1,23 @@
-﻿  GameObject.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(20): warning C4238: nonstandard extension used: class rvalue used as lvalue
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(14): warning C4100: 't': unreferenced formal parameter
-Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+﻿  Application.cpp
+  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(695): warning C4189: 'dwTimeCur': local variable is initialized but not referenced
+  GameObject.cpp
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(18): warning C4238: nonstandard extension used: class rvalue used as lvalue
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(12): warning C4100: 't': unreferenced formal parameter
+  Main.cpp
+  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+  ParticleModel.cpp
+  Generating Code...
+Appearance.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
   DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)
