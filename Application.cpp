@@ -41,23 +41,23 @@ bool Application::HandleKeyboard(float deltaTime)
 	}
 		//Mouse Input
 		if (mouseCurrState.lX != mouseLastState.lX)
-			_camera->Yaw(mouseCurrState.lX *_cameraSpeed);
+			_camera->Yaw(mouseCurrState.lX *_cameraLookSpeed*0.1);
 		if (mouseCurrState.lY != mouseLastState.lY)
-			_camera->Pitch(mouseCurrState.lY * _cameraSpeed);
+			_camera->Pitch(mouseCurrState.lY * _cameraLookSpeed*0.1);
 
 		//Control Camera
 		if (GetAsyncKeyState('W') & 0x8000)
-			_camera->Walk(_cameraSpeed*deltaTime);
+			_camera->Walk(_cameraWalkSpeed*deltaTime);
 		if (GetAsyncKeyState('S') & 0x8000)
-			_camera->Walk(-_cameraSpeed*deltaTime);
+			_camera->Walk(-_cameraWalkSpeed*deltaTime);
 		if (GetAsyncKeyState('A') & 0x8000)
-			_camera->Strafe(-_cameraSpeed*deltaTime);
+			_camera->Strafe(-_cameraWalkSpeed*deltaTime);
 		if (GetAsyncKeyState('D') & 0x8000)
-			_camera->Strafe(_cameraSpeed*deltaTime);
+			_camera->Strafe(_cameraWalkSpeed*deltaTime);
 		if (GetAsyncKeyState('E') & 0x8000)
-			_camera->Raise(_cameraSpeed*deltaTime);
+			_camera->Raise(_cameraWalkSpeed*deltaTime);
 		if (GetAsyncKeyState('Q') & 0x8000)
-			_camera->Raise(-_cameraSpeed*deltaTime);
+			_camera->Raise(-_cameraWalkSpeed*deltaTime);
 	
 	//else
 		//DIMouse->Unacquire();
@@ -679,10 +679,10 @@ void Application::Cleanup()
 	DirectInput->Release();
 }
 
-void Application::moveForward(int objectNumber)
+void Application::moveForward(int objectNumber, float deltaTime)
 {
 	Vector position = _gameObjects[objectNumber]->GetTransform()->GetPosition();
-	position.z -= 0.1f;
+	position.z = position.z + (-0.1f * deltaTime);
 	_gameObjects[objectNumber]->GetTransform()->SetPosition(position);
 }
 
@@ -699,7 +699,7 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		moveForward(1);
+		moveForward(1, deltaTime);
 	}
 	/*
 	// Update camera

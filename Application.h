@@ -82,7 +82,8 @@ private:
 	float _cameraOrbitRadiusMax = 50.0f;
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
-	float _cameraSpeed = 0.01f;
+	float _cameraLookSpeed = 0.01f;
+	float _cameraWalkSpeed = 0.1f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;
@@ -114,7 +115,7 @@ private:
 	HRESULT InitIndexBuffer();
 	HRESULT InitDirectInput(HINSTANCE hInstance);
 
-	void moveForward(int objectNumber);
+	void moveForward(int objectNumber, float deltaTime);
 
 public:
 	Application();
