@@ -18,11 +18,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     MSG msg = {0};
 
 	float deltaTime = 1.0f;
+	LARGE_INTEGER clockFrequency;
 
     while (WM_QUIT != msg.message)
     {
+		QueryPerformanceFrequency(&clockFrequency);
+
 		// Update our time
-		float startTime = (float)timeGetTime();
+		LARGE_INTEGER startTime;
+		LARGE_INTEGER endTime;
+		QueryPerformanceCounter(&startTime);
 
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -33,18 +38,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         {
 			theApp->Update(deltaTime);
             theApp->Draw();
+			
+			QueryPerformanceCounter(&endTime);
+			LARGE_INTEGER delta;
+			delta.QuadPart = (endTime.QuadPart - startTime.QuadPart);
 
 			//Calculate Delta Time in milliseconds
-			deltaTime = ((float)timeGetTime() - startTime);
+			deltaTime = (((float)delta.QuadPart) / clockFrequency.QuadPart)*1000;
 
 			if (deltaTime * (DesiredFPS * 0.001f) < 1)
 			{
 				Sleep(((1 / DesiredFPS) * 1000 - deltaTime));
-			}
-
-			if (deltaTime > 1)
-			{
-				MessageBox(nullptr, L"to_string(deltaTime)", L"Error", MB_OK);
 			}
         }
     }

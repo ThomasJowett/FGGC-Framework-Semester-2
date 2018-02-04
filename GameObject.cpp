@@ -9,8 +9,9 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update(float t)
-{
+void GameObject::Update(float deltaTime)
+{	
+	_particleModel->Update(deltaTime);
 	_transform->UpdateWorldMatrix();
 
 	if (_parent != nullptr)

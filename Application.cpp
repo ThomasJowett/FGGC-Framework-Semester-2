@@ -36,31 +36,26 @@ bool Application::HandleKeyboard(float deltaTime)
 	DIMouse->Acquire();
 	DIMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouseCurrState);
 
-	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
-	{
-	}
-		//Mouse Input
-		if (mouseCurrState.lX != mouseLastState.lX)
-			_camera->Yaw(mouseCurrState.lX *_cameraLookSpeed*0.1);
-		if (mouseCurrState.lY != mouseLastState.lY)
-			_camera->Pitch(mouseCurrState.lY * _cameraLookSpeed*0.1);
 
-		//Control Camera
-		if (GetAsyncKeyState('W') & 0x8000)
-			_camera->Walk(_cameraWalkSpeed*deltaTime);
-		if (GetAsyncKeyState('S') & 0x8000)
-			_camera->Walk(-_cameraWalkSpeed*deltaTime);
-		if (GetAsyncKeyState('A') & 0x8000)
-			_camera->Strafe(-_cameraWalkSpeed*deltaTime);
-		if (GetAsyncKeyState('D') & 0x8000)
-			_camera->Strafe(_cameraWalkSpeed*deltaTime);
-		if (GetAsyncKeyState('E') & 0x8000)
-			_camera->Raise(_cameraWalkSpeed*deltaTime);
-		if (GetAsyncKeyState('Q') & 0x8000)
-			_camera->Raise(-_cameraWalkSpeed*deltaTime);
-	
-	//else
-		//DIMouse->Unacquire();
+	//Mouse Input
+	if (mouseCurrState.lX != mouseLastState.lX)
+		_camera->Yaw(mouseCurrState.lX *_cameraLookSpeed*0.1);
+	if (mouseCurrState.lY != mouseLastState.lY)
+		_camera->Pitch(mouseCurrState.lY * _cameraLookSpeed*0.1);
+
+	//Control Camera
+	if (GetAsyncKeyState('W') & 0x8000)
+		_camera->Walk(_cameraWalkSpeed*deltaTime);
+	if (GetAsyncKeyState('S') & 0x8000)
+		_camera->Walk(-_cameraWalkSpeed*deltaTime);
+	if (GetAsyncKeyState('A') & 0x8000)
+		_camera->Strafe(-_cameraWalkSpeed*deltaTime);
+	if (GetAsyncKeyState('D') & 0x8000)
+		_camera->Strafe(_cameraWalkSpeed*deltaTime);
+	if (GetAsyncKeyState('E') & 0x8000)
+		_camera->Raise(_cameraWalkSpeed*deltaTime);
+	if (GetAsyncKeyState('Q') & 0x8000)
+		_camera->Raise(-_cameraWalkSpeed*deltaTime);
 
 	mouseLastState = mouseCurrState;
 
@@ -131,6 +126,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	_OrbitCamera.SetDistance(3.0f);
 	_FreeLookCamera.Initialise(eye, at, up, XM_PIDIV2, (float)_renderWidth, (float)_renderHeight, 0.01f, 10000.0f);
 	_camera = &_FreeLookCamera;
+	//_camera = &_OrbitCamera;
 
 	// Setup the scene's light
 	basicLight.AmbientLight = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -168,7 +164,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundTextureRV);
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 15.0f, 15.0f, 15.0f });
-	ParticleModel* particle = new ParticleModel(0.0f);
+	ParticleModel* particle = new ParticleModel(0.0f, transform);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
@@ -177,7 +173,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	{
 		appearance = new Appearance(cubeGeometry, shinyMaterial, _pTextureRV);
 		transform = new Transform({ -4.0f + (i * 2.0f), 0.5f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f });
-		particle = new ParticleModel(10.0f);
+		particle = new ParticleModel(10.0f, transform);
 
 		gameObject = new GameObject("Cube " + i, appearance, transform, particle);
 
@@ -688,32 +684,14 @@ void Application::moveForward(int objectNumber, float deltaTime)
 
 void Application::Update(float deltaTime)
 {
-    
-
 	HandleKeyboard(deltaTime);
-
-    DWORD dwTimeCur = GetTickCount();
-
-   
 
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
 		moveForward(1, deltaTime);
 	}
-	/*
-	// Update camera
-	float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleYaw);
 
-	float x = _cameraOrbitRadius * cos(angleAroundZ);
-	float z = _cameraOrbitRadius * sin(angleAroundZ);
-
-	Vector cameraPos = _camera->GetPosition();
-	cameraPos.x = x;
-	cameraPos.z = z;
-	*/
-
-	//_camera->SetPosition(cameraPos);
 	_camera->Update();
 
 	// Update objects
