@@ -5,10 +5,10 @@
 class ParticleModel
 {
 public:
-	ParticleModel(float mass, Transform * transform) : _mass(mass), _transform(transform) {};
+	ParticleModel(float mass, Transform * transform);
 	~ParticleModel();
 
-	void AddForce();
+	void AddForce(Vector force);
 
 	void Update(float deltaTime);
 
@@ -16,8 +16,9 @@ public:
 
 private:
 	Transform * _transform;
-	bool IsAtRest;
+	bool _isAtRest;
 	Vector _velocity;
+	Vector _acceleration;
 	Vector _netForce;
 	float _mass;
 };

@@ -115,8 +115,6 @@ private:
 	HRESULT InitIndexBuffer();
 	HRESULT InitDirectInput(HINSTANCE hInstance);
 
-	void moveForward(int objectNumber, float deltaTime);
-
 public:
 	Application();
 	~Application();

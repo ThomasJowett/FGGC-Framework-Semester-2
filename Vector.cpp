@@ -83,7 +83,7 @@ Vector Vector::operator*(float scaler)
 
 Vector Vector::operator/(float scaler)
 {
-	return Vector();
+	return Vector(x/scaler, y/scaler, z/scaler);
 }
 
 Vector Vector::operator+(const Vector & other)

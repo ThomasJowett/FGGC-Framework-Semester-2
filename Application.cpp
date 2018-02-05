@@ -164,7 +164,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundTextureRV);
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 15.0f, 15.0f, 15.0f });
-	ParticleModel* particle = new ParticleModel(0.0f, transform);
+	ParticleModel* particle = new ParticleModel(10.0f, transform);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
@@ -675,13 +675,6 @@ void Application::Cleanup()
 	DirectInput->Release();
 }
 
-void Application::moveForward(int objectNumber, float deltaTime)
-{
-	Vector position = _gameObjects[objectNumber]->GetTransform()->GetPosition();
-	position.z = position.z + (-0.1f * deltaTime);
-	_gameObjects[objectNumber]->GetTransform()->SetPosition(position);
-}
-
 void Application::Update(float deltaTime)
 {
 	HandleKeyboard(deltaTime);
@@ -689,7 +682,8 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		moveForward(1, deltaTime);
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 0.1f, 0.1f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 0.0f, 0.1f, 0.0f });
 	}
 
 	_camera->Update();
