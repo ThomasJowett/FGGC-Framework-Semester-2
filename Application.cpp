@@ -117,7 +117,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\floor.dds", nullptr, &_pGroundTextureRV);
 
 	// Setup Camera
-	Vector eye = { 0.0f, 4.0f,-4.0f };
+	Vector eye = { 0.0f, 400.0f,-400.0f };
 	Vector at = { 0.0f, 0.0f, 0.0f };
 	Vector up = { 0.0f, 1.0f, 0.0f };
 
@@ -163,8 +163,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specularPower = 0.0f;
 
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundTextureRV);
-	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 15.0f, 15.0f, 15.0f });
-	ParticleModel* particle = new ParticleModel(10.0f, transform);
+	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 1500.0f, 1500.0f, 1500.0f });
+	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
@@ -172,8 +172,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	for (auto i = 0; i < 5; i++)
 	{
 		appearance = new Appearance(cubeGeometry, shinyMaterial, _pTextureRV);
-		transform = new Transform({ -4.0f + (i * 2.0f), 0.5f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f });
-		particle = new ParticleModel(10.0f, transform);
+		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 100.0f, 100.0f, 100.0f });
+		particle = new ParticleModel(i+1, { 0.0f, 0.0f, 0.0f }, transform);
 
 		gameObject = new GameObject("Cube " + i, appearance, transform, particle);
 
@@ -682,8 +682,20 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 0.1f, 0.1f, 0.0f });
-		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 0.0f, 0.1f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+		_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+		_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+	}
+
+	if (GetAsyncKeyState('2'))
+	{
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[1]->GetParticleModel()->GetMass()));
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[2]->GetParticleModel()->GetMass()));
+		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
+		_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
+		_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[5]->GetParticleModel()->GetMass()));
 	}
 
 	_camera->Update();
@@ -691,6 +703,14 @@ void Application::Update(float deltaTime)
 	// Update objects
 	for (auto gameObject : _gameObjects)
 	{
+		
+		if (gameObject->GetTransform()->GetPosition().y < 100.0f)
+		{
+			gameObject->GetParticleModel()->AddForce(Vector{ 0.0f, 10.0f, 0.0f } *gameObject->GetParticleModel()->GetMass());
+		}
+
+		gameObject->GetParticleModel()->AddForce((Vector{ 0.0f, -10.0f, 0.0f }) *(gameObject->GetParticleModel()->GetMass()));
+		
 		gameObject->Update(deltaTime);
 	}
 }

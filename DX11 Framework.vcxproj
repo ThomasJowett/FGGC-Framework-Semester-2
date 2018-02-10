@@ -379,6 +379,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
@@ -398,6 +399,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="ParticleModel.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />

@@ -15,6 +15,7 @@
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="Appearance.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="ParticleModel.h" />
     <ClInclude Include="Appearance.h" />
     <ClInclude Include="Commons.h" />
+    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX11 Framework.rc" />

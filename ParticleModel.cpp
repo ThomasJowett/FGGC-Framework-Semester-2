@@ -1,7 +1,12 @@
 #include "ParticleModel.h"
-ParticleModel::ParticleModel(float mass, Transform * transform) : _mass(mass), _transform(transform)
+ParticleModel::ParticleModel(float mass, Vector velocity, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
 {
+	if (mass <= 0)
+		_simulatePhysics = false;
 
+	_dragCoefficient = 1.05f;
+	_fluidDensity = 1.225f;
+	_objectArea = 1.0f;
 }
 
 ParticleModel::~ParticleModel()
@@ -15,19 +20,27 @@ void ParticleModel::AddForce(Vector force)
 
 void ParticleModel::Update(float deltaTime)
 {
-	_acceleration = _netForce / _mass;
-
-	_velocity = _velocity + (_acceleration * deltaTime);
-
-	if (_velocity == Vector{ 0.0f, 0.0f, 0.0f })
-		_isAtRest = true;
-	else
+	if (_simulatePhysics)
 	{
-		_transform->SetPosition(_transform->GetPosition() + _velocity);
-		_isAtRest = false;
-	}
+		//AddForce(Vector{ 0.0f, -0.1f, 0.0f } *_mass);
+		//AddForce(Vector{ 0.0f, 10.0f, 0.0f } *_mass);//Acceleration Due to gravity
+		Vector acceleration = _netForce / _mass;
 
-	_netForce = Vector{ 0.0f,0.0f,0.0f };
+		_velocity = _velocity + (acceleration * deltaTime);
+
+		if (_velocity.GetSqrMagnitude() == 0.0f)
+			_isAtRest = true;
+		else
+		{
+			_transform->SetPosition(_transform->GetPosition() + _velocity);
+			_isAtRest = false;
+		}
+
+		_netForce = Vector{ 0.0f,0.0f,0.0f };
+
+		AddForce(DragForce());
+
+	}
 }
 
 void ParticleModel::MoveForward(float speed, float deltaTime)
@@ -36,3 +49,28 @@ void ParticleModel::MoveForward(float speed, float deltaTime)
 	position.z = position.z + (-0.1f * deltaTime);
 	_transform->SetPosition(position);
 }
+
+Vector ParticleModel::DragForce()
+{
+	_laminar = true;
+
+	if (_laminar)
+		return DragLaminarFlow();
+	else
+		return DragTurbulentFlow();
+}
+
+Vector ParticleModel::DragLaminarFlow()
+{
+	return _velocity * -_dragCoefficient;
+}
+
+Vector ParticleModel::DragTurbulentFlow()
+{
+	float velocitySqrMagnitude = _velocity.GetSqrMagnitude();
+	Vector unitVelocity = _velocity.GetNormalized();
+	float dragMagnitude = 0.5*_fluidDensity*_dragCoefficient*_objectArea*velocitySqrMagnitude;
+
+	return unitVelocity * -dragMagnitude;
+}
+
