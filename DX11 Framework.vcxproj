@@ -393,6 +393,7 @@
     <ClInclude Include="Appearance.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Commons.h" />
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="FreeLookCamera.h" />

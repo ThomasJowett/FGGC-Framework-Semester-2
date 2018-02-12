@@ -166,7 +166,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 1500.0f, 1500.0f, 1500.0f });
 	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
 
-	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
+	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle, 0.0f);
 	_gameObjects.push_back(gameObject);
 
 	for (auto i = 0; i < 5; i++)
@@ -175,7 +175,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 100.0f, 100.0f, 100.0f });
 		particle = new ParticleModel(i+1, { 0.0f, 0.0f, 0.0f }, transform);
 
-		gameObject = new GameObject("Cube " + i, appearance, transform, particle);
+		gameObject = new GameObject("Cube " + i, appearance, transform, particle, 100.0f);
 
 		_gameObjects.push_back(gameObject);
 	}
@@ -713,6 +713,15 @@ void Application::Update(float deltaTime)
 		
 		gameObject->Update(deltaTime);
 	}
+
+	//Check objects collisions
+	for (int i = 0; i < _gameObjects.size() - 1; i++) {
+		for (int j = i + 1; j < _gameObjects.size(); j++) {
+			Collision::SphereSphereCollision(_gameObjects[i]->GetBoundingSphere(), _gameObjects[j]->GetBoundingSphere());
+		}
+	}
+
+
 }
 
 void Application::Draw()
