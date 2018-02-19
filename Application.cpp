@@ -715,6 +715,8 @@ void Application::Update(float deltaTime)
 	}
 
 	//Check objects collisions
+	CollisionDetector::DetectCollisions(_gameObjects);
+
 	for (int i = 0; i < _gameObjects.size() - 1; i++) {
 		for (int j = i + 1; j < _gameObjects.size(); j++) {
 			Collision::SphereSphereCollision(_gameObjects[i]->GetBoundingSphere(), _gameObjects[j]->GetBoundingSphere());

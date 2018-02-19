@@ -1,5 +1,5 @@
 #include "ParticleModel.h"
-ParticleModel::ParticleModel(float mass, Vector velocity, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
+ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
 {
 	if (mass <= 0)
 		_simulatePhysics = false;
@@ -7,6 +7,8 @@ ParticleModel::ParticleModel(float mass, Vector velocity, Transform * transform)
 	_dragCoefficient = 1.05f;
 	_fluidDensity = 1.225f;
 	_objectArea = 1.0f;
+
+	_boundingSphere = new Sphere(boundingRadius, _transform);
 }
 
 ParticleModel::~ParticleModel()
@@ -38,13 +40,6 @@ void ParticleModel::Update(float deltaTime)
 
 		_netForce = Vector{ 0.0f,0.0f,0.0f };
 	}
-}
-
-void ParticleModel::MoveForward(float speed, float deltaTime)
-{
-	Vector position = _transform->GetPosition();
-	position.z = position.z + (-0.1f * deltaTime);
-	_transform->SetPosition(position);
 }
 
 Vector ParticleModel::DragForce()

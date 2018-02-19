@@ -26,9 +26,7 @@ public:
 	void SetParent(GameObject * parent) { _parent = parent; }
 
 	void Update(float t);
-	void Draw(ID3D11DeviceContext * pImmediateContext);
-
-	Sphere * GetBoundingSphere()const { return _boundingSphere; }
+	void Draw(ID3D11DeviceContext * pImmediateContext);	
 
 private:
 	string _type;
@@ -36,8 +34,6 @@ private:
 	Transform * _transform;
 	Appearance* _appearance;
 	ParticleModel* _particleModel;
-
-	Sphere * _boundingSphere;
 
 	GameObject * _parent;
 };

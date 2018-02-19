@@ -1,8 +1,8 @@
 #include "GameObject.h"
 
-GameObject::GameObject(string type, Appearance* appearance, Transform * transform, ParticleModel* particlemodel, float boundingRadius) : _type(type), _appearance(appearance), _transform(transform), _particleModel(particlemodel)
+GameObject::GameObject(string type, Appearance* appearance, Transform * transform, ParticleModel* particlemodel) : _type(type), _appearance(appearance), _transform(transform), _particleModel(particlemodel)
 {
-	_boundingSphere = new Sphere(boundingRadius, _transform);
+	
 	_parent = nullptr;
 }
 
