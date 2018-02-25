@@ -3,8 +3,13 @@
 //--------------------------------------------------------------------------------------
 
 Texture2D txDiffuse : register(t0);
+Texture2D txSpecular : register(t1);
+Texture2D txAO : register(t2);
+Texture2D txNormal : register(t3);
 
 SamplerState samLinear : register(s0);
+
+TextureCube SkyMap : register(t4);
 
 //--------------------------------------------------------------------------------------
 // Constant Buffer Variables
@@ -45,6 +50,17 @@ struct VS_INPUT
 	float4 PosL : POSITION;
 	float3 NormL : NORMAL;
 	float2 Tex : TEXCOORD0;
+};
+
+struct SKYMAP_VS_INPUT
+{
+    float4 PosL : POSITION;
+};
+
+struct SKYMAP_VS_OUTPUT
+{
+    float4 PosH : SV_POSITION;
+    float3 Tex : TEXCOORD;
 };
 
 //--------------------------------------------------------------------------------------
@@ -88,6 +104,8 @@ float4 PS(VS_OUTPUT input) : SV_Target
 
 	// Get texture data from file
 	float4 textureColour = txDiffuse.Sample(samLinear, input.Tex);
+    float4 textureSpecular = txSpecular.Sample(samLinear, input.Tex);
+    float4 textureAO = txAO.Sample(samLinear, input.Tex);
 
 	float3 ambient = float3(0.0f, 0.0f, 0.0f);
 	float3 diffuse = float3(0.0f, 0.0f, 0.0f);
@@ -112,9 +130,9 @@ float4 PS(VS_OUTPUT input) : SV_Target
 	}
 
 	// Compute the ambient, diffuse, and specular terms separately.
-	specular += specularAmount * (surface.SpecularMtrl * light.SpecularLight).rgb;
-	diffuse += diffuseAmount * (surface.DiffuseMtrl * light.DiffuseLight).rgb;
-	ambient += (surface.AmbientMtrl * light.AmbientLight).rgb;
+	specular += specularAmount * (surface.SpecularMtrl * light.SpecularLight).rgb * textureSpecular.r;
+	diffuse += diffuseAmount * (surface.DiffuseMtrl * light.DiffuseLight).rgb * textureColour.rgb;
+	ambient += (surface.AmbientMtrl * light.AmbientLight).rgb * textureAO.b;
 
 	// Sum all the terms together and copy over the diffuse alpha.
 	float4 finalColour;
@@ -129,6 +147,32 @@ float4 PS(VS_OUTPUT input) : SV_Target
 	}
 
 	finalColour.a = surface.DiffuseMtrl.a;
+    clip(textureColour.a - 0.25f);
 
 	return finalColour;
+}
+
+//------------------------------------------------------------------------------------
+//SKYMAP Vertex Shader
+//------------------------------------------------------------------------------------
+SKYMAP_VS_OUTPUT SKYMAP_VS(SKYMAP_VS_INPUT input)
+{
+    SKYMAP_VS_OUTPUT output = (SKYMAP_VS_OUTPUT) 0;
+    float4x4 WVP = mul(World, View);
+    WVP = mul(WVP, Projection);
+
+	//Set Pos to xyww instead of xyzw, so that z will always be 1 (furthest from camera)
+    output.PosH = mul(input.PosL, WVP).xyww;
+
+    output.Tex = input.PosL;
+
+    return output;
+}
+
+//------------------------------------------------------------------------------------
+//SKYMAP Pixel Shader
+//------------------------------------------------------------------------------------
+float4 SKYMAP_PS(SKYMAP_VS_OUTPUT input) : SV_Target
+{
+    return SkyMap.Sample(samLinear, input.Tex);
 }

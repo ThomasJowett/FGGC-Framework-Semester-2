@@ -62,6 +62,25 @@ bool Application::HandleKeyboard(float deltaTime)
 	return false;
 }
 
+ID3D11RasterizerState * Application::ViewMode()
+{
+	//Switch View mode with F1 and F2
+	if (GetAsyncKeyState(VK_F1) & 0x8000)//F1
+	{
+		_pCurrentState = RSWireFrame;
+	}
+	else if (GetAsyncKeyState(VK_F2) & 0x8000)//F2
+	{
+		_pCurrentState = RSCull;
+	}
+	else if (GetAsyncKeyState(VK_F3) & 0x8000)//F3
+	{
+		_pCurrentState = RSCullNone;
+	}
+
+	return(_pCurrentState);
+}
+
 Application::Application()
 {
 	_hInst = nullptr;
@@ -75,12 +94,12 @@ Application::Application()
 	_pVertexShader = nullptr;
 	_pPixelShader = nullptr;
 	_pVertexLayout = nullptr;
-	_pVertexBuffer = nullptr;
-	_pIndexBuffer = nullptr;
 	_pConstantBuffer = nullptr;
 
 	DSLessEqual = nullptr;
 	RSCullNone = nullptr;
+	RSCull = nullptr;
+	RSWireFrame = nullptr;
 }
 
 Application::~Application()
@@ -113,8 +132,20 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 		return E_FAIL;
 	}
 
-	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\stone.dds", nullptr, &_pTextureRV);
-	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\floor.dds", nullptr, &_pGroundTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Stone_Diffuse.dds", nullptr, &_pStoneDiffuseTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Stone_Specular.dds", nullptr, &_pStoneSpecularTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Stone_AO.dds", nullptr, &_pStoneAOTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Stone_Normal.dds", nullptr, &_pStoneNormalTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Floor_Diffuse.dds", nullptr, &_pGroundDiffuseTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Floor_Specular.dds", nullptr, &_pGroundSpecularTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Floor_AO.dds", nullptr, &_pGroundAOTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Floor_Normal.dds", nullptr, &_pGroundAOTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Ball_Diffuse.dds", nullptr, &_pBallDiffuseTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Ball_Specular.dds", nullptr, &_pBallSpecularTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Ball_AO.dds", nullptr, &_pBallAOTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Ball_Normal.dds", nullptr, &_pBallAOTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Car_Diffuse.dds", nullptr, &_pCarDiffuseTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Car_Specular.dds", nullptr, &_pCarSpecularTextureRV);
 
 	// Setup Camera
 	Vector eye = { 0.0f, 400.0f,-400.0f };
@@ -136,19 +167,13 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	basicLight.LightVecW = XMFLOAT3(0.0f, 1.0f, -1.0f);
 
 
-	MeshData cubeGeometry;
-	cubeGeometry.indexBuffer = _pIndexBuffer;
-	cubeGeometry.vertexBuffer = _pVertexBuffer;
-	cubeGeometry.numberOfIndices = 36;
-	cubeGeometry.vertexBufferOffset = 0;
-	cubeGeometry.vertexBufferStride = sizeof(SimpleVertex);
+	MeshData cubeGeometry = GeometryGenerator::CreateCube(100.0f, 100.0f, 100.0f, _pd3dDevice);
+	MeshData sphereGeometry = GeometryGenerator::CreateSphere(100.0f, 20, 10, _pd3dDevice);
 
-	MeshData planeGeometry;
-	planeGeometry.indexBuffer = _pPlaneIndexBuffer;
-	planeGeometry.vertexBuffer = _pPlaneVertexBuffer;
-	planeGeometry.numberOfIndices = 6;
-	planeGeometry.vertexBufferOffset = 0;
-	planeGeometry.vertexBufferStride = sizeof(SimpleVertex);
+	MeshData planeGeometry = GeometryGenerator::CreateGrid(2.0f, 2.0f, 10, 10, 4.0f, 4.0f, _pd3dDevice);
+
+	MeshData ballGeometry = OBJLoader::Load("Resources\\Ball.obj", _pd3dDevice, true);
+	MeshData carGeometry = OBJLoader::Load("Resources\\Car.obj", _pd3dDevice, true);
 
 	Material shinyMaterial;
 	shinyMaterial.ambient = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.0f);
@@ -162,23 +187,25 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	noSpecMaterial.specularPower = 0.0f;
 
-	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundTextureRV);
-	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { XMConvertToRadians(90.0f), 0.0f, 0.0f }, { 1500.0f, 1500.0f, 1500.0f });
-	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
+	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundDiffuseTextureRV, _pGroundSpecularTextureRV, _pGroundAOTextureRV);
+	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1500.0f, 1500.0f, 1500.0f });
+	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, 0.0f, transform);
 
-	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle, 0.0f);
+	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
 
 	for (auto i = 0; i < 5; i++)
 	{
-		appearance = new Appearance(cubeGeometry, shinyMaterial, _pTextureRV);
-		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 100.0f, 100.0f, 100.0f });
-		particle = new ParticleModel(i+1, { 0.0f, 0.0f, 0.0f }, transform);
+		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
+		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
+		particle = new ParticleModel(i+1, { 0.0f, 0.0f, 0.0f }, 10.0f, transform);
 
-		gameObject = new GameObject("Cube " + i, appearance, transform, particle, 100.0f);
+		gameObject = new GameObject("Ball " + i, appearance, transform, particle);
 
 		_gameObjects.push_back(gameObject);
 	}
+
+	_SkySphere = new SkySphere(_pd3dDevice, L"Resources\\grasscube1024.dds");
 
 	return S_OK;
 }
@@ -234,8 +261,8 @@ HRESULT Application::InitShadersAndInputLayout()
 	UINT numElements = ARRAYSIZE(layout);
 
     // Create the input layout
-	hr = _pd3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
-                                        pVSBlob->GetBufferSize(), &_pVertexLayout);
+	hr = _pd3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &_pVertexLayout);
+
 	pVSBlob->Release();
 
 	if (FAILED(hr))
@@ -256,147 +283,6 @@ HRESULT Application::InitShadersAndInputLayout()
 	hr = _pd3dDevice->CreateSamplerState(&sampDesc, &_pSamplerLinear);
 
 	return hr;
-}
-
-HRESULT Application::InitVertexBuffer()
-{
-    // Create vertex buffer
-    SimpleVertex vertices[] =
-    {
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-    };
-
-    D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SimpleVertex) * 24;
-    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-
-    D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-    InitData.pSysMem = vertices;
-
-    hr = _pd3dDevice->CreateBuffer(&bd, &InitData, &_pVertexBuffer);
-
-    if (FAILED(hr))
-        return hr;
-
-	// Create vertex buffer
-	SimpleVertex planeVertices[] =
-	{
-		{ XMFLOAT3(-1.0f, -1.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f), XMFLOAT2(0.0f, 5.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f), XMFLOAT2(5.0f, 5.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f), XMFLOAT2(5.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-	};
-
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(SimpleVertex) * 4;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = planeVertices;
-
-	hr = _pd3dDevice->CreateBuffer(&bd, &InitData, &_pPlaneVertexBuffer);
-
-	if (FAILED(hr))
-		return hr;
-
-	return S_OK;
-}
-
-HRESULT Application::InitIndexBuffer()
-{
-    // Create index buffer
-    WORD indices[] =
-    {
-		3, 1, 0,
-		2, 1, 3,
-
-		6, 4, 5,
-		7, 4, 6,
-
-		11, 9, 8,
-		10, 9, 11,
-
-		14, 12, 13,
-		15, 12, 14,
-
-		19, 17, 16,
-		18, 17, 19,
-
-		22, 20, 21,
-		23, 20, 22
-    };
-
-	D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(WORD) * 36;     
-    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-
-	D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-    InitData.pSysMem = indices;
-    hr = _pd3dDevice->CreateBuffer(&bd, &InitData, &_pIndexBuffer);
-
-    if (FAILED(hr))
-        return hr;
-
-	// Create plane index buffer
-	WORD planeIndices[] =
-	{
-		0, 3, 1,
-		3, 2, 1,
-	};
-
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(WORD) * 6;
-	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = planeIndices;
-	hr = _pd3dDevice->CreateBuffer(&bd, &InitData, &_pPlaneIndexBuffer);
-
-	if (FAILED(hr))
-		return hr;
-
-	return S_OK;
 }
 
 HRESULT Application::InitDirectInput(HINSTANCE hInstance)
@@ -562,9 +448,6 @@ HRESULT Application::InitDevice()
 
 	InitShadersAndInputLayout();
 
-	InitVertexBuffer();
-	InitIndexBuffer();
-
     // Set primitive topology
     _pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -604,8 +487,18 @@ HRESULT Application::InitDevice()
 
 	ZeroMemory(&cmdesc, sizeof(D3D11_RASTERIZER_DESC));
 	cmdesc.FillMode = D3D11_FILL_SOLID;
+	cmdesc.CullMode = D3D11_CULL_BACK;
+	hr = _pd3dDevice->CreateRasterizerState(&cmdesc, &RSCullNone);
+
+	ZeroMemory(&cmdesc, sizeof(D3D11_RASTERIZER_DESC));
+	cmdesc.FillMode = D3D11_FILL_SOLID;
 	cmdesc.CullMode = D3D11_CULL_NONE;
 	hr = _pd3dDevice->CreateRasterizerState(&cmdesc, &RSCullNone);
+
+	ZeroMemory(&cmdesc, sizeof(D3D11_RASTERIZER_DESC));
+	cmdesc.FillMode = D3D11_FILL_WIREFRAME;
+	cmdesc.CullMode = D3D11_CULL_NONE;
+	hr = _pd3dDevice->CreateRasterizerState(&cmdesc, &RSWireFrame);
 
 	D3D11_DEPTH_STENCIL_DESC dssDesc;
 	ZeroMemory(&dssDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
@@ -626,6 +519,30 @@ HRESULT Application::InitDevice()
 	cmdesc.FrontCounterClockwise = false;
 	hr = _pd3dDevice->CreateRasterizerState(&cmdesc, &CWcullMode);
 
+	_pCurrentState = RSCull;
+
+	//Create Blend Description 
+	D3D11_BLEND_DESC blendDesc;
+	ZeroMemory(&blendDesc, sizeof(blendDesc));
+
+	//Create Blend Render Target 
+	D3D11_RENDER_TARGET_BLEND_DESC rtbd;
+	ZeroMemory(&rtbd, sizeof(rtbd));
+
+	rtbd.BlendEnable = true;
+	rtbd.SrcBlend = D3D11_BLEND_SRC_COLOR;
+	rtbd.DestBlend = D3D11_BLEND_BLEND_FACTOR;
+	rtbd.BlendOp = D3D11_BLEND_OP_ADD;
+	rtbd.SrcBlendAlpha = D3D11_BLEND_ONE;
+	rtbd.DestBlendAlpha = D3D11_BLEND_ZERO;
+	rtbd.BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	rtbd.RenderTargetWriteMask = D3D10_COLOR_WRITE_ENABLE_ALL;
+
+	blendDesc.AlphaToCoverageEnable = false;
+	blendDesc.RenderTarget[0] = rtbd;
+
+	_pd3dDevice->CreateBlendState(&blendDesc, &BSTransparency);
+
     return S_OK;
 }
 
@@ -634,16 +551,25 @@ void Application::Cleanup()
     if (_pImmediateContext) _pImmediateContext->ClearState();
 	if (_pSamplerLinear) _pSamplerLinear->Release();
 
-	if (_pTextureRV) _pTextureRV->Release();
+	if (_pStoneDiffuseTextureRV) _pStoneDiffuseTextureRV->Release();
+	if (_pStoneSpecularTextureRV) _pStoneSpecularTextureRV->Release();
+	if (_pStoneAOTextureRV) _pStoneAOTextureRV->Release();
+	if (_pStoneNormalTextureRV) _pStoneNormalTextureRV->Release();
 
-	if (_pGroundTextureRV) _pGroundTextureRV->Release();
+	if (_pGroundDiffuseTextureRV) _pGroundDiffuseTextureRV->Release();
+	if (_pGroundSpecularTextureRV) _pGroundSpecularTextureRV->Release();
+	if (_pGroundAOTextureRV) _pGroundAOTextureRV->Release();
+	if (_pGroundNormalTextureRV) _pGroundNormalTextureRV->Release();
+
+	if (_pBallDiffuseTextureRV) _pBallDiffuseTextureRV->Release();
+	if (_pBallSpecularTextureRV) _pBallSpecularTextureRV->Release();
+	if (_pBallAOTextureRV) _pBallAOTextureRV->Release();
+	if (_pBallNormalTextureRV) _pBallNormalTextureRV->Release();
+
+	if (_pCarDiffuseTextureRV) _pCarDiffuseTextureRV->Release();
+	if (_pCarSpecularTextureRV) _pCarSpecularTextureRV->Release();
 
     if (_pConstantBuffer) _pConstantBuffer->Release();
-
-    if (_pVertexBuffer) _pVertexBuffer->Release();
-    if (_pIndexBuffer) _pIndexBuffer->Release();
-	if (_pPlaneVertexBuffer) _pPlaneVertexBuffer->Release();
-	if (_pPlaneIndexBuffer) _pPlaneIndexBuffer->Release();
 
     if (_pVertexLayout) _pVertexLayout->Release();
     if (_pVertexShader) _pVertexShader->Release();
@@ -657,6 +583,8 @@ void Application::Cleanup()
 
 	if (DSLessEqual) DSLessEqual->Release();
 	if (RSCullNone) RSCullNone->Release();
+	if (RSCull) RSCull->Release();
+	if (RSWireFrame) RSWireFrame->Release();
 
 	if (CCWcullMode) CCWcullMode->Release();
 	if (CWcullMode) CWcullMode->Release();
@@ -699,31 +627,27 @@ void Application::Update(float deltaTime)
 	}
 
 	_camera->Update();
+	_SkySphere->Update(_camera->GetPosition());
 
 	// Update objects
 	for (auto gameObject : _gameObjects)
 	{
-		
-		if (gameObject->GetTransform()->GetPosition().y < 100.0f)
+		gameObject->Update(deltaTime);
+		if (gameObject->GetTransform()->GetPosition().y < 100.0f && gameObject->GetParticleModel()->GetSimulatePhysics())
 		{
-			gameObject->GetParticleModel()->AddForce(Vector{ 0.0f, 10.0f, 0.0f } *gameObject->GetParticleModel()->GetMass());
+			gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 100.0f, gameObject->GetTransform()->GetPosition().z);
+			gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f,-1.0f,0.0f }));
 		}
 
 		gameObject->GetParticleModel()->AddForce((Vector{ 0.0f, -10.0f, 0.0f }) *(gameObject->GetParticleModel()->GetMass()));
 		
-		gameObject->Update(deltaTime);
+		
 	}
-
+	
 	//Check objects collisions
-	CollisionDetector::DetectCollisions(_gameObjects);
+	Collision::DetectCollisions(_gameObjects);
 
-	for (int i = 0; i < _gameObjects.size() - 1; i++) {
-		for (int j = i + 1; j < _gameObjects.size(); j++) {
-			Collision::SphereSphereCollision(_gameObjects[i]->GetBoundingSphere(), _gameObjects[j]->GetBoundingSphere());
-		}
-	}
-
-
+	
 }
 
 void Application::Draw()
@@ -736,20 +660,7 @@ void Application::Draw()
     _pImmediateContext->ClearRenderTargetView(_pRenderTargetView, ClearColor);
 	_pImmediateContext->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-    //
-    // Setup buffers and render scene
-    //
-
-	_pImmediateContext->IASetInputLayout(_pVertexLayout);
-
-	_pImmediateContext->VSSetShader(_pVertexShader, nullptr, 0);
-	_pImmediateContext->PSSetShader(_pPixelShader, nullptr, 0);
-
-	_pImmediateContext->VSSetConstantBuffers(0, 1, &_pConstantBuffer);
-	_pImmediateContext->PSSetConstantBuffers(0, 1, &_pConstantBuffer);
-	_pImmediateContext->PSSetSamplers(0, 1, &_pSamplerLinear);
-
-    ConstantBuffer cb;
+	ConstantBuffer cb;
 
 	XMFLOAT4X4 viewAsFloats = _camera->GetView();
 	XMFLOAT4X4 projectionAsFloats = _camera->GetProjection();
@@ -759,9 +670,32 @@ void Application::Draw()
 
 	cb.View = XMMatrixTranspose(view);
 	cb.Projection = XMMatrixTranspose(projection);
-	
+
 	cb.light = basicLight;
 	cb.EyePosW = _camera->GetPosition();
+	
+    //
+    // Setup buffers and render scene
+    //
+	_pImmediateContext->VSSetConstantBuffers(0, 1, &_pConstantBuffer);
+	_pImmediateContext->PSSetConstantBuffers(0, 1, &_pConstantBuffer);
+	_pImmediateContext->PSSetSamplers(0, 1, &_pSamplerLinear);
+
+	//Draw SkySphere
+	_pImmediateContext->RSSetState(RSCullNone);
+	cb.World = XMMatrixTranspose(_SkySphere->GetWorldMatrix());
+	_pImmediateContext->UpdateSubresource(_pConstantBuffer, 0, nullptr, &cb, 0, 0);
+	_SkySphere->Draw(_pImmediateContext);
+	
+	//Reset the shaders
+	_pImmediateContext->RSSetState(ViewMode());
+	_pImmediateContext->IASetInputLayout(_pVertexLayout);
+
+	_pImmediateContext->VSSetShader(_pVertexShader, nullptr, 0);
+	_pImmediateContext->PSSetShader(_pPixelShader, nullptr, 0);
+	_pImmediateContext->OMSetDepthStencilState(NULL, 0);
+	
+
 
 	// Render all scene objects
 	for (auto gameObject : _gameObjects)
@@ -780,8 +714,12 @@ void Application::Draw()
 		// Set texture
 		if (gameObject->GetAppearance()->HasTexture())
 		{
-			ID3D11ShaderResourceView * textureRV = gameObject->GetAppearance()->GetTextureRV();
-			_pImmediateContext->PSSetShaderResources(0, 1, &textureRV);
+			ID3D11ShaderResourceView * textureDiffuseRV = gameObject->GetAppearance()->GetTextureDiffuseRV();
+			ID3D11ShaderResourceView * textureSpecularRV = gameObject->GetAppearance()->GetTextureSpecularRV();
+			ID3D11ShaderResourceView * textureAORV = gameObject->GetAppearance()->GetTextureAORV();
+			_pImmediateContext->PSSetShaderResources(0, 1, &textureDiffuseRV);
+			_pImmediateContext->PSSetShaderResources(1, 1, &textureSpecularRV);
+			_pImmediateContext->PSSetShaderResources(2, 1, &textureAORV);
 			cb.HasTexture = 1.0f;
 		}
 		else

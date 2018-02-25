@@ -1,105 +1,61 @@
-﻿  Application.cpp
+﻿  Appearance.cpp
+  Application.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\j005627b\documents\fggc semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2039: 'vector': is not a member of 'std'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\string(17): note: see declaration of 'std'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2143: syntax error: missing ';' before '<'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2143: syntax error: missing ';' before '{'
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2447: '{': missing function header (old-style formal list?)
-c:\users\j005627b\documents\fggc semester 2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\application.cpp(167): error C2661: 'ParticleModel::ParticleModel': no overloaded function takes 3 arguments
-c:\users\j005627b\documents\fggc semester 2\application.cpp(176): error C2661: 'ParticleModel::ParticleModel': no overloaded function takes 3 arguments
-c:\users\j005627b\documents\fggc semester 2\application.cpp(718): error C2039: 'DetectCollisions': is not a member of 'CollisionDetector'
-  c:\users\j005627b\documents\fggc semester 2\collision.h(45): note: see declaration of 'CollisionDetector'
-c:\users\j005627b\documents\fggc semester 2\application.cpp(718): error C3861: 'DetectCollisions': identifier not found
-c:\users\j005627b\documents\fggc semester 2\application.cpp(720): warning C4018: '<': signed/unsigned mismatch
-c:\users\j005627b\documents\fggc semester 2\application.cpp(721): warning C4018: '<': signed/unsigned mismatch
-c:\users\j005627b\documents\fggc semester 2\application.cpp(722): error C2653: 'Collision': is not a class or namespace name
-c:\users\j005627b\documents\fggc semester 2\application.cpp(722): error C2039: 'GetBoundingSphere': is not a member of 'GameObject'
-  c:\users\j005627b\documents\fggc semester 2\gameobject.h(16): note: see declaration of 'GameObject'
-c:\users\j005627b\documents\fggc semester 2\application.cpp(722): error C3861: 'SphereSphereCollision': identifier not found
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.h(21): warning C4018: '<': signed/unsigned mismatch
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.h(23): warning C4018: '<': signed/unsigned mismatch
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(201): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  GameObject.cpp
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(21): warning C4238: nonstandard extension used: class rvalue used as lvalue
+  GeometryGenerator.cpp
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(53): error C2440: 'initializing': cannot convert from 'DirectX::XMFLOAT2' to 'DirectX::XMFLOAT3'
+  f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(53): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(129): error C2440: 'initializing': cannot convert from 'DirectX::XMFLOAT2' to 'DirectX::XMFLOAT3'
+  f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(129): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(130): error C2440: 'initializing': cannot convert from 'DirectX::XMFLOAT2' to 'DirectX::XMFLOAT3'
+  f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(130): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(190): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(191): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(200): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(201): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(202): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(204): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(205): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(206): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(216): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(217): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(218): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(247): warning C4553: '==': operator has no effect; did you intend '='?
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(249): warning C4553: '==': operator has no effect; did you intend '='?
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(256): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(307): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(308): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(309): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(311): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(312): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(313): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(350): error C2440: 'initializing': cannot convert from 'DirectX::XMFLOAT2' to 'DirectX::XMFLOAT3'
+  f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(350): note: No constructor could take the source type, or constructor overload resolution was ambiguous
   Main.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\j005627b\documents\fggc semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(26): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\particlemodel.h(40): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2039: 'vector': is not a member of 'std'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\string(17): note: see declaration of 'std'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2143: syntax error: missing ';' before '<'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2143: syntax error: missing ';' before '{'
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2447: '{': missing function header (old-style formal list?)
-c:\users\j005627b\documents\fggc semester 2\main.cpp(51): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
-  GameObject.cpp
-c:\users\j005627b\documents\fggc semester 2\collision.h(41): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\collision.h(41): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(41): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(42): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\collision.h(42): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(42): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2039: 'vector': is not a member of 'std'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\string(17): note: see declaration of 'std'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2143: syntax error: missing ';' before '<'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2143: syntax error: missing ';' before '{'
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2447: '{': missing function header (old-style formal list?)
-c:\users\j005627b\documents\fggc semester 2\gameobject.cpp(3): error C2511: 'GameObject::GameObject(std::string,Appearance *,Transform *,ParticleModel *)': overloaded member function not found in 'GameObject'
-  c:\users\j005627b\documents\fggc semester 2\gameobject.h(16): note: see declaration of 'GameObject'
-c:\users\j005627b\documents\fggc semester 2\gameobject.cpp(4): error C2550: 'GameObject::{ctor}': constructor initializer lists are only allowed on constructor definitions
-c:\users\j005627b\documents\fggc semester 2\gameobject.cpp(6): error C2597: illegal reference to non-static member 'GameObject::_parent'
-c:\users\j005627b\documents\fggc semester 2\gameobject.cpp(22): warning C4238: nonstandard extension used: class rvalue used as lvalue
-  ParticleModel.cpp
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(18): error C2061: syntax error: identifier 'ParticleModel'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2039: 'vector': is not a member of 'std'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\string(17): note: see declaration of 'std'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C2143: syntax error: missing ';' before '<'
-c:\users\j005627b\documents\fggc semester 2\collision.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2143: syntax error: missing ';' before '{'
-c:\users\j005627b\documents\fggc semester 2\collision.h(48): error C2447: '{': missing function header (old-style formal list?)
-c:\users\j005627b\documents\fggc semester 2\particlemodel.cpp(71): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.h(21): warning C4018: '<': signed/unsigned mismatch
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.h(23): warning C4018: '<': signed/unsigned mismatch
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\main.cpp(51): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
+  OBJLoader.cpp
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\objloader.cpp(36): error C2440: 'initializing': cannot convert from 'const DirectX::XMFLOAT2' to 'DirectX::XMFLOAT3'
+  f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\objloader.cpp(36): note: No constructor could take the source type, or constructor overload resolution was ambiguous
   ParticleSystem.cpp
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(18): error C2061: syntax error: identifier 'ParticleModel'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(24): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C2143: syntax error: missing ';' before '*'
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\j005627b\documents\fggc semester 2\gameobject.h(36): error C2238: unexpected token(s) preceding ';'
-c:\users\j005627b\documents\fggc semester 2\collision.h(49): error C2065: 'gameObjects': undeclared identifier
-c:\users\j005627b\documents\fggc semester 2\collision.h(49): error C2228: left of '.size' must have class/struct/union
-  c:\users\j005627b\documents\fggc semester 2\collision.h(49): note: type is 'unknown-type'
-c:\users\j005627b\documents\fggc semester 2\collision.h(51): error C2065: 'gameObjects': undeclared identifier
-c:\users\j005627b\documents\fggc semester 2\collision.h(51): error C2228: left of '.size' must have class/struct/union
-  c:\users\j005627b\documents\fggc semester 2\collision.h(51): note: type is 'unknown-type'
-c:\users\j005627b\documents\fggc semester 2\collision.h(53): error C2065: 'gameObjects': undeclared identifier
-c:\users\j005627b\documents\fggc semester 2\collision.h(53): error C2227: left of '->GetParticleModel' must point to class/struct/union/generic type
-c:\users\j005627b\documents\fggc semester 2\collision.h(53): error C2227: left of '->GetSphere' must point to class/struct/union/generic type
-c:\users\j005627b\documents\fggc semester 2\collision.h(53): error C2228: left of '.CollisionCheck' must have class/struct/union
-c:\users\j005627b\documents\fggc semester 2\collision.h(54): error C2143: syntax error: missing ';' before '}'
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\particlesystem.cpp(44): warning C4189: 'decrement': local variable is initialized but not referenced
+  SkySphere.cpp
   Generating Code...

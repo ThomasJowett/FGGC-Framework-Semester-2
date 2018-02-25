@@ -375,11 +375,14 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="FreeLookCamera.cpp" />
+    <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
@@ -393,23 +396,42 @@
     <ClInclude Include="Appearance.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Commons.h" />
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GeometryGenerator.h" />
+    <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="ParticleModel.h" />
     <ClInclude Include="ParticleSystem.h" />
     <CLInclude Include="resource.h" />
+    <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ResourceCompile Include="DX11 Framework.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\floor.dds" />
+    <Image Include="Resources\Ball_AO.dds" />
+    <Image Include="Resources\Ball_Diffuse.dds" />
+    <Image Include="Resources\Ball_Normals.dds" />
+    <Image Include="Resources\Ball_Specular.dds" />
+    <Image Include="Resources\Car_Diffuse.dds" />
+    <Image Include="Resources\Car_Specular.dds" />
+    <Image Include="Resources\Floor_AO.dds" />
+    <Image Include="Resources\Floor_Diffuse.dds" />
+    <Image Include="Resources\Floor_Normal.dds" />
+    <Image Include="Resources\Floor_Specular.dds" />
     <Image Include="Resources\NULL.dds" />
-    <Image Include="Resources\stone.dds" />
+    <Image Include="Resources\Stone_AO.dds" />
+    <Image Include="Resources\Stone_Diffuse.dds" />
+    <Image Include="Resources\Stone_Normal.dds" />
+    <Image Include="Resources\Stone_Specular.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

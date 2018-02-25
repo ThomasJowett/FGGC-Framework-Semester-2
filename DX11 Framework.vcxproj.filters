@@ -1,44 +1,178 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="DX11 Framework.fx" />
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrbitCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeLookCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DDSTextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Appearance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkySphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="DDSTextureLoader.cpp" />
-    <ClCompile Include="FreeLookCamera.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="OrbitCamera.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="ParticleModel.cpp" />
-    <ClCompile Include="Appearance.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="DDSTextureLoader.h" />
-    <ClInclude Include="FreeLookCamera.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="OrbitCamera.h" />
-    <CLInclude Include="resource.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="ParticleModel.h" />
-    <ClInclude Include="Appearance.h" />
-    <ClInclude Include="Commons.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Appearance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeLookCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbitCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CLInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </CLInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkySphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX11 Framework.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\floor.dds" />
-    <Image Include="Resources\stone.dds" />
-    <Image Include="Resources\NULL.dds" />
+    <Image Include="Resources\NULL.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Ball_AO.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Ball_Diffuse.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Ball_Normals.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Ball_Specular.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Car_Diffuse.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Car_Specular.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Floor_AO.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Floor_Diffuse.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Floor_Normal.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Floor_Specular.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Stone_AO.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Stone_Diffuse.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Stone_Normal.dds">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Stone_Specular.dds">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{36eac496-6cc7-4d4d-8bbe-b30a51107870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{a360bd86-91bc-4eda-8c20-771b548e8bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{830bcd46-f7c3-489c-8701-6ec1386c1976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{adfe5578-dd14-4522-949f-5472ac6b434e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="DX11 Framework.fx">
+      <Filter>FX</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

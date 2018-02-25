@@ -20,7 +20,7 @@ public:
 	void SetScale(Vector scale)			{ _position = scale; }
 	void SetScale(float x, float y, float z)	{ _scale.x = x; _scale.y = y; _scale.z = z; }
 
-	void SetWorldMatrix(XMFLOAT4X4 world) { _world = world; }
+	void SetWorldMatrix4x4(XMFLOAT4X4 world) { _world = world; }
 
 	Vector GetPosition() const { return _position; }
 	Vector GetRotation() const { return _rotation; }

@@ -1,7 +1,7 @@
 #include "ParticleModel.h"
 ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
 {
-	if (mass <= 0)
+	if (mass <= 0.0f)
 		_simulatePhysics = false;
 
 	_dragCoefficient = 1.05f;

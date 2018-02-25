@@ -10,7 +10,8 @@ struct SimpleVertex
 {
 	XMFLOAT3 PosL;
 	XMFLOAT3 NormL;
-	XMFLOAT2 Tex;
+	//XMFLOAT3 Tangent;
+	XMFLOAT2 TexCoord;
 
 	bool operator<(const SimpleVertex other)const
 	{

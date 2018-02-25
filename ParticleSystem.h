@@ -2,20 +2,30 @@
 #define _PARTICLESYSTEM_H
 
 #include <vector>
-#include "ParticleModel.h"
+#include "GameObject.h"
 
 class ParticleSystem
 {
 public:
-	ParticleSystem();
+	ParticleSystem(float lifeSpan);
 	~ParticleSystem();
 
+	void AddParticle(GameObject* particle);
+	void Activate(Vector position, Vector velocity, bool randomise);
+
+	void Render(ID3D11DeviceContext * pImmediateContext);
 	void Update(float deltaTime);
-	void Draw();
+	bool IsAlive();
 
 private:
-	int _numberOfParticles;
-	std::vector<ParticleModel*> _particles;
+	std::vector<GameObject*> _particles;
+	float _lifeSpan;
+	float _totalTime;
 
+	int _currentParticleCount;
+	
+	float _particlesPerSecond;
+	
+	bool _isAlive;
 };
 #endif // !_PARTICLESYSTEM_H

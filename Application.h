@@ -17,7 +17,9 @@
 #include "FreeLookCamera.h"
 #include "Transform.h"
 #include "Collision.h"
-
+#include "OBJLoader.h"
+#include "GeometryGenerator.h"
+#include "SkySphere.h"
 #include <vector>
 /*
 //#include <SpriteFont.h>
@@ -51,9 +53,6 @@ private:
 	ID3D11PixelShader*      _pPixelShader;
 	ID3D11InputLayout*      _pVertexLayout;
 
-	ID3D11Buffer*           _pVertexBuffer;
-	ID3D11Buffer*           _pIndexBuffer;
-
 	ID3D11Buffer*           _pPlaneVertexBuffer;
 	ID3D11Buffer*           _pPlaneIndexBuffer;
 
@@ -62,11 +61,27 @@ private:
 	ID3D11DepthStencilView* _depthStencilView = nullptr;
 	ID3D11Texture2D* _depthStencilBuffer = nullptr;
 
-	ID3D11ShaderResourceView * _pTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pStoneDiffuseTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pStoneSpecularTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pStoneAOTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pStoneNormalTextureRV = nullptr;
 
-	ID3D11ShaderResourceView * _pGroundTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pGroundDiffuseTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pGroundSpecularTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pGroundAOTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pGroundNormalTextureRV = nullptr;
+
+	ID3D11ShaderResourceView * _pBallDiffuseTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pBallSpecularTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pBallAOTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pBallNormalTextureRV = nullptr;
+
+	ID3D11ShaderResourceView * _pCarDiffuseTextureRV = nullptr;
+	ID3D11ShaderResourceView * _pCarSpecularTextureRV = nullptr;
 
 	ID3D11SamplerState * _pSamplerLinear = nullptr;
+
+	SkySphere* _SkySphere;
 
 	Light basicLight;
 
@@ -94,10 +109,15 @@ private:
 	UINT _renderWidth = 1920;
 
 	ID3D11DepthStencilState* DSLessEqual;
+	ID3D11RasterizerState* RSCull;
 	ID3D11RasterizerState* RSCullNone;
+	ID3D11RasterizerState* RSWireFrame;
+	ID3D11RasterizerState* _pCurrentState;
 
 	ID3D11RasterizerState* CCWcullMode;
 	ID3D11RasterizerState* CWcullMode;
+
+	ID3D11BlendState * BSTransparency;
 
 	HRESULT hr;
 
@@ -112,8 +132,6 @@ private:
 	void Cleanup();
 	HRESULT CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 	HRESULT InitShadersAndInputLayout();
-	HRESULT InitVertexBuffer();
-	HRESULT InitIndexBuffer();
 	HRESULT InitDirectInput(HINSTANCE hInstance);
 
 public:
@@ -123,6 +141,8 @@ public:
 	HRESULT Initialise(HINSTANCE hInstance, int nCmdShow);
 
 	bool HandleKeyboard(float deltaTime);
+
+	ID3D11RasterizerState* ViewMode();
 
 	void Update(float deltaTime);
 	void Draw();

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Appearance">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAgmAoAAgAAAEAAAAAAAAAACAIECACAAAgBBBA=</HashCode>
+      <FileName>Appearance.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FCTADidBHBOAAxgEIikEAgABOBBTEJfAkBBhAGJAQQo=</HashCode>
+      <FileName>Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQKAQAAACAAQYkQTgAAIAIIxAAAIwQAACBBAIIAQQA=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sphere">
+    <Position X="12.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAQRAAAAAAAAgAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Collider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collision">
+    <Position X="16.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FreeLookCamera" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAABAAIEAAAAAAAAAQAAAIAAAAABAAAAAAAA=</HashCode>
+      <FileName>FreeLookCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject">
+    <Position X="5.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAQAAAAAgQAAQDAAAAQAAAAAAEACEAAAAIEAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeometryGenerator">
+    <Position X="18" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAQAAAAEAIAAQAAgAAAAAAABAAAIQAAACAAAA=</HashCode>
+      <FileName>GeometryGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrbitCamera" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAgAAAEAAAAAAAAAAAAAAAIEAABAAIAAIBA=</HashCode>
+      <FileName>OrbitCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParticleModel">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAEA4MAAAgAAQAAAAAAAACAOFQAwhAAAAQAAQE=</HashCode>
+      <FileName>ParticleModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParticleSystem">
+    <Position X="14.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQABAAABAAAAQhCAAAAQAIAAAAAAAAAEBAAAAAAQAA=</HashCode>
+      <FileName>ParticleSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transform">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABECCAAAAQAAAAAAQAAAABAggAIAAAggAAAOA=</HashCode>
+      <FileName>Transform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector">
+    <Position X="20" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAEAEAAQABCAAAAAAAAEDgAQAAIAE=</HashCode>
+      <FileName>Vector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Contact">
+    <Position X="20" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SimpleVertex">
+    <Position X="16.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAIAAAAAAAAEAAgAAAAAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SurfaceInfo">
+    <Position X="18.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Light">
+    <Position X="16.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAYAAAAAAAAAgAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ConstantBuffer">
+    <Position X="14.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAEBAAAAAAAAQAAAAAAAIBAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MeshData">
+    <Position X="14.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAABAAIAQAAAAACAAAAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Material">
+    <Position X="18.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAABAAAAABAAAA=</HashCode>
+      <FileName>Commons.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

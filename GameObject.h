@@ -7,7 +7,6 @@
 #include "Transform.h"
 #include "Appearance.h"
 #include "ParticleModel.h"
-#include "Collision.h"
 
 using namespace DirectX;
 using namespace std;
@@ -15,7 +14,7 @@ using namespace std;
 class GameObject
 {
 public:
-	GameObject(string type, Appearance* appearance, Transform * transform, ParticleModel* particlemodel, float boundingRadius);
+	GameObject(string type, Appearance * appearance, Transform * transform, ParticleModel * particleModel);
 	~GameObject();
 
 	string GetType() const { return _type; }
@@ -32,8 +31,8 @@ private:
 	string _type;
 	
 	Transform * _transform;
-	Appearance* _appearance;
-	ParticleModel* _particleModel;
+	Appearance * _appearance;
+	ParticleModel * _particleModel;
 
 	GameObject * _parent;
 };

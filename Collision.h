@@ -1,37 +1,8 @@
 #ifndef _COLLISION_H
 #define _COLLISION_H
 
-#include "Transform.h"
-#include "GameObject.h"
-
-class Sphere
-{
-public:
-	Sphere(float radius, Transform* transform) : _radius(radius), _transform(transform) {}
-	float GetBoundingRadius() const { return _radius; }
-	Transform* GetTransform() const { return _transform; }
-
-	bool CollisionCheck(Sphere* otherSphere)
-	{
-		Vector centre1 = _transform->GetPosition();
-		Vector centre2 = otherSphere->GetTransform()->GetPosition();
-
-		Vector distance = centre2 - centre1;
-
-		float sumOfBoundingRadii = _radius + otherSphere->GetBoundingRadius();
-
-		if (distance.GetSqrMagnitude() < (sumOfBoundingRadii * sumOfBoundingRadii)) 
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-private:
-	float _radius;
-	Transform* _transform;
-};
+#include"GameObject.h"
+#include <vector>
 
 struct Contact
 {
@@ -39,17 +10,26 @@ struct Contact
 	GameObject * second;
 };
 
-namespace CollisionDetector
+class Collision
 {
-	static std::vector<Contact*> DetectCollisions(std::vector<GameObject>gameobjects) 
+public:
+	static std::vector<Contact> DetectCollisions(std::vector<GameObject*>gameObjects)
 	{
+		//Quadtree?
+
+		vector<Contact>contacts;
 		for (int i = 0; i < gameObjects.size() - 1; i++)
 		{
 			for (int j = 1 + 1; j < gameObjects.size(); j++)
 			{
-				gameObjects[i]->GetParticleModel()->GetBoundingSphere().CollisionCheck(gameObjects[j]->GetParticleModel()->GetGetBoundingSphere())
+				if (gameObjects[i]->GetParticleModel()->GetBoundingSphere()->CollisionCheck(gameObjects[j]->GetParticleModel()->GetBoundingSphere()))
+				{
+					contacts.push_back({ gameObjects[i], gameObjects[j] });
+				}
 			}
 		}
-	};
-}
-#endif //!_COLLISION_H
+		return contacts;
+	}
+};
+#endif // !_COLLISION_H
+

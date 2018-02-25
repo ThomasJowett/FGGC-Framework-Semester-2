@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.h"
 #include "Transform.h"
-#include "Collision.h"
+#include "Collider.h"
 
 class ParticleModel
 {
@@ -20,6 +20,7 @@ public:
 	void SetMass(float mass) { _mass = mass; }
 
 	Vector GetVelocity() const { return _velocity; }
+	void SetVelocity(Vector velocity) { _velocity = velocity; }
 
 	Sphere* GetBoundingSphere() const { return _boundingSphere; }
 

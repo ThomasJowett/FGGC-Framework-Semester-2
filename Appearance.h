@@ -12,7 +12,7 @@ class Appearance
 {
 public:
 	Appearance();
-	Appearance(MeshData _geometry, Material _material, ID3D11ShaderResourceView * _textureRV);
+	Appearance(MeshData _geometry, Material _material, ID3D11ShaderResourceView * _textureDiffuseRV, ID3D11ShaderResourceView * _textureSpecularRV, ID3D11ShaderResourceView * _textureAORV);
 	~Appearance();
 
 	Material GetMaterial() const {return _material; }
@@ -23,10 +23,16 @@ public:
 	void SetGeometry(MeshData geometry) { _geometry = geometry; }
 	void SetGeometry(ID3D11Buffer * vertexBuffer, ID3D11Buffer * indexBuffer, int numberOfIndices, UINT vertexBufferStride, UINT vertexBufferOffset);
 
-	ID3D11ShaderResourceView * GetTextureRV() const { return _textureRV; }
-	void SetTextureRV(ID3D11ShaderResourceView * textureRV) { _textureRV = textureRV; }
+	ID3D11ShaderResourceView * GetTextureDiffuseRV() const { return _textureDiffuseRV; }
+	void SetTextureDiffuseRV(ID3D11ShaderResourceView * textureRV) { _textureDiffuseRV = textureRV; }
 
-	bool HasTexture() const { return _textureRV ? true : false; }
+	ID3D11ShaderResourceView * GetTextureSpecularRV() const { return _textureSpecularRV; }
+	void SetTextureSpecularRV(ID3D11ShaderResourceView * textureRV) { _textureSpecularRV = textureRV; }
+
+	ID3D11ShaderResourceView * GetTextureAORV() const { return _textureAORV; }
+	void SetTextureAORV(ID3D11ShaderResourceView * textureRV) { _textureAORV = textureRV; }
+
+	bool HasTexture() const { return _textureDiffuseRV ? true : false; }
 	void Draw(ID3D11DeviceContext * pImmediateContext);
 
 private:
@@ -34,6 +40,8 @@ private:
 	MeshData _geometry;
 	Material _material;
 
-	ID3D11ShaderResourceView * _textureRV;
+	ID3D11ShaderResourceView * _textureDiffuseRV;
+	ID3D11ShaderResourceView * _textureSpecularRV;
+	ID3D11ShaderResourceView * _textureAORV;
 };
 

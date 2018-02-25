@@ -1,18 +1,17 @@
 #include "Appearance.h"
 
-
-
 Appearance::Appearance()
 {
 }
 
-Appearance::Appearance(MeshData geometry, Material material, ID3D11ShaderResourceView * textureRV) : _geometry(geometry), _material(material), _textureRV(textureRV)
+Appearance::Appearance(MeshData geometry, Material material, ID3D11ShaderResourceView * textureDiffuseRV, ID3D11ShaderResourceView * textureSpecularRV, ID3D11ShaderResourceView * textureAORV) : _geometry(geometry), _material(material), _textureDiffuseRV(textureDiffuseRV), _textureSpecularRV(textureSpecularRV), _textureAORV(textureAORV)
 {
 }
 
 
 Appearance::~Appearance()
 {
+	delete &_geometry;
 }
 
 void Appearance::SetMaterial(XMFLOAT4 diffuse, XMFLOAT4 ambient, XMFLOAT4 specular, float specularPower)
