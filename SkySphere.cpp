@@ -14,6 +14,8 @@ SkySphere::SkySphere(ID3D11Device* _pd3dDevice, const wchar_t* fileName)
 
 	CompileShader(_pd3dDevice);
 	LoadTexture(_pd3dDevice, fileName);
+
+	XMStoreFloat4x4(&_world, XMMatrixIdentity());
 }
 
 SkySphere::~SkySphere()

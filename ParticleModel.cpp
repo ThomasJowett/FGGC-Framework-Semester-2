@@ -4,7 +4,7 @@ ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, 
 	if (mass <= 0.0f)
 		_simulatePhysics = false;
 
-	_dragCoefficient = 1.05f;
+	_dragCoefficient = 0.2f;
 	_fluidDensity = 1.225f;
 	_objectArea = 1.0f;
 

@@ -383,6 +383,7 @@
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="SkySphere.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
