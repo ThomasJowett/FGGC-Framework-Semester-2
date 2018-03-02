@@ -1,4 +1,2 @@
-﻿  ParticleModel.cpp
-c:\users\j005627b\documents\fggc semester 2\particlemodel.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.pdb (Full PDB)
+﻿  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

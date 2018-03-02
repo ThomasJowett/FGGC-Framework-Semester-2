@@ -8,6 +8,7 @@ struct Contact
 {
 	GameObject * first;
 	GameObject * second;
+	float interpenertration;
 };
 
 namespace Collision

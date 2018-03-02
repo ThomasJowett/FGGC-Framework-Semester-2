@@ -17,7 +17,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // Main message loop
     MSG msg = {0};
 
-	float deltaTime = 1.0f;
+	float deltaTime = 0.0f;
 	LARGE_INTEGER clockFrequency;
 
     while (WM_QUIT != msg.message)

@@ -4,7 +4,7 @@ ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, 
 	if (mass <= 0.0f)
 		_simulatePhysics = false;
 
-	_dragCoefficient = 0.2f;
+	_dragCoefficient = 1.0f;
 	_fluidDensity = 1.225f;
 	_objectArea = 1.0f;
 
@@ -30,7 +30,7 @@ void ParticleModel::Update(float deltaTime)
 
 		_velocity = _velocity + (acceleration * deltaTime);
 
-		if (_velocity.GetSqrMagnitude() == 0.0f)
+		if (_velocity.GetSqrMagnitude() < 0.0f)
 			_isAtRest = true;
 		else
 		{
