@@ -11,7 +11,7 @@ public:
 	Transform* GetTransform() const { return _transform; }
 	
 	
-	bool CollisionCheck(Sphere* otherSphere)
+	float CollisionCheck(Sphere* otherSphere)
 	{
 		Vector centre1 = _transform->GetPosition();
 		Vector centre2 = otherSphere->GetTransform()->GetPosition();
@@ -20,12 +20,7 @@ public:
 
 		float sumOfBoundingRadii = _radius + otherSphere->GetBoundingRadius();
 
-		if (distance.GetSqrMagnitude() < (sumOfBoundingRadii * sumOfBoundingRadii)) 
-		{
-			return true;
-		}
-
-		return false;
+		return (sumOfBoundingRadii * sumOfBoundingRadii) - distance.GetSqrMagnitude();
 	}
 	
 private:

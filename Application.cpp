@@ -194,7 +194,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
 	_gameObjects.push_back(gameObject);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -500.0f + (i * 250.0f), 300.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
@@ -610,7 +610,7 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
+		//_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
@@ -619,8 +619,8 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('2'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f }*(_gameObjects[1]->GetParticleModel()->GetMass()));
-		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f }*(_gameObjects[2]->GetParticleModel()->GetMass()));
+		//_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f }*(_gameObjects[5]->GetParticleModel()->GetMass()));

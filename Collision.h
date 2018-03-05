@@ -7,8 +7,10 @@
 struct Contact
 {
 	GameObject * first;
+	Vector contactNormalA;
 	GameObject * second;
-	float interpenertration;
+	Vector contactNormalB;
+	float penetrationDepth;
 };
 
 namespace Collision
