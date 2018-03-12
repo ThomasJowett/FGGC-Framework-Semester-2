@@ -16,11 +16,11 @@ public:
 		Vector centre1 = _transform->GetPosition();
 		Vector centre2 = otherSphere->GetTransform()->GetPosition();
 
-		Vector distance = centre2 - centre1;
+		Vector distance = centre1 - centre2;
 
 		float sumOfBoundingRadii = _radius + otherSphere->GetBoundingRadius();
 
-		return (sumOfBoundingRadii * sumOfBoundingRadii) - distance.GetSqrMagnitude();
+		return sumOfBoundingRadii - distance.GetMagnitude();
 	}
 	
 private:

@@ -27,23 +27,18 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 {
 	for (auto contact : contacts)
 	{
-		Vector velocityA = contact.first->GetParticleModel()->GetVelocity();
-		Vector velocityB = contact.second->GetParticleModel()->GetVelocity();
+		Vector velocityA = contact.A->GetParticleModel()->GetVelocity();
+		Vector velocityB = contact.B->GetParticleModel()->GetVelocity();
 
+		float massA = contact.A->GetParticleModel()->GetMass();
+		float massB = contact.B->GetParticleModel()->GetMass();
 
-		//TODO: Resolve Interpenertration
-		//contact.first->GetTransform()->SetPosition(contact.first->GetTransform()->GetPosition() + (contact.contactNormalA*(contact.penetrationDepth/2)));
-		//contact.second->GetTransform()->SetPosition(contact.second->GetTransform()->GetPosition() + (contact.contactNormalB*(contact.penetrationDepth/2)));
-
-		float massA = contact.first->GetParticleModel()->GetMass();
-		float massB = contact.second->GetParticleModel()->GetMass();
+		//Resolve Interpenertration
+		contact.A->GetTransform()->SetPosition(contact.A->GetTransform()->GetPosition() + ((contact.contactNormalA*(contact.penetrationDepth)) * (massB / massA + massB)));
+		contact.B->GetTransform()->SetPosition(contact.B->GetTransform()->GetPosition() + ((contact.contactNormalB*(contact.penetrationDepth)) * (massA / massA + massB)));
 
 		//coeffiecient of restitution hard coded as 0.5
-		velocityA = (((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*0.5))) / (massA + massB));
-		velocityB = (((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massA*0.5))) / (massA + massB));
-
-		contact.first->GetParticleModel()->SetVelocity(velocityA);
-
-		contact.second->GetParticleModel()->SetVelocity(velocityB);
+		contact.A->GetParticleModel()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*0.5))) / (massA + massB)));
+		contact.B->GetParticleModel()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityA - velocityB)*(massA*0.5))) / (massA + massB)));
 	}
 }

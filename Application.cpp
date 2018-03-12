@@ -188,7 +188,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specularPower = 0.0f;
 
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundDiffuseTextureRV, _pGroundSpecularTextureRV, _pGroundAOTextureRV);
-	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
+	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
 	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, 0.0f, transform);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, particle);
@@ -197,7 +197,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	for (int i = 0; i < 5; i++)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
-		transform = new Transform({ -500.0f + (i * 250.0f), 300.0f, 1000.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
+		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
 		particle = new ParticleModel(10.0f, { 0.0f, 1.0f, 0.0f }, 100.0f, transform);
 
 		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle);
@@ -610,16 +610,16 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		//_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
-		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
+		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 	}
 
 	if (GetAsyncKeyState('2'))
 	{
-		//_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
@@ -635,13 +635,29 @@ void Application::Update(float deltaTime)
 		gameObject->GetParticleModel()->AddForce((Vector{ 0.0f, -10.0f, 0.0f }) *(gameObject->GetParticleModel()->GetMass()));
 
 		gameObject->Update(deltaTime);
-		if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < 00.0f && gameObject->GetParticleModel()->GetSimulatePhysics())
+		if (gameObject->GetParticleModel()->GetSimulatePhysics())
 		{
-			gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 100.0f, gameObject->GetTransform()->GetPosition().z);
-			gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f,-1.0f,0.0f }));
+			if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < 00.0f)
+			{
+				gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 0.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f,-1.0f,0.0f })* 0.995);
+			}
+			if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 1000.0f)
+			{
+				gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 1000.0f - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f, 1.0f, 0.0f })* 0.995);
+			}
+			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 1000.0f)
+			{
+				gameObject->GetTransform()->SetPosition(1000.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 1.0f, 0.0f, 0.0f }) * 0.995);
+			}
+			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < -1000.0f)
+			{
+				gameObject->GetTransform()->SetPosition(-1000.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { -1.0f, 0.0f, 0.0f })* 0.995);
+			}
 		}
-
-		
 	}
 	
 	//Check objects collisions
