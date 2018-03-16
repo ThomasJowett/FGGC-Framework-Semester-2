@@ -196,7 +196,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 	for (int i = 0; i < 5; i++)
 	{
-		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
+		appearance = new Appearance(cubeGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
 		particle = new ParticleModel(10.0f, { 0.0f, 1.0f, 0.0f }, 100.0f, transform);
 
@@ -205,7 +205,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 		_gameObjects.push_back(gameObject);
 	}
 
-	_particleSystem = ParticleSystem(10.0f, 1, appearance, 10.0f, 100.0f);
+	appearance = new Appearance(cubeGeometry, shinyMaterial, _pStoneDiffuseTextureRV, _pStoneSpecularTextureRV, _pStoneAOTextureRV);
+	_particleSystem = new ParticleSystem(appearance, 10.0f, 100.0f);
 
 	_SkySphere = new SkySphere(_pd3dDevice, L"Resources\\grasscube1024.dds");
 
@@ -614,7 +615,7 @@ void Application::Update(float deltaTime)
 	{
 		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
-		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
+		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 	}
@@ -630,16 +631,22 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('3'))
 	{
-		_particleSystem.Activate({ 0.0f,0.0f,0.0f }, { 0.0f, 3.0f, 0.0f }, false);
+		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 50.0f, 30.0f, 0.0f }, 10.0f, 0.0f, 4);
+	}
+
+	if (GetAsyncKeyState('4'))
+	{
+		_particleSystem->Deactivate();
 	}
 
 	_camera->Update();
+	_particleSystem->Update(deltaTime);
 	_SkySphere->Update(_camera->GetPosition());
 
 	// Update objects
 	for (auto gameObject : _gameObjects)
 	{
-		gameObject->GetParticleModel()->AddForce((Vector{ 0.0f, -10.0f, 0.0f }) *(gameObject->GetParticleModel()->GetMass()));
+		//gameObject->GetParticleModel()->AddForce((Vector{ 0.0f, -10.0f, 0.0f }) *(gameObject->GetParticleModel()->GetMass()));
 
 		gameObject->Update(deltaTime);
 		if (gameObject->GetParticleModel()->GetSimulatePhysics())
@@ -666,7 +673,7 @@ void Application::Update(float deltaTime)
 			}
 		}
 	}
-	
+
 	//Check objects collisions
 	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 }
@@ -716,7 +723,42 @@ void Application::Draw()
 	_pImmediateContext->PSSetShader(_pPixelShader, nullptr, 0);
 	_pImmediateContext->OMSetDepthStencilState(NULL, 0);
 	
+	//render the particles
+	for (auto particle : _particleSystem->GetParticles())
+	{
+		// Get render material
+		Material material = particle->GetAppearance()->GetMaterial();
 
+		// Copy material to shader
+		cb.surface.AmbientMtrl = material.ambient;
+		cb.surface.DiffuseMtrl = material.diffuse;
+		cb.surface.SpecularMtrl = material.specular;
+
+		// Set world matrix
+		cb.World = XMMatrixTranspose(particle ->GetTransform()->GetWorldMatrix());
+
+		// Set texture
+		if (particle->GetAppearance()->HasTexture())
+		{
+			ID3D11ShaderResourceView * textureDiffuseRV = particle->GetAppearance()->GetTextureDiffuseRV();
+			ID3D11ShaderResourceView * textureSpecularRV = particle->GetAppearance()->GetTextureSpecularRV();
+			ID3D11ShaderResourceView * textureAORV = particle->GetAppearance()->GetTextureAORV();
+			_pImmediateContext->PSSetShaderResources(0, 1, &textureDiffuseRV);
+			_pImmediateContext->PSSetShaderResources(1, 1, &textureSpecularRV);
+			_pImmediateContext->PSSetShaderResources(2, 1, &textureAORV);
+			cb.HasTexture = 1.0f;
+		}
+		else
+		{
+			cb.HasTexture = 0.0f;
+		}
+
+		// Update constant buffer
+		_pImmediateContext->UpdateSubresource(_pConstantBuffer, 0, nullptr, &cb, 0, 0);
+
+		// Draw object
+		particle->Draw(_pImmediateContext);
+	}
 
 	// Render all scene objects
 	for (auto gameObject : _gameObjects)

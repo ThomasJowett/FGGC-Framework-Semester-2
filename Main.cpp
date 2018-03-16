@@ -44,11 +44,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			delta.QuadPart = (endTime.QuadPart - startTime.QuadPart);
 
 			//Calculate Delta Time in milliseconds
-			deltaTime = (((float)delta.QuadPart) / clockFrequency.QuadPart)*1000;
+			deltaTime = (((float)delta.QuadPart) / clockFrequency.QuadPart);
 
-			if (deltaTime * (DesiredFPS * 0.001f) < 1)
+			
+			if (deltaTime * (DesiredFPS / 1000.0f) < 1)
 			{
-				Sleep(((1 / DesiredFPS) * 1000 - deltaTime));
+				Sleep(((1 / DesiredFPS) - deltaTime));
 			}
         }
     }

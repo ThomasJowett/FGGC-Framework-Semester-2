@@ -24,6 +24,7 @@ void ParticleModel::Update(float deltaTime)
 {
 	if (_simulatePhysics)
 	{
+		AddForce(GravityForce());
 		AddForce(DragForce());
 
 		Vector acceleration = _netForce / _mass;
@@ -40,6 +41,11 @@ void ParticleModel::Update(float deltaTime)
 
 		_netForce = Vector{ 0.0f,0.0f,0.0f };
 	}
+}
+
+Vector ParticleModel::GravityForce()
+{
+	return Vector({ 0.0f, -10.0f, 0.0f }) *(_mass);
 }
 
 Vector ParticleModel::DragForce()

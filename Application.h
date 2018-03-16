@@ -87,7 +87,7 @@ private:
 	Light basicLight;
 
 	vector<GameObject *> _gameObjects;
-	ParticleSystem _particleSystem;
+	ParticleSystem* _particleSystem;
 
 	Camera _StaticCamera;
 	OrbitCamera _OrbitCamera;
@@ -101,7 +101,7 @@ private:
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
 	float _cameraLookSpeed = 0.01f;
-	float _cameraWalkSpeed = 100.0f;
+	float _cameraWalkSpeed = 500.0f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;

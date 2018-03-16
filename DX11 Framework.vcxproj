@@ -404,6 +404,7 @@
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GeometryGenerator.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="ParticleModel.h" />

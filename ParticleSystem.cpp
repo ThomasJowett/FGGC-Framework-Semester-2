@@ -1,9 +1,13 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(float lifeSpan, int particlesPerSecond, Appearance* appearance, float mass, float radius) : _lifeSpan(lifeSpan), _particlesPerSecond(particlesPerSecond), _appearance(appearance), _mass(mass), _radius(radius)
+ParticleSystem::ParticleSystem(Appearance* appearance, float mass, float radius) 
+	:_appearance(appearance), _mass(mass), _radius(radius)
 {
 	_isAlive = false;
 	_totalTime = 0.0f;
+	_spawnTime = 0.0f;
+	_destroyTime = 0.0f;
+	_particlePool = new GameObjectPool();
 }
 
 
@@ -13,23 +17,30 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::AddParticle(GameObject* particle)
 {
-	_particles.push_back(particle);
+	_particles.push_back(_particlePool->GetGameObject(particle));
 }
 
-void ParticleSystem::Activate(Vector position, Vector velocity, bool randomise)
+void ParticleSystem::Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond)
 {
-	/*
-	for (auto particle : _particles)
-	{
-		particle->GetTransform()->SetPosition(position);
-		if (randomise)
-			particle->GetParticleModel()->SetVelocity(velocity + Vector{ 1.0f * (float)rand() / (RAND_MAX)-0.5f, 1.0f * (float)rand() / (RAND_MAX)-0.5f, 1.0f * (float)rand() / (RAND_MAX)-0.5f });
-		else
-			particle->GetParticleModel()->SetVelocity(velocity);
-	}*/
+	_lifeSpan = lifeSpan;
+	_particlesPerSecond = particlesPerSecond;
+	_variance = variance;
+	_particleLife = 0.25f;
+
 	_initialVelocity = velocity;
 	_emitterLocation = position;
 	_isAlive = true;
+}
+
+void ParticleSystem::Deactivate()
+{
+	/*for(auto particle : _particles)
+	{
+		delete particle;
+	}*/
+	//_particles.clear();
+	_totalTime = 0.0f;
+	_isAlive = false;
 }
 
 void ParticleSystem::Render(ID3D11DeviceContext * pImmediateContext)
@@ -42,43 +53,47 @@ void ParticleSystem::Render(ID3D11DeviceContext * pImmediateContext)
 
 void ParticleSystem::Update(float deltaTime)
 {
-
-	float quat = _lifeSpan / 0.016f;
-	float decrement = 1.0f / quat;
-
-	if (_totalTime <= _lifeSpan && _isAlive)
+	if ((_totalTime <= _lifeSpan || _lifeSpan <= 0.0f) && _isAlive)
 	{
-		if (_oldTime + deltaTime > 1 / _particlesPerSecond)
+		if (_spawnTime + deltaTime > 1 / _particlesPerSecond)
 		{
+			
 			Transform* transform = new Transform(_emitterLocation, { 1,0,0, }, { 1,1,1 });
-			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity, _radius, transform);
+			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, _radius, transform);
 
 			AddParticle(new GameObject("Particle", _appearance, transform, particle));
+			_spawnTime = 0.0f;
 		}
 
-		if (_lifeSpan > 0.0f)
-		{
-			_totalTime += deltaTime;
-		}
-		else
-		{
-			_totalTime = _lifeSpan;
-		}
-
-		for (auto particle : _particles)
-		{
-			particle->Update(deltaTime);
-		}
+		_spawnTime += deltaTime;
+		_totalTime += deltaTime;
 	}
 	else
 	{
 		_totalTime = 0.0f;
 		_isAlive = false;
 	}
+
+	
+	if (_destroyTime > _particleLife && _particles.size())
+	{
+		_particlePool->ReturnGameObject(_particles[0]);
+		_particles.erase(_particles.begin());
+		_destroyTime = 0.0f;
+	}
+	else
+	{
+		_destroyTime += deltaTime;
+	}
+
+	for (auto particle : _particles)
+	{
+		particle->Update(deltaTime);
+	}
 }
 
 bool ParticleSystem::IsAlive()
 {
-	return false;
+	return _isAlive;
 }
 

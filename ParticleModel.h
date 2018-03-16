@@ -37,7 +37,7 @@ private:
 	float _objectArea;
 
 	Sphere* _boundingSphere;
-
+	Vector GravityForce();
 	Vector DragForce();
 	Vector DragLaminarFlow();
 	Vector DragTurbulentFlow();
