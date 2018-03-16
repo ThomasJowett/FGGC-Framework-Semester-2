@@ -82,18 +82,63 @@ public:
 	*
 	* @see normalise
 	*/
+
+	//from 4 floats
 	Quaternion(const float r, const float i, const float j, const float k)
 		: r(r), i(i), j(j), k(k)
 	{
 	}
 
+	//from a Quaternion
+	Quaternion(const Quaternion& q)
+		:r(q.r), i(q.i), j(q.j), k(q.k)
+	{
+	}
+
+	//from a vector of 3 euler angles
+	Quaternion(const Vector angles)
+	{
+		float cos_i_2 = cosf(0.5*angles.x);
+		float cos_j_2 = cosf(0.5*angles.y);
+		float cos_k_2 = cosf(0.5*angles.z);
+
+		float sin_i_2 = sinf(0.5*angles.x);
+		float sin_j_2 = sinf(0.5*angles.y);
+		float sin_k_2 = sinf(0.5*angles.z);
+
+		// and now compute quaternion
+		r = cos_i_2*cos_j_2*cos_i_2 + sin_k_2*sin_j_2*sin_i_2;
+		i = cos_i_2*cos_j_2*sin_i_2 - sin_k_2*sin_j_2*cos_i_2;
+		j = cos_i_2*sin_j_2*cos_i_2 + sin_k_2*cos_j_2*sin_i_2;
+		k = sin_i_2*cos_j_2*cos_i_2 - cos_k_2*sin_j_2*sin_i_2;
+	}
+
+	//from 3 euler angles
+	Quaternion(const float theta_x, float theta_y, float theta_z)
+	{
+		(*this) = Quaternion(Vector(theta_x, theta_y, theta_z));
+	}
+
+	~Quaternion() {}
+
 	/**
 	* Normalises the quaternion to unit length, making it a valid
 	* orientation quaternion.
 	*/
-	void normalise()
+
+	float GetSqrMagnitude()
 	{
-		float d = r*r + i*i + j*j + k*k;
+		return r*r + i*i + j*j + k*k;
+	}
+
+	float GetMagnitude()
+	{
+		return sqrtf(GetSqrMagnitude());
+	}
+
+	void Normalize()
+	{
+		float d = GetSqrMagnitude();
 
 		// Check for zero length quaternion, and use the no-rotation
 		// quaternion in that case.
@@ -109,7 +154,58 @@ public:
 		j *= d;
 		k *= d;
 	}
+	
+	Quaternion Conjugate()
+	{
+		return Quaternion(r, -i, -j, -k);
+	}
 
+	Quaternion Scale(float scaler)
+	{
+		return Quaternion(r*scaler, i*scaler, j*scaler, k*scaler);
+	}
+
+	Quaternion Inverse()
+	{
+		return Conjugate().Scale(1 / GetSqrMagnitude());
+	}
+
+	Quaternion UnitQuaternion()
+	{
+		return (*this).Scale(1 / (*this).GetMagnitude());
+	}
+
+	//Operators---------------------------------------------------------------------------------
+
+	Quaternion operator = (const Quaternion& q)
+	{
+		r = q.r;
+		i = q.i;
+		j = q.j;
+		k = q.k;
+
+		return (*this);
+	}
+
+	Quaternion operator + (const Quaternion& q)
+	{
+		return Quaternion(r + q.r, i + q.i, j + q.j, k + q.k);
+	}
+
+	Quaternion operator - (const Quaternion& q)
+	{
+		return Quaternion(r - q.r, i - q.i, j - q.j, k - q.k);
+	}
+
+	Quaternion operator * (const Quaternion& q)
+	{
+		return Quaternion(
+			r*q.r - i*q.i - j*q.j - k*q.k,
+			r*q.i + i*q.r + j*q.k - k*q.j,
+			r*q.j + j*q.r + k*q.i - i*q.k,
+			r*q.k + k*q.r + i*q.j - j*q.i
+		);
+	}
 	/**
 	* Multiplies the quaternion by the given quaternion.
 	*
@@ -137,6 +233,7 @@ public:
 	*
 	* @param scale The amount of the vector to add.
 	*/
+	//------------------------------------------------------------------------------------------
 	void addScaledVector(const Vector& vector, float scale)
 	{
 		Quaternion q(0,
@@ -154,6 +251,11 @@ public:
 	{
 		Quaternion q(0, vector.x, vector.y, vector.z);
 		(*this) *= q;
+	}
+
+	Vector euler_angles(bool homogenous = true)const
+	{
+
 	}
 };
 
