@@ -1,91 +1,147 @@
 ﻿  Appearance.cpp
   Application.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\application.cpp(85): error C2512: 'ParticleSystem': no appropriate default constructor available
+  c:\users\j005627b\documents\fggc\particlesystem.h(8): note: see declaration of 'ParticleSystem'
   Camera.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-  Collision.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.cpp(7): warning C4018: '<': signed/unsigned mismatch
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.cpp(9): warning C4018: '<': signed/unsigned mismatch
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.cpp(41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\collision.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
   DDSTextureLoader.cpp
   FreeLookCamera.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-  GameObject.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\gameobject.cpp(21): warning C4238: nonstandard extension used: class rvalue used as lvalue
+c:\users\j005627b\documents\fggc\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
   GeometryGenerator.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(190): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(191): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(200): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(201): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(202): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(204): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(205): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(206): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(216): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(217): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(218): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(247): warning C4553: '==': operator has no effect; did you intend '='?
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(249): warning C4553: '==': operator has no effect; did you intend '='?
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(256): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(307): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(308): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(309): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(311): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(312): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(313): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(190): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(191): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(200): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(201): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(202): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(204): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(205): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(206): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(216): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(217): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(218): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(247): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(249): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(256): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(307): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(308): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(309): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(311): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(312): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(313): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
   Main.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\main.cpp(51): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
+c:\users\j005627b\documents\fggc\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\main.cpp(51): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
+  GameObject.cpp
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\gameobject.cpp(21): warning C4238: nonstandard extension used: class rvalue used as lvalue
   OBJLoader.cpp
   OrbitCamera.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\orbitcamera.cpp(34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\orbitcamera.cpp(35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\orbitcamera.cpp(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\orbitcamera.cpp(34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\orbitcamera.cpp(35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\orbitcamera.cpp(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   ParticleModel.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\particlemodel.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\particlemodel.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   ParticleSystem.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\particlesystem.cpp(44): warning C4189: 'decrement': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\particlesystem.cpp(4): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\particlesystem.cpp(19): warning C4100: 'randomise': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\particlesystem.cpp(47): warning C4189: 'decrement': local variable is initialized but not referenced
   SkySphere.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  Collision.cpp
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\collision.cpp(7): warning C4018: '<': signed/unsigned mismatch
+c:\users\j005627b\documents\fggc\collision.cpp(9): warning C4018: '<': signed/unsigned mismatch
+c:\users\j005627b\documents\fggc\collision.cpp(41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\collision.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Transform.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
   Vector.cpp
   Generating Code...
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(366): warning C4700: uninitialized local variable 'vertexBuffer' used
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(385): warning C4700: uninitialized local variable 'indexBuffer' used
-  LINK : F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe not found or not built by the last incremental link; performing full link
-Appearance.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(366): warning C4700: uninitialized local variable 'vertexBuffer' used
+c:\users\j005627b\documents\fggc\geometrygenerator.cpp(385): warning C4700: uninitialized local variable 'indexBuffer' used

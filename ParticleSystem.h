@@ -7,7 +7,7 @@
 class ParticleSystem
 {
 public:
-	ParticleSystem(float lifeSpan);
+	ParticleSystem(float lifeSpan, int particlesPerSecond, Appearance* appearance, float mass, float radius);
 	~ParticleSystem();
 
 	void AddParticle(GameObject* particle);
@@ -21,11 +21,21 @@ private:
 	std::vector<GameObject*> _particles;
 	float _lifeSpan;
 	float _totalTime;
+	float _oldTime;
 
 	int _currentParticleCount;
 	
 	float _particlesPerSecond;
 	
 	bool _isAlive;
+
+	Vector _emitterLocation;
+
+	Vector _initialVelocity;
+
+	Appearance* _appearance;
+
+	float _mass;
+	float _radius;
 };
 #endif // !_PARTICLESYSTEM_H

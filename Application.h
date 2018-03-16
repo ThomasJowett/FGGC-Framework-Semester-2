@@ -35,6 +35,7 @@
 #include "VertexTypes.h"
 */
 #include "GameObject.h"
+#include "ParticleSystem.h"
 
 using namespace DirectX;
 
@@ -86,6 +87,7 @@ private:
 	Light basicLight;
 
 	vector<GameObject *> _gameObjects;
+	ParticleSystem _particleSystem;
 
 	Camera _StaticCamera;
 	OrbitCamera _OrbitCamera;

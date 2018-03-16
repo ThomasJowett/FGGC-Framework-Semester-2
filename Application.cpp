@@ -205,6 +205,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 		_gameObjects.push_back(gameObject);
 	}
 
+	_particleSystem = ParticleSystem(10.0f, 1, appearance, 10.0f, 100.0f);
+
 	_SkySphere = new SkySphere(_pd3dDevice, L"Resources\\grasscube1024.dds");
 
 	return S_OK;
@@ -624,6 +626,11 @@ void Application::Update(float deltaTime)
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f }*(_gameObjects[5]->GetParticleModel()->GetMass()));
+	}
+
+	if (GetAsyncKeyState('3'))
+	{
+		_particleSystem.Activate({ 0.0f,0.0f,0.0f }, { 0.0f, 3.0f, 0.0f }, false);
 	}
 
 	_camera->Update();
