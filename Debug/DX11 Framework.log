@@ -1,25 +1,19 @@
-﻿  GeometryGenerator.cpp
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(190): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(191): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(200): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(201): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(202): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(204): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(205): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(206): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(216): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(217): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(218): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(247): warning C4553: '==': operator has no effect; did you intend '='?
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(249): warning C4553: '==': operator has no effect; did you intend '='?
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(256): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(307): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(308): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(309): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(311): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(312): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(313): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(366): warning C4700: uninitialized local variable 'vertexBuffer' used
-f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\geometrygenerator.cpp(385): warning C4700: uninitialized local variable 'indexBuffer' used
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)
+﻿  Application.cpp
+  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\j005627b\documents\fggc semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc semester 2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc semester 2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.pdb (Full PDB)

@@ -12,7 +12,7 @@ public:
 	~ParticleSystem();
 
 	void AddParticle(GameObject* particle);
-	void Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond);
+	void Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife);
 	void Deactivate();
 
 	void Render(ID3D11DeviceContext * pImmediateContext);
@@ -35,7 +35,7 @@ private:
 	float _totalTime;
 	float _spawnTime;
 	float _destroyTime;
-	float _particleLife;
+	float _destroyRate;
 	
 	float _particlesPerSecond;
 	float _variance;

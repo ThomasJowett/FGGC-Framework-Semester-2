@@ -29,7 +29,7 @@ void ParticleModel::Update(float deltaTime)
 
 		Vector acceleration = _netForce / _mass;
 
-		_velocity = _velocity + (acceleration * deltaTime);
+		_velocity = _velocity + (acceleration * deltaTime/1000.0f);
 
 		if (_velocity.GetSqrMagnitude() < 0.0f)
 			_isAtRest = true;
