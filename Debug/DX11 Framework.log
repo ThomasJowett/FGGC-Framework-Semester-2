@@ -1,19 +1,11 @@
-﻿  Application.cpp
-  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\j005627b\documents\fggc semester 2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-c:\users\j005627b\documents\fggc semester 2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc semester 2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC Semester 2\Debug\DX11 Framework.pdb (Full PDB)
+﻿  ParticleSystem.cpp
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\quaternion.h(256): warning C4100: 'homogenous': unreferenced formal parameter
+f:\documents\onedrive - staffordshire university\university work\further games and graphics concepts\fggc framework semester 2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

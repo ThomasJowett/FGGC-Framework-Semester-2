@@ -45,17 +45,17 @@ bool Application::HandleKeyboard(float deltaTime)
 
 	//Control Camera
 	if (GetAsyncKeyState('W') & 0x8000)
-		_camera->Walk(_cameraWalkSpeed*deltaTime);
+		_camera->Walk(_cameraWalkSpeed*deltaTime / 1000.0f);
 	if (GetAsyncKeyState('S') & 0x8000)
-		_camera->Walk(-_cameraWalkSpeed*deltaTime);
+		_camera->Walk(-_cameraWalkSpeed*deltaTime / 1000.0f);
 	if (GetAsyncKeyState('A') & 0x8000)
-		_camera->Strafe(-_cameraWalkSpeed*deltaTime);
+		_camera->Strafe(-_cameraWalkSpeed*deltaTime / 1000.0f);
 	if (GetAsyncKeyState('D') & 0x8000)
-		_camera->Strafe(_cameraWalkSpeed*deltaTime);
+		_camera->Strafe(_cameraWalkSpeed*deltaTime / 1000.0f);
 	if (GetAsyncKeyState('E') & 0x8000)
-		_camera->Raise(_cameraWalkSpeed*deltaTime);
+		_camera->Raise(_cameraWalkSpeed*deltaTime / 1000.0f);
 	if (GetAsyncKeyState('Q') & 0x8000)
-		_camera->Raise(-_cameraWalkSpeed*deltaTime);
+		_camera->Raise(-_cameraWalkSpeed*deltaTime / 1000.0f);
 
 	mouseLastState = mouseCurrState;
 
@@ -198,7 +198,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
-		particle = new ParticleModel(100.0f, { 0.0f, 1.0f, 0.0f }, 100.0f, transform);
+		particle = new ParticleModel(10.0f, { 0.0f, 1.0f, 0.0f }, 100.0f, transform);
 
 		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle);
 
@@ -613,8 +613,8 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -2.0f, 0.0f, 0.0f });
-		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 2.0f, 0.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
@@ -622,8 +622,8 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('2'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 2.0f, 0.0f, 0.0f });
-		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ -2.0f, 0.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f }*(_gameObjects[5]->GetParticleModel()->GetMass()));
@@ -631,7 +631,7 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('3'))
 	{
-		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 5.0f, 5.0f, 0.0f }, 0.5f, 10.0f, 10.0f, 1.0f);
+		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 0.0f, 50.0f, 0.0f }, 1.0f, 10.0f, 190.0f, 5.0f);
 	}
 
 	if (GetAsyncKeyState('4'))

@@ -101,7 +101,7 @@ private:
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
 	float _cameraLookSpeed = 0.01f;
-	float _cameraWalkSpeed = 5.0f;
+	float _cameraWalkSpeed = 500.0f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;

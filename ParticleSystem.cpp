@@ -71,7 +71,7 @@ void ParticleSystem::Update(float deltaTime)
 	}
 
 	
-	if (_destroyTime > _destroyRate && _particles.size())
+	if (_destroyTime >= _destroyRate && _particles.size())
 	{
 		_particlePool->ReturnGameObject(_particles[0]);
 		_particles.erase(_particles.begin());
