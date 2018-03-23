@@ -148,7 +148,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\Car_Specular.dds", nullptr, &_pCarSpecularTextureRV);
 
 	// Setup Camera
-	Vector eye = { 0.0f, 400.0f,-400.0f };
+	Vector eye = { 0.0f, 4.0f,-4.0f };
 	Vector at = { 0.0f, 0.0f, 0.0f };
 	Vector up = { 0.0f, 1.0f, 0.0f };
 
@@ -167,10 +167,10 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	basicLight.LightVecW = XMFLOAT3(0.0f, 1.0f, -1.0f);
 
 
-	MeshData cubeGeometry = GeometryGenerator::CreateCube(100.0f, 100.0f, 100.0f, _pd3dDevice);
-	MeshData sphereGeometry = GeometryGenerator::CreateSphere(100.0f, 20, 10, _pd3dDevice);
+	MeshData cubeGeometry = GeometryGenerator::CreateCube(1.0f, 1.0f, 1.0f, _pd3dDevice);
+	MeshData sphereGeometry = GeometryGenerator::CreateSphere(1.0f, 20, 10, _pd3dDevice);
 
-	MeshData planeGeometry = GeometryGenerator::CreateGrid(2500.0f, 2500.0f, 10, 10, 4.0f, 4.0f, _pd3dDevice);
+	MeshData planeGeometry = GeometryGenerator::CreateGrid(25.0f, 25.0f, 10, 10, 4.0f, 4.0f, _pd3dDevice);
 
 	MeshData ballGeometry = OBJLoader::Load("Resources\\Ball.obj", _pd3dDevice, true);
 	MeshData carGeometry = OBJLoader::Load("Resources\\Car.obj", _pd3dDevice, true);
@@ -196,9 +196,9 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 	for (int i = 0; i < 5; i++)
 	{
-		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
-		transform = new Transform({ -500.0f + (i * 250.0f), 100.0f, 1000.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
-		particle = new ParticleModel(10.0f, { 0.0f, 1.0f, 0.0f }, 100.0f, transform);
+		appearance = new Appearance(sphereGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
+		transform = new Transform({ -5.0f + (i * 2.5f), 1.0f, 10.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
+		particle = new ParticleModel(10.0f, { 0.0f, 1.0f, 0.0f }, 1.0f, transform);
 
 		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle);
 
@@ -206,7 +206,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	}
 
 	appearance = new Appearance(cubeGeometry, shinyMaterial, _pStoneDiffuseTextureRV, _pStoneSpecularTextureRV, _pStoneAOTextureRV);
-	_particleSystem = new ParticleSystem(appearance, 10.0f, 100.0f);
+	_particleSystem = new ParticleSystem(appearance, 10.0f, 1.0f);
 
 	_SkySphere = new SkySphere(_pd3dDevice, L"Resources\\grasscube1024.dds");
 
@@ -613,9 +613,9 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f });
-		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
-		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 200000.0f, 0.0f, 0.0f });
+		//_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 	}
@@ -673,7 +673,7 @@ void Application::Update(float deltaTime)
 	}
 
 	//Check objects collisions
-	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 }
 
 void Application::Draw()

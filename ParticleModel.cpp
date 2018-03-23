@@ -29,15 +29,22 @@ void ParticleModel::Update(float deltaTime)
 
 		Vector acceleration = _netForce / _mass;
 
-		_velocity = _velocity + (acceleration * deltaTime/1000.0f);
-
 		if (_velocity.GetSqrMagnitude() < 0.0f)
 			_isAtRest = true;
 		else
 		{
-			_transform->SetPosition(_transform->GetPosition() + _velocity);
+			Vector position = _transform->GetPosition();
+			position.x += _velocity.x * deltaTime + 0.5f * acceleration.x * deltaTime * deltaTime;
+			position.y += _velocity.y * deltaTime + 0.5f * acceleration.y * deltaTime * deltaTime;
+			position.z += _velocity.z * deltaTime + 0.5f * acceleration.z * deltaTime * deltaTime;
+
+			//_transform->SetPosition(_transform->GetPosition() + _velocity * deltaTime + 0.5f * acceleration * deltaTime * deltaTime);
+
+			_transform->SetPosition(position);
 			_isAtRest = false;
 		}
+
+		_velocity = _velocity + (acceleration * deltaTime);
 
 		_netForce = Vector{ 0.0f,0.0f,0.0f };
 	}
@@ -45,7 +52,7 @@ void ParticleModel::Update(float deltaTime)
 
 Vector ParticleModel::GravityForce()
 {
-	return Vector({ 0.0f, -10.0f, 0.0f }) *(_mass);
+	return Vector({ 0.0f, -10.0f, 0.0f }) * _mass;
 }
 
 Vector ParticleModel::DragForce()

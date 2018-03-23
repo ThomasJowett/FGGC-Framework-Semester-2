@@ -1,13 +1,13 @@
 #include "Application.h"
 #include <ctime>
 
-float milliseconds_now() {
+float seconds_now() {
 	static LARGE_INTEGER s_frequency;
 	static BOOL s_use_qpc = QueryPerformanceFrequency(&s_frequency);
 	if (s_use_qpc) {
 		LARGE_INTEGER now;
 		QueryPerformanceCounter(&now);
-		return(1000.0f * now.QuadPart) / s_frequency.QuadPart;
+		return(now.QuadPart) / s_frequency.QuadPart;
 	}
 	else
 	{
@@ -20,7 +20,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	float DesiredFPS = 10;
+	float DesiredFPS = 60.0f;
 
 	Application * theApp = new Application();
 
@@ -36,10 +36,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
     while (WM_QUIT != msg.message)
     {
-		
-
 		// Update start time
-		float startTime = milliseconds_now();
+		float startTime = seconds_now();
 		//clock_t startTime = clock();
 
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -49,18 +47,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         else
         {
-			theApp->Update(deltaTime);
+			theApp->Update(0.01667f);
             theApp->Draw();
 
 			//Calculate Delta Time in milliseconds
-			float endTime = milliseconds_now();
+			float endTime = seconds_now();
 			//clock_t endTime = clock();
 			deltaTime = (endTime - startTime);
-			
+
+			if (deltaTime < (1.0f / DesiredFPS))
+			{
+				Sleep(((1.0f / DesiredFPS) - deltaTime) * 1000.0f);
+			}
+
+			/*
 			if (deltaTime * (DesiredFPS/1000.0f) < 1)
 			{
-				Sleep(((1 / DesiredFPS) - deltaTime/1000.0f));
-			}
+				Sleep(((1 / DesiredFPS) - deltaTime));
+			}*/
         }
     }
 
