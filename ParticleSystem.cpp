@@ -23,11 +23,11 @@ void ParticleSystem::AddParticle(GameObject* particle)
 
 void ParticleSystem::Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife)
 {
-	_lifeSpan = lifeSpan*1000.0f;
+	_lifeSpan = lifeSpan;
 	_particlesPerSecond = particlesPerSecond;
 	_variance = variance;
 
-	_destroyRate = (particleLife*1000.0f) / particlesPerSecond;
+	_destroyRate = (particleLife) / particlesPerSecond;
 	_initialVelocity = velocity;
 	_emitterLocation = position;
 	_isAlive = true;
@@ -52,7 +52,7 @@ void ParticleSystem::Update(float deltaTime)
 {
 	if ((_totalTime <= _lifeSpan || _lifeSpan <= 0.0f) && _isAlive)
 	{
-		if (_spawnTime + deltaTime > 1000.0f / _particlesPerSecond)
+		if (_spawnTime + deltaTime > 1.0f / _particlesPerSecond)
 		{
 			Transform* transform = new Transform(_emitterLocation, { 1,0,0, }, { 1,1,1 });
 			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, _radius, transform);

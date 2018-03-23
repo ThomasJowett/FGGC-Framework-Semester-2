@@ -1,2 +1,3 @@
-﻿  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC\Debug\DX11 Framework.pdb (Full PDB)
+﻿Appearance.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

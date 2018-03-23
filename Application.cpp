@@ -23,7 +23,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-bool Application::HandleKeyboard(float deltaTime)
+bool Application::HandleInput(float deltaTime)
 {
 	//Escape to Quit
 	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
@@ -45,17 +45,17 @@ bool Application::HandleKeyboard(float deltaTime)
 
 	//Control Camera
 	if (GetAsyncKeyState('W') & 0x8000)
-		_camera->Walk(_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Walk(_cameraWalkSpeed*deltaTime);
 	if (GetAsyncKeyState('S') & 0x8000)
-		_camera->Walk(-_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Walk(-_cameraWalkSpeed*deltaTime);
 	if (GetAsyncKeyState('A') & 0x8000)
-		_camera->Strafe(-_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Strafe(-_cameraWalkSpeed*deltaTime);
 	if (GetAsyncKeyState('D') & 0x8000)
-		_camera->Strafe(_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Strafe(_cameraWalkSpeed*deltaTime);
 	if (GetAsyncKeyState('E') & 0x8000)
-		_camera->Raise(_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Raise(_cameraWalkSpeed*deltaTime);
 	if (GetAsyncKeyState('Q') & 0x8000)
-		_camera->Raise(-_cameraWalkSpeed*deltaTime / 1000.0f);
+		_camera->Raise(-_cameraWalkSpeed*deltaTime);
 
 	mouseLastState = mouseCurrState;
 
@@ -608,14 +608,14 @@ void Application::Cleanup()
 
 void Application::Update(float deltaTime)
 {
-	HandleKeyboard(deltaTime);
+	HandleInput(deltaTime);
 
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 200000.0f, 0.0f, 0.0f });
-		//_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
-		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
+		_gameObjects[1]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, 200.0f, 0.0f });
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
 	}
@@ -631,7 +631,7 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('3'))
 	{
-		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 0.0f, 50.0f, 0.0f }, 1.0f, 10.0f, 190.0f, 5.0f);
+		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 0.0f, 50.0f, 0.0f }, 1.0f, 10.0f, 1.0f, 5.0f);
 	}
 
 	if (GetAsyncKeyState('4'))
@@ -649,31 +649,31 @@ void Application::Update(float deltaTime)
 		gameObject->Update(deltaTime);
 		if (gameObject->GetParticleModel()->GetSimulatePhysics())
 		{
-			if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < 00.0f)
+			if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < 0.0f)
 			{
 				gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 0.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().z);
 				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f,-1.0f,0.0f })* 0.995);
 			}
-			if (gameObject->GetTransform()->GetPosition().y - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 1000.0f)
+			if (gameObject->GetTransform()->GetPosition().y + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 10.0f)
 			{
-				gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 1000.0f - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 10.0f - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().z);
 				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 0.0f, 1.0f, 0.0f })* 0.995);
 			}
-			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 1000.0f)
+			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() > 10.0f)
 			{
-				gameObject->GetTransform()->SetPosition(1000.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetTransform()->SetPosition(10.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
 				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { 1.0f, 0.0f, 0.0f }) * 0.995);
 			}
-			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < -1000.0f)
+			if (gameObject->GetTransform()->GetPosition().x - gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius() < -10.0f)
 			{
-				gameObject->GetTransform()->SetPosition(-1000.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+				gameObject->GetTransform()->SetPosition(-10.0f + gameObject->GetParticleModel()->GetBoundingSphere()->GetBoundingRadius(), gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
 				gameObject->GetParticleModel()->SetVelocity(Vector::Reflect(gameObject->GetParticleModel()->GetVelocity(), { -1.0f, 0.0f, 0.0f })* 0.995);
 			}
 		}
 	}
 
 	//Check objects collisions
-	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 }
 
 void Application::Draw()

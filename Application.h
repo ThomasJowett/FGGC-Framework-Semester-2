@@ -101,7 +101,7 @@ private:
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
 	float _cameraLookSpeed = 0.01f;
-	float _cameraWalkSpeed = 500.0f;
+	float _cameraWalkSpeed = 50.0f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;
@@ -142,7 +142,7 @@ public:
 
 	HRESULT Initialise(HINSTANCE hInstance, int nCmdShow);
 
-	bool HandleKeyboard(float deltaTime);
+	bool HandleInput(float deltaTime);
 
 	ID3D11RasterizerState* ViewMode();
 
