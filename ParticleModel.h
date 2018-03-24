@@ -11,7 +11,7 @@ public:
 
 	void AddForce(Vector force);
 
-	void Update(float deltaTime);
+	virtual void Update(float deltaTime);
 
 	bool GetSimulatePhysics() const { return _simulatePhysics; }
 	void SetSimulatePhysics(bool simulate) { _simulatePhysics = simulate; }
@@ -24,10 +24,15 @@ public:
 
 	Sphere* GetBoundingSphere() const { return _boundingSphere; }
 
-private:
+	bool GetIsLaminar()const { return _isLaminar; }
+	void SetIsLaminar(bool laminar) { _isLaminar = laminar; }
+
+protected:
 	Transform * _transform;
+
+private:
 	bool _isAtRest;
-	bool _laminar;
+	bool _isLaminar;
 	Vector _velocity;
 	Vector _netForce;
 	float _mass;
@@ -35,8 +40,8 @@ private:
 	float _dragCoefficient;
 	float _fluidDensity;
 	float _objectArea;
-
 	Sphere* _boundingSphere;
+
 	Vector GravityForce();
 	Vector DragForce();
 	Vector DragLaminarFlow();

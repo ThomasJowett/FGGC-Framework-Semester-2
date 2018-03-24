@@ -49,6 +49,10 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectRigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Appearance.h">
@@ -111,6 +115,10 @@
     <ClInclude Include="ObjectPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectRigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX11 Framework.rc" />

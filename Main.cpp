@@ -1,17 +1,18 @@
 #include "Application.h"
-#include <ctime>
-#include <chrono>
 
 long long Milliseconds_now() {
 	static LARGE_INTEGER s_frequency;
+	//check to see if the application can read the frequency
 	static BOOL s_use_qpc = QueryPerformanceFrequency(&s_frequency);
 	if (s_use_qpc) {
+		//most accurate method of getting system time
 		LARGE_INTEGER now;
 		QueryPerformanceCounter(&now);
 		return((now.QuadPart * 1000) / s_frequency.QuadPart);
 	}
 	else
 	{
+		//same value but only updates 64 times a second
 		return GetTickCount();
 	}
 }
@@ -37,10 +38,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
     while (WM_QUIT != msg.message)
     {
-		auto start = std::chrono::high_resolution_clock::now();
 		// Update start time
 		long long startTime = Milliseconds_now();
-		//clock_t startTime = clock();
 
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -49,6 +48,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         else
         {
+			//if game loop running faster than frame rate
 			if (deltaTime < (1.0f / DesiredFPS))
 			{
 				theApp->Update(1.0f / DesiredFPS);
@@ -57,16 +57,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			{
 				theApp->Update(deltaTime);
 			}
-			//theApp->Update(deltaTime);
+
             theApp->Draw();
 
-			//Calculate Delta Time in milliseconds
-			auto end = std::chrono::high_resolution_clock::now();
+			//Calculate Delta Time in seconds
 			long long endTime = Milliseconds_now();
-			//clock_t endTime = clock();
 			deltaTime = (endTime - startTime)/1000.0f;
-			std::chrono::duration<double> elasped = end - start;
-			//deltaTime = elasped.count();
 
 			if (deltaTime < (1.0f / DesiredFPS))
 			{

@@ -13,6 +13,9 @@ ParticleSystem::ParticleSystem(Appearance* appearance, float mass, float radius)
 
 ParticleSystem::~ParticleSystem()
 {
+	for (auto particle : _particles)
+		delete particle;
+
 	_particlePool->CleanUp();
 }
 
@@ -27,7 +30,7 @@ void ParticleSystem::Activate(Vector position, Vector velocity, float variance, 
 	_particlesPerSecond = particlesPerSecond;
 	_variance = variance;
 
-	_destroyRate = (particleLife) / particlesPerSecond;
+	_destroyRate = particleLife / particlesPerSecond;
 	_initialVelocity = velocity;
 	_emitterLocation = position;
 	_isAlive = true;

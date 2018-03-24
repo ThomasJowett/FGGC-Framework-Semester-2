@@ -28,24 +28,24 @@ void ParticleModel::Update(float deltaTime)
 		AddForce(DragForce());
 
 		Vector acceleration = _netForce / _mass;
-
-		if (_velocity.GetSqrMagnitude() < 0.0f)
-			_isAtRest = true;
-		else
+		if (!_isAtRest) 
 		{
 			Vector position = _transform->GetPosition();
-			position.x += _velocity.x * deltaTime + 0.5f * acceleration.x * deltaTime * deltaTime;
-			position.y += _velocity.y * deltaTime + 0.5f * acceleration.y * deltaTime * deltaTime;
-			position.z += _velocity.z * deltaTime + 0.5f * acceleration.z * deltaTime * deltaTime;
-
-			//_transform->SetPosition(_transform->GetPosition() + _velocity * deltaTime + 0.5f * acceleration * deltaTime * deltaTime);
+			position += (_velocity*deltaTime) + (acceleration*(deltaTime*deltaTime)) / 2;
 
 			_transform->SetPosition(position);
+		}
+		_velocity += acceleration * deltaTime;
+
+		if (_velocity.GetSqrMagnitude() < 0.01f)
+		{
+			_velocity = { 0.0f, 0.0f, 0.0f };
+			_isAtRest = true;
+		}
+		else
+		{
 			_isAtRest = false;
 		}
-
-		_velocity = _velocity + (acceleration * deltaTime);
-
 		_netForce = Vector{ 0.0f,0.0f,0.0f };
 	}
 }
@@ -57,9 +57,9 @@ Vector ParticleModel::GravityForce()
 
 Vector ParticleModel::DragForce()
 {
-	_laminar = true;
+	_isLaminar = true;
 
-	if (_laminar)
+	if (_isLaminar)
 		return DragLaminarFlow();
 	else
 		return DragTurbulentFlow();

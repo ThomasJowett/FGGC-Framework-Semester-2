@@ -9,6 +9,7 @@
 #include <directxmath.h>
 #include <directxcolors.h>
 #include <dinput.h>
+#include <Xinput.h>
 #include "Commons.h"
 #include "DDSTextureLoader.h"
 #include "resource.h"
@@ -22,9 +23,8 @@
 #include "SkySphere.h"
 #include <vector>
 /*
-//#include <SpriteFont.h>
+#include <SpriteFont.h>
 #include "CommonStates.h"
-//#include "DDSTextureLoader.h"
 #include "Effects.h"
 #include "GeometricPrimitive.h"
 #include "Model.h"
@@ -35,6 +35,7 @@
 #include "VertexTypes.h"
 */
 #include "GameObject.h"
+#include "GameObjectRigidBody.h"
 #include "ParticleSystem.h"
 
 using namespace DirectX;
@@ -54,13 +55,10 @@ private:
 	ID3D11PixelShader*      _pPixelShader;
 	ID3D11InputLayout*      _pVertexLayout;
 
-	ID3D11Buffer*           _pPlaneVertexBuffer;
-	ID3D11Buffer*           _pPlaneIndexBuffer;
-
 	ID3D11Buffer*           _pConstantBuffer;
 
 	ID3D11DepthStencilView* _depthStencilView = nullptr;
-	ID3D11Texture2D* _depthStencilBuffer = nullptr;
+	ID3D11Texture2D*		_depthStencilBuffer = nullptr;
 
 	ID3D11ShaderResourceView * _pStoneDiffuseTextureRV = nullptr;
 	ID3D11ShaderResourceView * _pStoneSpecularTextureRV = nullptr;
@@ -101,7 +99,7 @@ private:
 	float _cameraOrbitAngleYaw = -90.0f;
 	float _cameraOrbitAnglePitch = 20.0f;
 	float _cameraLookSpeed = 0.01f;
-	float _cameraWalkSpeed = 50.0f;
+	float _cameraWalkSpeed = 5.0f;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;

@@ -20,20 +20,20 @@ public:
 	string GetType() const { return _type; }
 	Transform * GetTransform() const { return _transform; }
 	Appearance * GetAppearance() const { return _appearance; }
-	ParticleModel* GetParticleModel() const { return _particleModel; }
+	virtual ParticleModel* GetPhysicsComponent() const { return _particleModel; }
 	
 	void SetParent(GameObject * parent) { _parent = parent; }
 
-	void Update(float t);
+	virtual void Update(float deltaTime);
 	void Draw(ID3D11DeviceContext * pImmediateContext);
 
-private:
+protected:
 	string _type;
 	
 	Transform * _transform;
 	Appearance * _appearance;
 	ParticleModel * _particleModel;
-
+private:
 	GameObject * _parent;
 };
 

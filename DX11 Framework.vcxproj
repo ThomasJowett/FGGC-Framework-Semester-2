@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -31,6 +31,7 @@
     <ProjectGuid>{B8FF81B5-9B26-4931-8353-07795FDC4043}</ProjectGuid>
     <RootNamespace>DX11 Framework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,31 +42,31 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -375,6 +376,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="FreeLookCamera.cpp" />
+    <ClCompile Include="GameObjectRigidBody.cpp" />
     <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -382,6 +384,7 @@
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -403,6 +406,7 @@
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectRigidBody.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="OBJLoader.h" />
@@ -411,6 +415,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Quaternion.h" />
     <CLInclude Include="resource.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
