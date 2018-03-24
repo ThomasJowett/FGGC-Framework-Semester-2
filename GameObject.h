@@ -7,6 +7,8 @@
 #include "Transform.h"
 #include "Appearance.h"
 #include "ParticleModel.h"
+#include "RigidBody.h"
+#include "Collider.h"
 
 using namespace DirectX;
 using namespace std;
@@ -14,13 +16,14 @@ using namespace std;
 class GameObject
 {
 public:
-	GameObject(string type, Appearance * appearance, Transform * transform, ParticleModel * particleModel);
+	GameObject(string type, Appearance * appearance, Transform * transform, ParticleModel * particleModel, Collider* collider);
 	~GameObject();
 
 	string GetType() const { return _type; }
 	Transform * GetTransform() const { return _transform; }
 	Appearance * GetAppearance() const { return _appearance; }
-	virtual ParticleModel* GetPhysicsComponent() const { return _particleModel; }
+	ParticleModel* GetPhysicsComponent() const { return _particleModel; }
+	Collider* GetCollider() const { return _collider; }
 	
 	void SetParent(GameObject * parent) { _parent = parent; }
 
@@ -33,6 +36,8 @@ protected:
 	Transform * _transform;
 	Appearance * _appearance;
 	ParticleModel * _particleModel;
+	Collider* _collider;
+
 private:
 	GameObject * _parent;
 };

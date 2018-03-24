@@ -14,7 +14,7 @@ public:
 	SkySphere(ID3D11Device* _pd3dDevice, const wchar_t* fileName);
 	~SkySphere();
 
-	void Update(Vector position);
+	void Update(Vector3D position);
 	void Draw(ID3D11DeviceContext * pImmediateContext);
 
 	XMMATRIX GetWorldMatrix() const { return XMLoadFloat4x4(&_world); }

@@ -96,7 +96,7 @@ public:
 	}
 
 	//from a vector of 3 euler angles
-	Quaternion(const Vector angles)
+	Quaternion(const Vector3D angles)
 	{
 		float cos_i_2 = cosf(0.5*angles.x);
 		float cos_j_2 = cosf(0.5*angles.y);
@@ -116,7 +116,7 @@ public:
 	//from 3 euler angles
 	Quaternion(const float theta_x, float theta_y, float theta_z)
 	{
-		(*this) = Quaternion(Vector(theta_x, theta_y, theta_z));
+		(*this) = Quaternion(Vector3D(theta_x, theta_y, theta_z));
 	}
 
 	~Quaternion() {}
@@ -234,7 +234,7 @@ public:
 	* @param scale The amount of the vector to add.
 	*/
 	//------------------------------------------------------------------------------------------
-	void addScaledVector(const Vector& vector, float scale)
+	void addScaledVector(const Vector3D& vector, float scale)
 	{
 		Quaternion q(0,
 			vector.x * scale,
@@ -247,13 +247,13 @@ public:
 		k += q.k * 0.5f;
 	}
 
-	void rotateByVector(const Vector& vector)
+	void rotateByVector(const Vector3D& vector)
 	{
 		Quaternion q(0, vector.x, vector.y, vector.z);
 		(*this) *= q;
 	}
 
-	Vector euler_angles(bool homogenous = true)const
+	Vector3D euler_angles(bool homogenous = true)const
 	{
 
 	}
@@ -263,9 +263,10 @@ public:
 * Inline function that creates a transform matrix from a
 * position and orientation.
 */
-static inline XMMATRIX CalculateTransformMatrix(const Vector &position, const Quaternion &orientation)
+static inline XMMATRIX CalculateTransformMatrix(const Vector3D &position, const Quaternion &orientation)
 {
 	XMMATRIX transformMatrix;
+	transformMatrix = XMMatrixIdentity();
 	transformMatrix.r[0] = XMVectorSetX(transformMatrix.r[0], 1 - 2 * orientation.j*orientation.j - 2 * orientation.k*orientation.k);
 	transformMatrix.r[0] = XMVectorSetY(transformMatrix.r[0], 2 * orientation.i*orientation.j - 2 * orientation.r*orientation.k);
 	transformMatrix.r[0] = XMVectorSetZ(transformMatrix.r[0], 2 * orientation.i*orientation.k + 2 * orientation.r*orientation.j);

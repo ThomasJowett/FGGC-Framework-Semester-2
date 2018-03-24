@@ -11,11 +11,11 @@ using namespace DirectX;
 class Camera
 {
 private:
-	Vector _eye; 
-	Vector _at;
-	Vector _up;
-	Vector _right;
-	Vector _look;
+	Vector3D _eye; 
+	Vector3D _at;
+	Vector3D _up;
+	Vector3D _right;
+	Vector3D _look;
 
 	FLOAT _windowWidth;
 	FLOAT _windowHeight;
@@ -31,7 +31,7 @@ public:
 	Camera();
 	~Camera();
 
-	void Initialise(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
+	void Initialise(Vector3D position, Vector3D at, Vector3D up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
 
 	virtual void Strafe(float d) {};
 	virtual void Walk(float d) {};
@@ -48,18 +48,18 @@ public:
 
 	XMFLOAT4X4 GetViewProjection() const;
 
-	Vector GetPosition() const { return _eye; }
-	Vector GetLookAt() const { return _at; }
-	Vector GetUp() const { return _up; }
-	Vector GetRight() const { return _right; }
-	Vector GetLook() const { return _look; }
+	Vector3D GetPosition() const { return _eye; }
+	Vector3D GetLookAt() const { return _at; }
+	Vector3D GetUp() const { return _up; }
+	Vector3D GetRight() const { return _right; }
+	Vector3D GetLook() const { return _look; }
 
 	void SetLens(float fovY, float windowHeight, float windowWidth, float zn, float zf);
-	void SetPosition(Vector position) { _eye = position; }
-	void SetLookAt(Vector lookAt) { _at = lookAt; }
-	void SetUp(Vector up) { _up = up; }
-	void SetRight(Vector right) { _right = right; }
-	void SetLook(Vector look) { _look = look; }
+	void SetPosition(Vector3D position) { _eye = position; }
+	void SetLookAt(Vector3D lookAt) { _at = lookAt; }
+	void SetUp(Vector3D up) { _up = up; }
+	void SetRight(Vector3D right) { _right = right; }
+	void SetLook(Vector3D look) { _look = look; }
 
 	void Reshape(FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth);
 };

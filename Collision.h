@@ -7,9 +7,8 @@
 struct Contact
 {
 	GameObject * A;
-	Vector contactNormalA;
 	GameObject * B;
-	Vector contactNormalB;
+	Vector3D contactNormal;
 	float penetrationDepth;
 };
 

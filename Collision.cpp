@@ -8,15 +8,15 @@ std::vector<Contact> Collision::DetectCollisions(std::vector<GameObject*> gameOb
 	{
 		for (int j = i + 1; j < gameObjects.size(); j++)
 		{
-			float penetrationDepth = gameObjects[i]->GetPhysicsComponent()->GetBoundingSphere()->CollisionCheck(gameObjects[j]->GetPhysicsComponent()->GetBoundingSphere());
-			if (penetrationDepth > 0.0f)
+			if (gameObjects[i]->GetCollider() != nullptr && gameObjects[j]->GetCollider() != nullptr)
 			{
-				Vector contactNormalA = gameObjects[i]->GetTransform()->GetPosition() - gameObjects[j]->GetTransform()->GetPosition();
-				Vector contactNormalB = gameObjects[j]->GetTransform()->GetPosition() - gameObjects[i]->GetTransform()->GetPosition();
-
-				contactNormalA.Normalize();
-				contactNormalB.Normalize();
-				contacts.push_back({ gameObjects[i], contactNormalA, gameObjects[j],contactNormalB, penetrationDepth });
+				Vector3D contactNormal;
+				float penetrationDepth;
+				
+				if(gameObjects[i]->GetCollider()->CollisionCheck(gameObjects[j]->GetCollider(), contactNormal, penetrationDepth))
+				{
+					contacts.push_back({ gameObjects[i], gameObjects[j],contactNormal, penetrationDepth });
+				}
 			}
 		}
 	}
@@ -27,18 +27,58 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 {
 	for (auto contact : contacts)
 	{
-		Vector velocityA = contact.A->GetPhysicsComponent()->GetVelocity();
-		Vector velocityB = contact.B->GetPhysicsComponent()->GetVelocity();
+		Vector3D velocityA;
+		Vector3D velocityB;
+		float massA = 0.0f;
+		float massB = 0.0f;
 
-		float massA = contact.A->GetPhysicsComponent()->GetMass();
-		float massB = contact.B->GetPhysicsComponent()->GetMass();
+		bool moveA, moveB;
 
-		//Resolve Interpenertration
-		contact.A->GetTransform()->SetPosition(contact.A->GetTransform()->GetPosition() + ((contact.contactNormalA*(contact.penetrationDepth)) * (massB / massA + massB)));
-		contact.B->GetTransform()->SetPosition(contact.B->GetTransform()->GetPosition() + ((contact.contactNormalB*(contact.penetrationDepth)) * (massA / massA + massB)));
+		if (contact.A->GetPhysicsComponent() != nullptr)
+		{
+			velocityA = contact.A->GetPhysicsComponent()->GetVelocity();
+			massA = contact.A->GetPhysicsComponent()->GetMass();
+			moveA = true;
+		}
+		else
+			moveA = false;
 
-		//coeffiecient of restitution hard coded as 0.5
-		contact.A->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*0.5))) / (massA + massB)));
-		contact.B->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityA - velocityB)*(massA*0.5))) / (massA + massB)));
+		if (contact.B->GetPhysicsComponent() != nullptr)
+		{
+			velocityB = contact.B->GetPhysicsComponent()->GetVelocity();
+			massB = contact.B->GetPhysicsComponent()->GetMass();
+			moveB = true;
+		}
+		else
+			moveB = false;
+
+		if (!moveA && !moveB)
+		{
+			//do nothing
+		}
+		else if (moveA && moveB)
+		{
+			//Resolve Interpenertration
+			contact.A->GetTransform()->SetPosition(contact.A->GetTransform()->GetPosition() + ((contact.contactNormal*(contact.penetrationDepth)) * (massB / massA + massB)));
+			contact.B->GetTransform()->SetPosition(contact.B->GetTransform()->GetPosition() + ((contact.contactNormal*-(contact.penetrationDepth)) * (massA / massA + massB)));
+
+			//coeffiecient of restitution hard coded as 0.5
+			contact.A->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*0.5))) / (massA + massB)));
+			contact.B->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityA - velocityB)*(massA*0.5))) / (massA + massB)));
+		}
+		else if (moveA && !moveB)
+		{
+			//move only A
+			contact.A->GetTransform()->SetPosition(contact.A->GetTransform()->GetPosition() + (contact.contactNormal*contact.penetrationDepth));
+
+			contact.A->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(contact.A->GetPhysicsComponent()->GetVelocity(), contact.contactNormal)* 0.8);
+		}
+		else if (!moveA && moveB)
+		{
+			//move only B
+			contact.B->GetTransform()->SetPosition(contact.B->GetTransform()->GetPosition() + (contact.contactNormal*contact.penetrationDepth));
+
+			contact.B->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(contact.B->GetPhysicsComponent()->GetVelocity(), contact.contactNormal)* 0.8);
+		}
 	}
 }

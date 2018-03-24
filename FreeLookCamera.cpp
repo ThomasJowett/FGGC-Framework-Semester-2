@@ -14,22 +14,22 @@ FreeLookCamera::~FreeLookCamera()
 void FreeLookCamera::Strafe(float d)
 {
 	// mPosition += d*mRight
-	Vector s = Vector().Replicate(d);
-	SetPosition(Vector().MultiplyAdd(s, GetRight(), GetPosition()));
+	Vector3D s = Vector3D().Replicate(d);
+	SetPosition(Vector3D().MultiplyAdd(s, GetRight(), GetPosition()));
 }
 
 void FreeLookCamera::Walk(float d)
 {
 	//mPosition += d*mLook
-	Vector s = Vector().Replicate(d);
-	SetPosition(Vector().MultiplyAdd(s, GetLook(), GetPosition()));
+	Vector3D s = Vector3D().Replicate(d);
+	SetPosition(Vector3D().MultiplyAdd(s, GetLook(), GetPosition()));
 }
 
 void FreeLookCamera::Raise(float d)
 {
 	//mPosition += d*mUp
-	Vector s = Vector().Replicate(d);
-	SetPosition(Vector().MultiplyAdd(s, GetUp(), GetPosition()));
+	Vector3D s = Vector3D().Replicate(d);
+	SetPosition(Vector3D().MultiplyAdd(s, GetUp(), GetPosition()));
 }
 
 void FreeLookCamera::Pitch(float angle)
@@ -65,16 +65,16 @@ void FreeLookCamera::Yaw(float angle)
 
 void FreeLookCamera::Update()
 {
-	Vector R = GetRight();
-	Vector U;
-	Vector L = GetLook();
-	Vector P = GetPosition();
+	Vector3D R = GetRight();
+	Vector3D U;
+	Vector3D L = GetLook();
+	Vector3D P = GetPosition();
 
 	L.Normalize();
 	R.Normalize();
 
-	U = Vector().Cross(L, R).GetNormalized();
-	R = Vector().Cross(U, L);
+	U = Vector3D().Cross(L, R).GetNormalized();
+	R = Vector3D().Cross(U, L);
 
 	SetRight(R);
 	SetUp(U);

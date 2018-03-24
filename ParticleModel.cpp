@@ -1,5 +1,5 @@
 #include "ParticleModel.h"
-ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
+ParticleModel::ParticleModel(float mass, Vector3D velocity, Transform * transform) : _mass(mass), _transform(transform), _velocity(velocity)
 {
 	if (mass <= 0.0f)
 		_simulatePhysics = false;
@@ -7,15 +7,13 @@ ParticleModel::ParticleModel(float mass, Vector velocity, float boundingRadius, 
 	_dragCoefficient = 1.0f;
 	_fluidDensity = 1.225f;
 	_objectArea = 1.0f;
-
-	_boundingSphere = new Sphere(boundingRadius, _transform);
 }
 
 ParticleModel::~ParticleModel()
 {
 }
 
-void ParticleModel::AddForce(Vector force)
+void ParticleModel::AddForce(Vector3D force)
 {
 	_netForce += force;
 }
@@ -27,10 +25,10 @@ void ParticleModel::Update(float deltaTime)
 		AddForce(GravityForce());
 		AddForce(DragForce());
 
-		Vector acceleration = _netForce / _mass;
+		Vector3D acceleration = _netForce / _mass;
 		if (!_isAtRest) 
 		{
-			Vector position = _transform->GetPosition();
+			Vector3D position = _transform->GetPosition();
 			position += (_velocity*deltaTime) + (acceleration*(deltaTime*deltaTime)) / 2;
 
 			_transform->SetPosition(position);
@@ -46,16 +44,16 @@ void ParticleModel::Update(float deltaTime)
 		{
 			_isAtRest = false;
 		}
-		_netForce = Vector{ 0.0f,0.0f,0.0f };
+		_netForce = Vector3D{ 0.0f,0.0f,0.0f };
 	}
 }
 
-Vector ParticleModel::GravityForce()
+Vector3D ParticleModel::GravityForce()
 {
-	return Vector({ 0.0f, -10.0f, 0.0f }) * _mass;
+	return Vector3D({ 0.0f, -10.0f, 0.0f }) * _mass;
 }
 
-Vector ParticleModel::DragForce()
+Vector3D ParticleModel::DragForce()
 {
 	_isLaminar = true;
 
@@ -65,15 +63,15 @@ Vector ParticleModel::DragForce()
 		return DragTurbulentFlow();
 }
 
-Vector ParticleModel::DragLaminarFlow()
+Vector3D ParticleModel::DragLaminarFlow()
 {
 	return _velocity * -_dragCoefficient;
 }
 
-Vector ParticleModel::DragTurbulentFlow()
+Vector3D ParticleModel::DragTurbulentFlow()
 {
 	float velocitySqrMagnitude = _velocity.GetSqrMagnitude();
-	Vector unitVelocity = _velocity.GetNormalized();
+	Vector3D unitVelocity = _velocity.GetNormalized();
 	float dragMagnitude = 0.5*_fluidDensity*_dragCoefficient*_objectArea*velocitySqrMagnitude;
 
 	return unitVelocity * -dragMagnitude;

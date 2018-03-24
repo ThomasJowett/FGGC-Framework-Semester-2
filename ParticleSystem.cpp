@@ -1,7 +1,7 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(Appearance* appearance, float mass, float radius) 
-	:_appearance(appearance), _mass(mass), _radius(radius)
+ParticleSystem::ParticleSystem(Appearance* appearance, float mass) 
+	:_appearance(appearance), _mass(mass)
 {
 	_isAlive = false;
 	_totalTime = 0.0f;
@@ -24,7 +24,7 @@ void ParticleSystem::AddParticle(GameObject* particle)
 	_particles.push_back(_particlePool->GetGameObject(particle));
 }
 
-void ParticleSystem::Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife)
+void ParticleSystem::Activate(Vector3D position, Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife)
 {
 	_lifeSpan = lifeSpan;
 	_particlesPerSecond = particlesPerSecond;
@@ -58,9 +58,9 @@ void ParticleSystem::Update(float deltaTime)
 		if (_spawnTime + deltaTime > 1.0f / _particlesPerSecond)
 		{
 			Transform* transform = new Transform(_emitterLocation, { 1,0,0, }, { 1,1,1 });
-			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, _radius, transform);
+			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector3D{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, transform);
 
-			AddParticle(new GameObject("Particle", _appearance, transform, particle));
+			AddParticle(new GameObject("Particle", _appearance, transform, particle, nullptr));
 			_spawnTime = 0.0f;
 		}
 

@@ -1,73 +1,73 @@
 #include "Vector.h"
 
 
-Vector::Vector()
+Vector3D::Vector3D()
 {
 	x = 0.0f;
 	y = 0.0f;
 	z = 0.0f;
 }
 
-Vector::Vector(float x, float y, float z)
+Vector3D::Vector3D(float x, float y, float z)
 {
 	this->x = x;
 	this->y = y;
 	this->z = z;
 }
 
-float Vector::GetMagnitude()
+float Vector3D::GetMagnitude()
 {
 	return sqrtf(GetSqrMagnitude());
 }
 
-float Vector::GetSqrMagnitude()
+float Vector3D::GetSqrMagnitude()
 {
 	return ((x*x) + (y*y) + (z*z));
 }
 
-Vector Vector::GetNormalized()
+Vector3D Vector3D::GetNormalized()
 {
 	float magnitude = GetMagnitude();
-	return Vector(x / magnitude, y / magnitude, z / magnitude);
+	return Vector3D(x / magnitude, y / magnitude, z / magnitude);
 }
 
-void Vector::Normalize()
+void Vector3D::Normalize()
 {
-	Vector normalized = GetNormalized();
+	Vector3D normalized = GetNormalized();
 
 	x = normalized.x;
 	y = normalized.y;
 	z = normalized.z;
 }
 
-Vector Vector::Cross(Vector v1, Vector v2)
+Vector3D Vector3D::Cross(Vector3D v1, Vector3D v2)
 {
-	Vector cross;
+	Vector3D cross;
 	cross.x = (v1.y*v2.z) - (v1.z*v2.y);
 	cross.y = -((v1.x*v2.z) - (v1.z*v2.x));
 	cross.z = (v1.x*v2.y) - (v1.y*v2.x);
 	return cross;
 }
 
-float Vector::Dot(Vector v1, Vector v2)
+float Vector3D::Dot(Vector3D v1, Vector3D v2)
 {
 	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
-Vector Vector::Reflect(Vector v, Vector normal)
+Vector3D Vector3D::Reflect(Vector3D v, Vector3D normal)
 {
 	normal.Normalize();
 	return v - (normal * (2.0f * Dot(v, normal)));
 }
 
-Vector Vector::Replicate(float f)
+Vector3D Vector3D::Replicate(float f)
 {
-	return Vector(f,f,f);
+	return Vector3D(f,f,f);
 }
 
-Vector Vector::MultiplyAdd(Vector v1, Vector v2, Vector v3)
+Vector3D Vector3D::MultiplyAdd(Vector3D v1, Vector3D v2, Vector3D v3)
 {
-	Vector Result;
+	Vector3D Result;
 
 	Result.x = v1.x * v2.x + v3.x;
 	Result.y = v1.y * v2.y + v3.y;
@@ -76,27 +76,27 @@ Vector Vector::MultiplyAdd(Vector v1, Vector v2, Vector v3)
 	return Result;
 }
 
-Vector Vector::operator*(float scaler)
+Vector3D Vector3D::operator*(float scaler)
 {
-	return Vector(x * scaler, y * scaler, z * scaler);
+	return Vector3D(x * scaler, y * scaler, z * scaler);
 }
 
-Vector Vector::operator/(float scaler)
+Vector3D Vector3D::operator/(float scaler)
 {
-	return Vector(x/scaler, y/scaler, z/scaler);
+	return Vector3D(x/scaler, y/scaler, z/scaler);
 }
 
-Vector Vector::operator+(const Vector & other)
+Vector3D Vector3D::operator+(const Vector3D & other)
 {
-	return Vector(x + other.x, y + other.y, z + other.z);
+	return Vector3D(x + other.x, y + other.y, z + other.z);
 }
 
-Vector Vector::operator-(const Vector & other)
+Vector3D Vector3D::operator-(const Vector3D & other)
 {
-	return Vector(x - other.x, y - other.y, z - other.z);
+	return Vector3D(x - other.x, y - other.y, z - other.z);
 }
 
-Vector Vector::operator+=(const Vector & other)
+Vector3D Vector3D::operator+=(const Vector3D & other)
 {
 	x += other.x;
 	y += other.y;
@@ -104,7 +104,7 @@ Vector Vector::operator+=(const Vector & other)
 	return *this;
 }
 
-Vector Vector::operator-=(const Vector & other)
+Vector3D Vector3D::operator-=(const Vector3D & other)
 {
 	x -= other.x;
 	y -= other.y;
@@ -112,7 +112,7 @@ Vector Vector::operator-=(const Vector & other)
 	return *this;
 }
 
-bool Vector::operator==(const Vector & other)
+bool Vector3D::operator==(const Vector3D & other)
 {
 	if (x == other.x && y == other.y && z == other.z)
 		return true;
@@ -120,7 +120,7 @@ bool Vector::operator==(const Vector & other)
 		return false;
 }
 
-bool Vector::operator!=(const Vector & other)
+bool Vector3D::operator!=(const Vector3D & other)
 {
 	if (x == other.x && y == other.y && z == other.z)
 		return false;
@@ -128,7 +128,7 @@ bool Vector::operator!=(const Vector & other)
 		return true;
 }
 
-Vector Vector::operator=(const Vector & other)
+Vector3D Vector3D::operator=(const Vector3D & other)
 {
 	x = other.x;
 	y = other.y;

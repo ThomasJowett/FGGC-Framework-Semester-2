@@ -22,7 +22,7 @@ SkySphere::~SkySphere()
 {
 }
 
-void SkySphere::Update(Vector position)
+void SkySphere::Update(Vector3D position)
 {
 	XMStoreFloat4x4(&_world, XMMatrixTranslation(position.x, position.y, position.z));
 }

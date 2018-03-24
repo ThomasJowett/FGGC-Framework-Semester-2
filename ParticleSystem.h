@@ -8,11 +8,11 @@
 class ParticleSystem
 {
 public:
-	ParticleSystem(Appearance* appearance, float mass, float radius);
+	ParticleSystem(Appearance* appearance, float mass);
 	~ParticleSystem();
 
 	void AddParticle(GameObject* particle);
-	void Activate(Vector position, Vector velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife);
+	void Activate(Vector3D position, Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife);
 	void Deactivate();
 
 	void Render(ID3D11DeviceContext * pImmediateContext);
@@ -42,9 +42,9 @@ private:
 	
 	bool _isAlive;
 
-	Vector _emitterLocation;
+	Vector3D _emitterLocation;
 
-	Vector _initialVelocity;
+	Vector3D _initialVelocity;
 
 	Appearance* _appearance;
 

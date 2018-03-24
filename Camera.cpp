@@ -8,7 +8,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::Initialise(Vector position, Vector at, Vector up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
+void Camera::Initialise(Vector3D position, Vector3D at, Vector3D up, FLOAT fovY, FLOAT windowWidth, FLOAT windowHeight, FLOAT nearDepth, FLOAT farDepth)
 {
 	SetLens(fovY, windowHeight, windowWidth, nearDepth, farDepth);
 	SetLookAt(at);

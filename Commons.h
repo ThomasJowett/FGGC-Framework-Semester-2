@@ -46,7 +46,7 @@ struct ConstantBuffer
 
 	Light light;
 
-	Vector EyePosW;
+	Vector3D EyePosW;
 	float HasTexture;
 };
 

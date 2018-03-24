@@ -6,10 +6,10 @@
 class ParticleModel
 {
 public:
-	ParticleModel(float mass, Vector velocity, float boundingRadius, Transform * transform);
+	ParticleModel(float mass, Vector3D velocity, Transform * transform);
 	~ParticleModel();
 
-	void AddForce(Vector force);
+	void AddForce(Vector3D force);
 
 	virtual void Update(float deltaTime);
 
@@ -19,10 +19,8 @@ public:
 	float GetMass() const { return _mass; }
 	void SetMass(float mass) { _mass = mass; }
 
-	Vector GetVelocity() const { return _velocity; }
-	void SetVelocity(Vector velocity) { _velocity = velocity; }
-
-	Sphere* GetBoundingSphere() const { return _boundingSphere; }
+	Vector3D GetVelocity() const { return _velocity; }
+	void SetVelocity(Vector3D velocity) { _velocity = velocity; }
 
 	bool GetIsLaminar()const { return _isLaminar; }
 	void SetIsLaminar(bool laminar) { _isLaminar = laminar; }
@@ -33,18 +31,17 @@ protected:
 private:
 	bool _isAtRest;
 	bool _isLaminar;
-	Vector _velocity;
-	Vector _netForce;
+	Vector3D _velocity;
+	Vector3D _netForce;
 	float _mass;
 	bool _simulatePhysics;
 	float _dragCoefficient;
 	float _fluidDensity;
 	float _objectArea;
-	Sphere* _boundingSphere;
 
-	Vector GravityForce();
-	Vector DragForce();
-	Vector DragLaminarFlow();
-	Vector DragTurbulentFlow();
+	Vector3D GravityForce();
+	Vector3D DragForce();
+	Vector3D DragLaminarFlow();
+	Vector3D DragTurbulentFlow();
 };
 

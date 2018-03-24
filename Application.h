@@ -35,7 +35,6 @@
 #include "VertexTypes.h"
 */
 #include "GameObject.h"
-#include "GameObjectRigidBody.h"
 #include "ParticleSystem.h"
 
 using namespace DirectX;

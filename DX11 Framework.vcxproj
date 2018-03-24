@@ -374,9 +374,9 @@
     <ClCompile Include="Appearance.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="FreeLookCamera.cpp" />
-    <ClCompile Include="GameObjectRigidBody.cpp" />
     <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -406,7 +406,6 @@
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectRigidBody.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="OBJLoader.h" />

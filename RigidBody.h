@@ -3,12 +3,12 @@
 class RigidBody :public ParticleModel
 {
 public:
-	RigidBody(float mass, Vector velocity, float boundingRadius, Transform * transform, Vector rotationAxis, float rotationRate);
+	RigidBody(float mass, Vector3D velocity, Transform * transform, Vector3D rotationAxis, float rotationRate);
 	~RigidBody();
 
 	void Update(float deltaTime)override;
 private:
-	Vector	_rotationAxis;
+	Vector3D	_rotationAxis;
 	float	_rotationRate;
 };
 

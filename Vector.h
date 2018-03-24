@@ -2,35 +2,35 @@
 
 #include <math.h>
 
-class Vector
+class Vector3D
 {
 public:
 	float x;
 	float y;
 	float z;
 
-	Vector();
-	Vector(float x, float y, float z);
+	Vector3D();
+	Vector3D(float x, float y, float z);
 
 	float GetMagnitude();
 	float GetSqrMagnitude();
-	Vector GetNormalized();
+	Vector3D GetNormalized();
 	void Normalize();
 
-	static Vector Cross(Vector v1, Vector v2);
-	static float Dot(Vector v1, Vector v2);
-	static Vector Reflect(Vector vector, Vector normal);
-	static Vector Replicate(float f);
-	static Vector MultiplyAdd(Vector v1, Vector v2, Vector v3);
+	static Vector3D Cross(Vector3D v1, Vector3D v2);
+	static float Dot(Vector3D v1, Vector3D v2);
+	static Vector3D Reflect(Vector3D vector, Vector3D normal);
+	static Vector3D Replicate(float f);
+	static Vector3D MultiplyAdd(Vector3D v1, Vector3D v2, Vector3D v3);
 
 	//Operators
-	Vector operator*(float scaler);
-	Vector operator/(float scaler);
-	Vector operator+(const Vector& other);
-	Vector operator-(const Vector& other);
-	Vector operator+=(const Vector& other);
-	Vector operator-=(const Vector& other);
-	bool operator==(const Vector& other);
-	bool operator!=(const Vector& other);
-	Vector operator=(const Vector& other);
+	Vector3D operator*(float scaler);
+	Vector3D operator/(float scaler);
+	Vector3D operator+(const Vector3D& other);
+	Vector3D operator-(const Vector3D& other);
+	Vector3D operator+=(const Vector3D& other);
+	Vector3D operator-=(const Vector3D& other);
+	bool operator==(const Vector3D& other);
+	bool operator!=(const Vector3D& other);
+	Vector3D operator=(const Vector3D& other);
 };

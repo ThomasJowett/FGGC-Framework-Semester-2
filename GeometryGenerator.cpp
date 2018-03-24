@@ -144,7 +144,7 @@ MeshData GeometryGenerator::CreateSphere(float radius, UINT longitudeLines, UINT
 			vertex.PosL.y = radius*cosf(phi);
 			vertex.PosL.z = radius*sinf(phi)*sinf(theta);
 
-			Vector position = { vertex.PosL.x, vertex.PosL.y, vertex.PosL.z };
+			Vector3D position = { vertex.PosL.x, vertex.PosL.y, vertex.PosL.z };
 			position.Normalize();
 
 			vertex.NormL.x = position.x;

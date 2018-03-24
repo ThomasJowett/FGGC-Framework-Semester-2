@@ -2,12 +2,12 @@
 
 Transform::Transform()
 {
-	_position = Vector(0.0f, 0.0f, 0.0f);
+	_position = Vector3D(0.0f, 0.0f, 0.0f);
 	_rotation = Quaternion(1.0f, 0.0f, 0.0f, 0.0f);
-	_scale = Vector(1.0f, 1.0f, 1.0f);
+	_scale = Vector3D(1.0f, 1.0f, 1.0f);
 }
 
-Transform::Transform(Vector position, Quaternion rotation, Vector scale)
+Transform::Transform(Vector3D position, Quaternion rotation, Vector3D scale)
 {
 	_position = position;
 	_rotation = rotation;
@@ -18,11 +18,11 @@ void Transform::UpdateWorldMatrix()
 {
 	
 	// Calculate world matrix
-	//XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, _scale.z);
+	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, _scale.z);
 	//XMMATRIX rotation = XMMatrixRotationX(_rotation.x) * XMMatrixRotationY(_rotation.y) * XMMatrixRotationZ(_rotation.z);
 	//XMMATRIX translation = XMMatrixTranslation(_position.x, _position.y, _position.z);
 
-	XMStoreFloat4x4(&_world, CalculateTransformMatrix(_position, _rotation));
+	XMStoreFloat4x4(&_world, scale * CalculateTransformMatrix(_position, _rotation));
 
 	//XMStoreFloat4x4(&_world, scale * rotation * translation);
 }

@@ -2,9 +2,17 @@
 
 
 
-RigidBody::RigidBody(float mass, Vector velocity, float boundingRadius, Transform * transform, Vector rotationAxis, float rotationRate)
-	:ParticleModel(mass, velocity, boundingRadius, transform), _rotationAxis(rotationAxis), _rotationRate(rotationRate)
+RigidBody::RigidBody(float mass, Vector3D velocity, Transform * transform, Vector3D rotationAxis, float rotationRate)
+	:ParticleModel(mass, velocity, transform), _rotationRate(rotationRate)
 {
+	if (rotationAxis.GetSqrMagnitude() != 0.0f)
+	{
+		_rotationAxis = rotationAxis.GetNormalized();
+	}
+	else
+	{
+		_rotationAxis = { 0.0f,1.0f,0.0f };
+	}
 }
 
 
@@ -16,10 +24,10 @@ void RigidBody::Update(float deltaTime)
 {
 	ParticleModel::Update(deltaTime);
 
-	Vector angularAcceleration;
+	Vector3D angularAcceleration;
 	//some calculation of angular acceleration
 
-	Vector angularVelocity = _rotationAxis * _rotationRate;
+	Vector3D angularVelocity = _rotationAxis * _rotationRate;
 
 	//add angular acceleration to angular velocity
 
