@@ -201,13 +201,14 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -5.0f + (i * 2.5f), 1.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 0.01f, 0.01f, 0.01f });
-		particle = new RigidBody(10.0f, { 0.0f, 1.0f, 0.0f }, transform, { 1.0f, 0.5f, 0.0f }, 0.0f);
+		particle = new RigidBody(10.0f, { 0.0f, 0.0f, 0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 3.14f);
 		collider = new Sphere(1.0f, transform);
 
 		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle, collider);
 
 		_gameObjects.push_back(gameObject);
 	}
+
 
 	appearance = new Appearance(cubeGeometry, shinyMaterial, _pStoneDiffuseTextureRV, _pStoneSpecularTextureRV, _pStoneAOTextureRV);
 	_particleSystem = new ParticleSystem(appearance, 10.0f);
@@ -617,17 +618,18 @@ void Application::Update(float deltaTime)
 	// Move gameobject
 	if (GetAsyncKeyState('1'))
 	{
-		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
-		_gameObjects[2]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
 		_gameObjects[3]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 200.0f, 0.0f });
-		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, 20.0f, 0.0f });
-		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[4]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, 50.0f });
+		//_gameObjects[5]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
+		
 	}
 
 	if (GetAsyncKeyState('2'))
 	{
-		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
-		_gameObjects[2]->GetPhysicsComponent()->AddForce(Vector3D{ -20.0f, 0.0f, 0.0f });
+		//_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
+		_gameObjects[2]->GetPhysicsComponent()->AddForce(Vector3D{ -50.0f, 0.0f, 0.0f });
 		//_gameObjects[3]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[3]->GetParticleModel()->GetMass()));
 		//_gameObjects[4]->GetParticleModel()->AddForce(Vector{ 0.0f, -10.0f, 0.0f }*(_gameObjects[4]->GetParticleModel()->GetMass()));
 		//_gameObjects[5]->GetParticleModel()->AddForce(Vector{ -20.0f, 0.0f, 0.0f }*(_gameObjects[5]->GetParticleModel()->GetMass()));
@@ -642,7 +644,22 @@ void Application::Update(float deltaTime)
 	{
 		_particleSystem->Deactivate();
 	}
-
+	if (GetAsyncKeyState('5'))
+	{
+		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, 50.0f });
+	}
+	if (GetAsyncKeyState('6'))
+	{
+		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, -50.0f });
+	}
+	if (GetAsyncKeyState('7'))
+	{
+		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
+	}
+	if (GetAsyncKeyState('8'))
+	{
+		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ -50.0f, 0.0f, 0.0f });
+	}
 	_camera->Update();
 	_particleSystem->Update(deltaTime);
 	_SkySphere->Update(_camera->GetPosition());
@@ -655,25 +672,25 @@ void Application::Update(float deltaTime)
 		{
 			if (gameObject->GetPhysicsComponent()->GetSimulatePhysics())
 			{
-				if (gameObject->GetTransform()->GetPosition().y < -10.0f)
+				if (gameObject->GetTransform()->GetPosition().y < 0.0f)
 				{
-					gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, -10.0f , gameObject->GetTransform()->GetPosition().z);
+					gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 0.0f , gameObject->GetTransform()->GetPosition().z);
 					gameObject->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(gameObject->GetPhysicsComponent()->GetVelocity(), { 0.0f,-1.0f,0.0f })* 0.8);
 				}
 				
-				if (gameObject->GetTransform()->GetPosition().y > 10.0f)
+				if (gameObject->GetTransform()->GetPosition().y > 20.0f)
 				{
-					gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 10.0f , gameObject->GetTransform()->GetPosition().z);
+					gameObject->GetTransform()->SetPosition(gameObject->GetTransform()->GetPosition().x, 20.0f , gameObject->GetTransform()->GetPosition().z);
 					gameObject->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(gameObject->GetPhysicsComponent()->GetVelocity(), { 0.0f, 1.0f, 0.0f })* 0.8);
 				}
-				if (gameObject->GetTransform()->GetPosition().x > 10.0f)
+				if (gameObject->GetTransform()->GetPosition().x > 20.0f)
 				{
-					gameObject->GetTransform()->SetPosition(10.0f, gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+					gameObject->GetTransform()->SetPosition(20.0f, gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
 					gameObject->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(gameObject->GetPhysicsComponent()->GetVelocity(), { 1.0f, 0.0f, 0.0f }) * 0.8);
 				}
-				if (gameObject->GetTransform()->GetPosition().x < -10.0f)
+				if (gameObject->GetTransform()->GetPosition().x < -20.0f)
 				{
-					gameObject->GetTransform()->SetPosition(-10.0f, gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
+					gameObject->GetTransform()->SetPosition(-20.0f, gameObject->GetTransform()->GetPosition().y, gameObject->GetTransform()->GetPosition().z);
 					gameObject->GetPhysicsComponent()->SetVelocity(Vector3D::Reflect(gameObject->GetPhysicsComponent()->GetVelocity(), { -1.0f, 0.0f, 0.0f })* 0.8);
 				}
 				
@@ -682,6 +699,9 @@ void Application::Update(float deltaTime)
 	}
 
 	//Check objects collisions
+	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 }
 

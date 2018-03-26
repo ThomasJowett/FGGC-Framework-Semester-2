@@ -1,7 +1,5 @@
 #include "RigidBody.h"
 
-
-
 RigidBody::RigidBody(float mass, Vector3D velocity, Transform * transform, Vector3D rotationAxis, float rotationRate)
 	:ParticleModel(mass, velocity, transform), _rotationRate(rotationRate)
 {
@@ -34,6 +32,8 @@ void RigidBody::Update(float deltaTime)
 	Quaternion rotation = _transform->GetRotation();
 
 	rotation.addScaledVector(angularVelocity, deltaTime);
+
+	rotation.Normalize();
 
 	_transform->SetRotation(rotation);
 }

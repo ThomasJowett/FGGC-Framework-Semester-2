@@ -14,6 +14,8 @@ public:
 	void SetTransform(Transform* transform) { _transform = transform; }
 	Transform* GetTransform() const { return _transform; }
 
+	bool TestAxis(Vector3D axis, float minA, float maxA, float minB, float maxB, Vector3D& mtvAxis, float& mtvDistance);
+
 protected:
 	Transform* _transform;
 };
