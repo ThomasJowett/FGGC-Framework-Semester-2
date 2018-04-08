@@ -28,7 +28,10 @@ float Vector3D::GetSqrMagnitude()
 Vector3D Vector3D::GetNormalized()
 {
 	float magnitude = GetMagnitude();
-	return Vector3D(x / magnitude, y / magnitude, z / magnitude);
+	if (magnitude != 0.0f)
+		return Vector3D(x / magnitude, y / magnitude, z / magnitude);
+	else
+		return{ 0.0f, 0.0f, 0.0f };
 }
 
 void Vector3D::Normalize()
@@ -74,6 +77,11 @@ Vector3D Vector3D::MultiplyAdd(Vector3D v1, Vector3D v2, Vector3D v3)
 	Result.z = v1.z * v2.z + v3.z;
 
 	return Result;
+}
+
+float Vector3D::AngleBetween(Vector3D v1, Vector3D v2)
+{
+	return acosf(Dot(v1, v2) / sqrt(v1.GetSqrMagnitude() * v2.GetSqrMagnitude()));
 }
 
 Vector3D Vector3D::operator*(float scaler)

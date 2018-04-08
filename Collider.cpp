@@ -80,7 +80,7 @@ bool AABB::CollisionCheck(Collider * otherCollider, Vector3D & normal, float & p
 
 bool Sphere::CollisionCheck(Collider * otherCollider, Vector3D & normal, float & penetrationDepth)
 {
-	//Sphere on Box
+	//Sphere on Sphere
 	if (Sphere* otherSphere = dynamic_cast<Sphere*>(otherCollider))
 	{
 		Vector3D seperationVector = GetCentre() - otherSphere->GetCentre();

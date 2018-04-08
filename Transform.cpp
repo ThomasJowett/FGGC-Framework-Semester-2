@@ -19,11 +19,6 @@ void Transform::UpdateWorldMatrix()
 	
 	// Calculate world matrix
 	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, _scale.z);
-	//XMMATRIX rotation = XMMatrixRotationX(_rotation.x) * XMMatrixRotationY(_rotation.y) * XMMatrixRotationZ(_rotation.z);
 	XMMATRIX translation = XMMatrixTranslation(_position.x, _position.y, _position.z);
-
 	XMStoreFloat4x4(&_world, scale * CalculateTransformMatrix(_rotation) * translation);
-	//XMStoreFloat4x4(&_world, scale  * translation);
-
-	//XMStoreFloat4x4(&_world, scale * rotation * translation);
 }

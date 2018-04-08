@@ -6,9 +6,15 @@ public:
 	RigidBody(float mass, Vector3D velocity, Transform * transform, Vector3D rotationAxis, float rotationRate);
 	~RigidBody();
 
+	void AddPointForce(Vector3D force, Vector3D point);
+
 	void Update(float deltaTime)override;
 private:
-	Vector3D	_rotationAxis;
-	float	_rotationRate;
+	float _angularDrag;
+	Vector3D _angularVelocity;
+
+	Vector3D _netTorque;
+
+	float GetInertia(Vector3D axis);
 };
 

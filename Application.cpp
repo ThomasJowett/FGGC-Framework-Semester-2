@@ -188,6 +188,16 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	noSpecMaterial.specularPower = 0.0f;
 
+	//Setup Physics Materials
+	PhysicsMaterial bounceyBall;
+	bounceyBall.elasticity = 0.8;
+	bounceyBall.friction = 0.8;
+	bounceyBall.inertiaTensor = {
+		4.0f, 0.0f, 0.0f,
+		0.0f,4.0f,0.0f,
+		0.0f,0.0f,4.0f
+	};
+
 	//create the Game objects
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundDiffuseTextureRV, _pGroundSpecularTextureRV, _pGroundAOTextureRV);
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
@@ -201,7 +211,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -5.0f + (i * 2.5f), 1.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 0.01f, 0.01f, 0.01f });
-		particle = new RigidBody(10.0f, { 0.0f, 0.0f, 0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 3.14f);
+		particle = new RigidBody(10.0f, { 0.0f, 0.0f, 0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 0.0001f);
+		particle->SetPhysicsMaterial(bounceyBall);
 		collider = new Sphere(1.0f, transform);
 
 		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle, collider);
@@ -646,7 +657,10 @@ void Application::Update(float deltaTime)
 	}
 	if (GetAsyncKeyState('5'))
 	{
-		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, 50.0f });
+		ParticleModel* tempPhysicsComp = _gameObjects[1]->GetPhysicsComponent();
+
+		RigidBody* physicsComp = dynamic_cast<RigidBody*>(tempPhysicsComp);
+		physicsComp->AddPointForce(Vector3D{ 0.0f, 0.0f, 5.0f }, { 1.0f, 1.0f,0.0f });
 	}
 	if (GetAsyncKeyState('6'))
 	{
@@ -700,9 +714,9 @@ void Application::Update(float deltaTime)
 
 	//Check objects collisions
 	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
-	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
-	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
-	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 }
 
 void Application::Draw()

@@ -22,6 +22,7 @@ public:
 	static Vector3D Reflect(Vector3D vector, Vector3D normal);
 	static Vector3D Replicate(float f);
 	static Vector3D MultiplyAdd(Vector3D v1, Vector3D v2, Vector3D v3);
+	static float AngleBetween(Vector3D v1, Vector3D v2);
 
 	//Operators
 	Vector3D operator*(float scaler);

@@ -247,15 +247,31 @@ public:
 		k += q.k * 0.5f;
 	}
 
+	//rotates this quaternion by vector
 	void rotateByVector(const Vector3D& vector)
 	{
 		Quaternion q(0, vector.x, vector.y, vector.z);
 		(*this) *= q;
 	}
 
+	//returns the euler angles of the quaternion
 	Vector3D euler_angles(bool homogenous = true)const
 	{
+		Vector3D euler;
 
+		if (homogenous)
+		{
+			euler.x = atan2f(2.f * (i*j + k*i), (i*i) - (j*j) - (k*k) + (r*r));
+			euler.y = asinf(-2.f * (i*k - j*r));
+			euler.z = atan2f(2.f * (j*k + i*r), -(i*i) - (j*j) + (k*k) + (r*r));
+		}
+		else
+		{
+			euler.x = atan2f(2.f * (k*j + i*r), 1 - 2 * ((i*i) + (j*j)));
+			euler.y = asinf(-2.f * (i*k - j*r));
+			euler.z = atan2f(2.f * (i*j + k*r), 1 - 2 * ((j*j) + (k*k)));
+		}
+		return euler;
 	}
 };
 

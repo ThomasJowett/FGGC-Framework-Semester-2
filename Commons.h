@@ -67,3 +67,10 @@ struct Material
 	XMFLOAT4 specular;
 	float specularPower;
 };
+
+struct PhysicsMaterial
+{
+	XMFLOAT3X3 inertiaTensor;
+	float elasticity;
+	float friction;
+};

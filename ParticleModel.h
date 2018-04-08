@@ -2,6 +2,8 @@
 #include "Vector.h"
 #include "Transform.h"
 #include "Collider.h"
+#include "Commons.h"
+
 
 class ParticleModel
 {
@@ -25,6 +27,11 @@ public:
 	bool GetIsLaminar()const { return _isLaminar; }
 	void SetIsLaminar(bool laminar) { _isLaminar = laminar; }
 
+	PhysicsMaterial GetPhysicsMaterial() const { return _physicsMaterial; }
+	void SetPhysicsMaterial(PhysicsMaterial physicsMaterial) { _physicsMaterial = physicsMaterial; }
+
+
+
 protected:
 	Transform * _transform;
 
@@ -38,6 +45,8 @@ private:
 	float _dragCoefficient;
 	float _fluidDensity;
 	float _objectArea;
+
+	PhysicsMaterial _physicsMaterial;
 
 	Vector3D GravityForce();
 	Vector3D DragForce();
