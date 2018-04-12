@@ -22,11 +22,21 @@ RigidBody::~RigidBody()
 
 void RigidBody::AddPointForce(Vector3D force, Vector3D point)
 {
-	//convert to coordinates relative to center of mass
-	Vector3D pt = _transform->GetPosition() - point;
-	Vector3D torque = Vector3D::Cross(force, pt);
-	//AddForce(force - torque);
+	Vector3D torque = Vector3D::Cross(force, point);
+	AddForce(force);
 
+	_netTorque += torque;
+}
+
+void RigidBody::AddPointForceWorld(Vector3D force, Vector3D point)
+{
+	//convert from world to local
+	Vector3D pt = _transform->GetPosition() - point;
+	AddPointForce(force, pt);
+}
+
+void RigidBody::AddTorque(Vector3D torque)
+{
 	_netTorque += torque;
 }
 

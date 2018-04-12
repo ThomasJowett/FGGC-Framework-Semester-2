@@ -1,9 +1,46 @@
 #include "Collision.h"	
 std::vector<Contact> Collision::DetectCollisions(std::vector<GameObject*> gameObjects)
 {
-	//TODO: Quadtree?
 
+	QuadTree* quadTree = new QuadTree( new AABB(new Transform(), 30.0f, 100.0f,30.0f), 0);
+	quadTree->Clear();
+
+	for (auto gameObject : gameObjects)
+	{
+		if(gameObject->GetCollider())
+			quadTree->Insert(gameObject);
+	}
 	vector<Contact>contacts;
+
+	for (auto gameObject : gameObjects)
+	{	
+		
+		if (gameObject->GetCollider())
+		{
+			std::vector<GameObject*>coarseList = quadTree->Retrieve(gameObject);
+			
+			if (coarseList.size())
+			{
+				
+				for (auto otherObject : coarseList)
+				{
+					if (otherObject != gameObject)
+					{
+						Vector3D contactNormal;
+						float penetrationDepth;
+
+						if (gameObject->GetCollider()->IntersectsCollider(otherObject->GetCollider(), contactNormal, penetrationDepth))
+						{
+							contacts.push_back({ gameObject, otherObject,contactNormal, penetrationDepth });
+						}
+					}
+				}
+			}
+		}
+		ResolveCollision(contacts);
+		contacts.clear();
+	}
+	/*
 	for (int i = 0; i < gameObjects.size() - 1; i++)
 	{
 		for (int j = i + 1; j < gameObjects.size(); j++)
@@ -12,14 +49,15 @@ std::vector<Contact> Collision::DetectCollisions(std::vector<GameObject*> gameOb
 			{
 				Vector3D contactNormal;
 				float penetrationDepth;
-				
-				if(gameObjects[i]->GetCollider()->CollisionCheck(gameObjects[j]->GetCollider(), contactNormal, penetrationDepth))
+
+				if (gameObjects[i]->GetCollider()->IntersectsCollider(gameObjects[j]->GetCollider(), contactNormal, penetrationDepth))
 				{
 					contacts.push_back({ gameObjects[i], gameObjects[j],contactNormal, penetrationDepth });
 				}
 			}
 		}
-	}
+	}*/
+	delete quadTree;
 	return contacts;
 }
 

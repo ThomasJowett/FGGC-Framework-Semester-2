@@ -2,6 +2,7 @@
 #define _COLLISION_H
 
 #include"GameObject.h"
+#include "QuadTree.h"
 #include <vector>
 
 struct Contact

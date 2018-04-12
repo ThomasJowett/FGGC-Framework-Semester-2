@@ -7,6 +7,9 @@ public:
 	~RigidBody();
 
 	void AddPointForce(Vector3D force, Vector3D point);
+	void AddPointForceWorld(Vector3D force, Vector3D point);
+
+	void AddTorque(Vector3D torque);
 
 	void Update(float deltaTime)override;
 private:

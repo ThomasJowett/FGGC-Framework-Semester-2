@@ -1,6 +1,6 @@
 #include "Collider.h"
 
-bool AABB::CollisionCheck(Collider * otherCollider, Vector3D & normal, float & penetrationDepth)
+bool AABB::IntersectsCollider(Collider * otherCollider, Vector3D & normal, float & penetrationDepth) const
 {
 	//box on sphere
 		if (Sphere* otherSphere = dynamic_cast<Sphere*>(otherCollider))
@@ -78,7 +78,42 @@ bool AABB::CollisionCheck(Collider * otherCollider, Vector3D & normal, float & p
 			return false;
 }
 
-bool Sphere::CollisionCheck(Collider * otherCollider, Vector3D & normal, float & penetrationDepth)
+bool AABB::ContainsPoint(Vector3D point) const
+{
+	return (GetXMax() < point.x
+		|| GetXMin() > point.x
+		|| GetYMax() < point.y
+		|| GetYMin() > point.y
+		|| GetZMax() < point.z
+		|| GetZMin() > point.z)
+		? false : true;
+}
+
+bool AABB::TestXAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetXMin() > value) ? true : false;
+	else
+		return (GetXMax() < value) ? true : false;
+}
+
+bool AABB::TestYAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetYMin() > value) ? true : false;
+	else
+		return (GetYMax() < value) ? true : false;
+}
+
+bool AABB::TestZAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetZMin() > value) ? true : false;
+	else
+		return (GetZMax() < value) ? true : false;
+}
+
+bool Sphere::IntersectsCollider(Collider * otherCollider, Vector3D & normal, float & penetrationDepth) const
 {
 	//Sphere on Sphere
 	if (Sphere* otherSphere = dynamic_cast<Sphere*>(otherCollider))
@@ -146,7 +181,38 @@ bool Sphere::CollisionCheck(Collider * otherCollider, Vector3D & normal, float &
 	}
 }
 
-bool Collider::TestAxis(Vector3D axis, float minA, float maxA, float minB, float maxB, Vector3D & mtvAxis, float & mtvDistance)
+bool Sphere::ContainsPoint(Vector3D point) const
+{
+	Vector3D distance = GetCentre() - point;
+
+	return (distance.GetSqrMagnitude() > _radius * _radius) ? false : true;
+}
+
+bool Sphere::TestXAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetCentre().x - _radius > value) ? true : false;
+	else
+		return (GetCentre().x + _radius > value) ? true : false;
+}
+
+bool Sphere::TestYAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetCentre().y - _radius > value) ? true : false;
+	else
+		return (GetCentre().y + _radius > value) ? true : false;
+}
+
+bool Sphere::TestZAxisValue(float value, bool greater)
+{
+	if (greater)
+		return (GetCentre().z - _radius > value) ? true : false;
+	else
+		return (GetCentre().z + _radius > value) ? true : false;
+}
+
+bool Collider::TestAxis(Vector3D axis, float minA, float maxA, float minB, float maxB, Vector3D & mtvAxis, float & mtvDistance) const
 {
 	if (axis.GetSqrMagnitude() < 1.0e-8f)
 		return true;

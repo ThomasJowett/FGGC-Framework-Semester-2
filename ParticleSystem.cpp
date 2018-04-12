@@ -30,16 +30,15 @@ void ParticleSystem::Activate(Vector3D position, Vector3D velocity, float varian
 	_particlesPerSecond = particlesPerSecond;
 	_variance = variance;
 
-	_destroyRate = particleLife / particlesPerSecond;
+	_particleLife = particleLife;
 	_initialVelocity = velocity;
 	_emitterLocation = position;
 	_isAlive = true;
+	_totalTime = 0.0f;
 }
 
 void ParticleSystem::Deactivate()
 {
-	//_particlePool->CleanUp();
-	_totalTime = 0.0f;
 	_isAlive = false;
 }
 
@@ -53,36 +52,37 @@ void ParticleSystem::Render(ID3D11DeviceContext * pImmediateContext)
 
 void ParticleSystem::Update(float deltaTime)
 {
+	_totalTime += deltaTime;
+
 	if ((_totalTime <= _lifeSpan || _lifeSpan <= 0.0f) && _isAlive)
 	{
-		if (_spawnTime + deltaTime > 1.0f / _particlesPerSecond)
+		_spawnTime += deltaTime;
+
+		if (_spawnTime > 1.0f / _particlesPerSecond)
 		{
-			Transform* transform = new Transform(_emitterLocation, { 1,0,0, }, { 1,1,1 });
+			Transform* transform = new Transform(_emitterLocation, { 1,0,0, 0}, { 1,1,1 });
 			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector3D{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, transform);
 
 			AddParticle(new GameObject("Particle", _appearance, transform, particle, nullptr));
 			_spawnTime = 0.0f;
 		}
-
-		_spawnTime += deltaTime;
-		_totalTime += deltaTime;
 	}
 	else
 	{
-		_totalTime = 0.0f;
 		_isAlive = false;
 	}
 
 	
-	if (_destroyTime >= _destroyRate && _particles.size())
-	{
-		_particlePool->ReturnGameObject(_particles[0]);
-		_particles.erase(_particles.begin());
-		_destroyTime = 0.0f;
-	}
-	else
+	if (_particles.size() && _totalTime > _particleLife)
 	{
 		_destroyTime += deltaTime;
+
+		if (_destroyTime >= 1.0f/_particlesPerSecond && _particles.size())
+		{
+			_particlePool->ReturnGameObject(_particles[0]);
+			_particles.erase(_particles.begin());
+			_destroyTime = 0.0f;
+		}
 	}
 
 	for (auto particle : _particles)

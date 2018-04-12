@@ -35,7 +35,7 @@ private:
 	float _totalTime;
 	float _spawnTime;
 	float _destroyTime;
-	float _destroyRate;
+	float _particleLife;
 	
 	float _particlesPerSecond;
 	float _variance;

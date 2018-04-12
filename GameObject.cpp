@@ -1,5 +1,11 @@
 #include "GameObject.h"
 
+GameObject::GameObject()
+	:_type("NULL"), _appearance(nullptr), _transform(new Transform()), _particleModel(nullptr), _collider(nullptr)
+{
+	_parent = nullptr;
+}
+
 GameObject::GameObject(string type, Appearance* appearance, Transform * transform, ParticleModel* particlemodel, Collider* collider)
 	: _type(type), _appearance(appearance), _transform(transform), _particleModel(particlemodel), _collider(collider)
 {

@@ -16,6 +16,7 @@ using namespace std;
 class GameObject
 {
 public:
+	GameObject();
 	GameObject(string type, Appearance * appearance, Transform * transform, ParticleModel * particleModel, Collider* collider);
 	~GameObject();
 

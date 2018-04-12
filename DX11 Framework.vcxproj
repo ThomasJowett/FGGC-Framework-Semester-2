@@ -384,6 +384,7 @@
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -412,6 +413,7 @@
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="ParticleModel.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Quaternion.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />

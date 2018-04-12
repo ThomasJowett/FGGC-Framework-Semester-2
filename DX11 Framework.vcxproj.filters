@@ -53,6 +53,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Appearance.h">
@@ -118,6 +121,9 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX11 Framework.rc" />
@@ -181,6 +187,9 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{adfe5578-dd14-4522-949f-5472ac6b434e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{3d992b22-ab50-4801-b1d4-dbf7daa1a694}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -194,15 +194,15 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	bounceyBall.friction = 0.8;
 	bounceyBall.inertiaTensor = {
 		4.0f, 0.0f, 0.0f,
-		0.0f,4.0f,0.0f,
-		0.0f,0.0f,4.0f
+		0.0f, 4.0f, 0.0f,
+		0.0f, 0.0f, 4.0f
 	};
 
 	//create the Game objects
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundDiffuseTextureRV, _pGroundSpecularTextureRV, _pGroundAOTextureRV);
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
 	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
-	Collider* collider = new AABB(transform, 0.0f, 25.0f, 25.0f);
+	Collider* collider = new AABB(transform, 25.0f, 0.0f, 25.0f);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, nullptr, collider);
 	_gameObjects.push_back(gameObject);
@@ -632,7 +632,7 @@ void Application::Update(float deltaTime)
 		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
 		_gameObjects[2]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
 		_gameObjects[3]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 200.0f, 0.0f });
-		_gameObjects[4]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, 50.0f });
+		_gameObjects[4]->GetPhysicsComponent()->AddForce(Vector3D{ 50.0f, 0.0f, 0.0f });
 		//_gameObjects[5]->GetPhysicsComponent()->AddForce(Vector3D{ 20.0f, 0.0f, 0.0f });
 		
 	}
@@ -648,7 +648,7 @@ void Application::Update(float deltaTime)
 
 	if (GetAsyncKeyState('3'))
 	{
-		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 0.0f, 50.0f, 0.0f }, 1.0f, 10.0f, 1.0f, 5.0f);
+		_particleSystem->Activate(_gameObjects[1]->GetTransform()->GetPosition(), { 0.0f, 50.0f, 0.0f }, 10.0f, 10.0f, 10000000.0f, 1.0f);
 	}
 
 	if (GetAsyncKeyState('4'))
@@ -660,11 +660,18 @@ void Application::Update(float deltaTime)
 		ParticleModel* tempPhysicsComp = _gameObjects[1]->GetPhysicsComponent();
 
 		RigidBody* physicsComp = dynamic_cast<RigidBody*>(tempPhysicsComp);
-		physicsComp->AddPointForce(Vector3D{ 0.0f, 0.0f, 5.0f }, { 1.0f, 1.0f,0.0f });
+		physicsComp->AddPointForce(Vector3D{ 0.0f, 0.0f, -50.0f }, { 0.0f, 0.2f,0.0f });
 	}
 	if (GetAsyncKeyState('6'))
 	{
-		_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, -50.0f });
+		ParticleModel* tempPhysicsComp = _gameObjects[1]->GetPhysicsComponent();
+
+		RigidBody* physicsComp = dynamic_cast<RigidBody*>(tempPhysicsComp);
+		physicsComp->AddPointForce(Vector3D{ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.2f, 0.0f });
+	}
+	if (GetAsyncKeyState('6'))
+	{
+		//_gameObjects[1]->GetPhysicsComponent()->AddForce(Vector3D{ 0.0f, 0.0f, -50.0f });
 	}
 	if (GetAsyncKeyState('7'))
 	{
@@ -713,7 +720,9 @@ void Application::Update(float deltaTime)
 	}
 
 	//Check objects collisions
-	Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
+	Collision::DetectCollisions(_gameObjects);
+
+
 	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
 	//Collision::ResolveCollision(Collision::DetectCollisions(_gameObjects));
