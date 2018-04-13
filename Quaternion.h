@@ -95,28 +95,28 @@ public:
 	{
 	}
 
-	//from a vector of 3 euler angles
+	//from a vector of 3 euler angles in radians
 	Quaternion(const Vector3D angles)
 	{
-		float cos_i_2 = cosf(0.5*angles.x);
-		float cos_j_2 = cosf(0.5*angles.y);
-		float cos_k_2 = cosf(0.5*angles.z);
+		float cos_x_2 = cosf(0.5*angles.x);
+		float cos_y_2 = cosf(0.5*angles.y);
+		float cos_z_2 = cosf(0.5*angles.z);
 
-		float sin_i_2 = sinf(0.5*angles.x);
-		float sin_j_2 = sinf(0.5*angles.y);
-		float sin_k_2 = sinf(0.5*angles.z);
+		float sin_x_2 = sinf(0.5*angles.x);
+		float sin_y_2 = sinf(0.5*angles.y);
+		float sin_z_2 = sinf(0.5*angles.z);
 
 		// and now compute quaternion
-		r = cos_i_2*cos_j_2*cos_i_2 + sin_k_2*sin_j_2*sin_i_2;
-		i = cos_i_2*cos_j_2*sin_i_2 - sin_k_2*sin_j_2*cos_i_2;
-		j = cos_i_2*sin_j_2*cos_i_2 + sin_k_2*cos_j_2*sin_i_2;
-		k = sin_i_2*cos_j_2*cos_i_2 - cos_k_2*sin_j_2*sin_i_2;
+		r = cos_z_2*cos_y_2*cos_x_2 + sin_z_2*sin_y_2*sin_x_2;
+		i = cos_z_2*cos_y_2*sin_x_2 - sin_z_2*sin_y_2*cos_x_2;
+		j = cos_z_2*sin_y_2*cos_x_2 + sin_z_2*cos_y_2*sin_x_2;
+		k = sin_z_2*cos_y_2*cos_x_2 - cos_z_2*sin_y_2*sin_x_2;
 	}
 
-	//from 3 euler angles
-	Quaternion(const float theta_x, float theta_y, float theta_z)
+	//from 3 euler angles in radians
+	Quaternion(const float theta_Roll, float theta_Pitch, float theta_Yaw)
 	{
-		(*this) = Quaternion(Vector3D(theta_x, theta_y, theta_z));
+		(*this) = Quaternion(Vector3D(theta_Roll, theta_Pitch, theta_Yaw));
 	}
 
 	~Quaternion() {}
@@ -254,6 +254,39 @@ public:
 		(*this) *= q;
 	}
 
+	//rotate vector by this quaternion
+	Vector3D rotateVectorByQuaternion(Vector3D& vector)
+	{
+		Quaternion V(0, vector.x, vector.y, vector.z);
+		V = (*this * V * this->Conjugate());
+		vector.x = V.i;
+		vector.z = V.j;
+		vector.z = V.k;
+		return vector;
+	}
+
+	//converts the quaternion to an axis and an angle in radians
+	void toAxisAngle(Vector3D& axis, float& angle)
+	{
+		if (r > 1)
+			Normalize();
+		angle = 2*acosf(r);
+		double s = sqrtf(1 - r*r);
+
+		if (s < 0.001)
+		{
+			axis.x = i;
+			axis.y = j;
+			axis.z = k;
+		}
+		else
+		{
+			axis.x = i / s;
+			axis.y = j / s;
+			axis.z = k / s;
+		}
+	}
+
 	//returns the euler angles of the quaternion
 	Vector3D euler_angles(bool homogenous = true)const
 	{
@@ -276,36 +309,8 @@ public:
 };
 
 /**
-* Inline function that creates a transform matrix from a
-* position and orientation.
+* Inline function that creates a transform matrix from an orientation.
 */
-static inline XMMATRIX CalculateTransformMatrix(const Vector3D &position, const Quaternion &orientation)
-{
-	XMMATRIX transformMatrix;
-	transformMatrix = XMMatrixIdentity();
-	transformMatrix.r[0] = XMVectorSetX(transformMatrix.r[0], 1 - 2 * orientation.j*orientation.j - 2 * orientation.k*orientation.k);
-	transformMatrix.r[0] = XMVectorSetY(transformMatrix.r[0], 2 * orientation.i*orientation.j - 2 * orientation.k*orientation.r);
-	transformMatrix.r[0] = XMVectorSetZ(transformMatrix.r[0], 2 * orientation.i*orientation.k + 2 * orientation.j*orientation.r);
-	transformMatrix.r[0] = XMVectorSetW(transformMatrix.r[0], 0.0f);
-
-	transformMatrix.r[1] = XMVectorSetX(transformMatrix.r[1], 2 * orientation.i*orientation.j + 2 * orientation.r*orientation.k);
-	transformMatrix.r[1] = XMVectorSetY(transformMatrix.r[1], 1 - 2 * orientation.i*orientation.i - 2 * orientation.k*orientation.k);
-	transformMatrix.r[1] = XMVectorSetZ(transformMatrix.r[1], 2 * orientation.j*orientation.k - 2 * orientation.r*orientation.i);
-	transformMatrix.r[1] = XMVectorSetW(transformMatrix.r[1], 0.0f);
-
-	transformMatrix.r[2] = XMVectorSetX(transformMatrix.r[2], 2 * orientation.i*orientation.k - 2 * orientation.r*orientation.j);
-	transformMatrix.r[2] = XMVectorSetY(transformMatrix.r[2], 2 * orientation.j*orientation.k + 2 * orientation.r*orientation.i);
-	transformMatrix.r[2] = XMVectorSetZ(transformMatrix.r[2], 1 - 2 * orientation.i*orientation.i - 2 * orientation.j*orientation.j);
-	transformMatrix.r[2] = XMVectorSetW(transformMatrix.r[2], 0.0f);
-
-	transformMatrix.r[3] = XMVectorSetX(transformMatrix.r[3], position.x);
-	transformMatrix.r[3] = XMVectorSetY(transformMatrix.r[3], position.y);
-	transformMatrix.r[3] = XMVectorSetZ(transformMatrix.r[3], position.z);
-	transformMatrix.r[3] = XMVectorSetW(transformMatrix.r[3], 1.0f);
-
-
-	return transformMatrix;
-}
 
 static inline XMMATRIX CalculateTransformMatrix(const Quaternion & orientation)
 {
