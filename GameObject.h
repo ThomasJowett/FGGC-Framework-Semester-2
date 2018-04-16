@@ -23,7 +23,7 @@ public:
 	string GetType() const { return _type; }
 	Transform * GetTransform() const { return _transform; }
 	Appearance * GetAppearance() const { return _appearance; }
-	ParticleModel* GetPhysicsComponent() const { return _particleModel; }
+	ParticleModel* GetPhysicsComponent() const { return _physicsComponent; }
 	Collider* GetCollider() const { return _collider; }
 	
 	void SetParent(GameObject * parent) { _parent = parent; }
@@ -36,7 +36,7 @@ protected:
 	
 	Transform * _transform;
 	Appearance * _appearance;
-	ParticleModel * _particleModel;
+	ParticleModel * _physicsComponent;
 	Collider* _collider;
 
 private:

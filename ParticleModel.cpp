@@ -7,6 +7,7 @@ ParticleModel::ParticleModel(float mass, Vector3D velocity, Transform * transfor
 	_dragCoefficient = 1.0f;
 	_fluidDensity = 1.225f;
 	_objectArea = 1.0f;
+	_isLaminar = true;
 }
 
 ParticleModel::~ParticleModel()
@@ -55,8 +56,6 @@ Vector3D ParticleModel::GravityForce()
 
 Vector3D ParticleModel::DragForce()
 {
-	_isLaminar = true;
-
 	if (_isLaminar)
 		return DragLaminarFlow();
 	else

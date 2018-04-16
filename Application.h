@@ -21,6 +21,8 @@
 #include "OBJLoader.h"
 #include "GeometryGenerator.h"
 #include "SkySphere.h"
+#include "Car.h"
+#include "PlayerController.h"
 #include <vector>
 /*
 #include <SpriteFont.h>

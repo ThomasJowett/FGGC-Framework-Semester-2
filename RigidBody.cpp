@@ -69,16 +69,17 @@ void RigidBody::Update(float deltaTime)
 float RigidBody::GetInertia(Vector3D axis)
 {
 	Vector3D localAxis = axis;
-	localAxis.x /= (GetPhysicsMaterial().inertiaTensor._11) 
-		+ (GetPhysicsMaterial().inertiaTensor._12) 
-		+ (GetPhysicsMaterial().inertiaTensor._13);
+	PhysicsMaterial material = GetPhysicsMaterial();
+	localAxis.x /= (material.inertiaTensor._11)
+		+ (material.inertiaTensor._12)
+		+ (material.inertiaTensor._13);
 
-	localAxis.y /= (GetPhysicsMaterial().inertiaTensor._21)
-		+ (GetPhysicsMaterial().inertiaTensor._22)
-		+ (GetPhysicsMaterial().inertiaTensor._23);
+	localAxis.y /= (material.inertiaTensor._21)
+		+ (material.inertiaTensor._22)
+		+ (material.inertiaTensor._23);
 
-	localAxis.z /= (GetPhysicsMaterial().inertiaTensor._31)
-		+ (GetPhysicsMaterial().inertiaTensor._32)
-		+ (GetPhysicsMaterial().inertiaTensor._33);
+	localAxis.z /= (material.inertiaTensor._31)
+		+ (material.inertiaTensor._32)
+		+ (material.inertiaTensor._33);
 	return localAxis.GetMagnitude();
 }

@@ -201,21 +201,32 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	//create the Game objects
 	Appearance* appearance = new Appearance(planeGeometry, noSpecMaterial, _pGroundDiffuseTextureRV, _pGroundSpecularTextureRV, _pGroundAOTextureRV);
 	Transform * transform = new Transform({ 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
-	ParticleModel* particle = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
+	ParticleModel* physicsModel = new ParticleModel(0.0f, { 0.0f, 0.0f, 0.0f }, transform);
+	physicsModel->SetPhysicsMaterial(bounceyBall);
 	Collider* collider = new AABB(transform, 25.0f, 0.0f, 25.0f);
 
 	GameObject * gameObject = new GameObject("Floor", appearance, transform, nullptr, collider);
+	_gameObjects.push_back(gameObject);
+
+	appearance = new Appearance(carGeometry, shinyMaterial, _pCarDiffuseTextureRV, _pCarSpecularTextureRV, _pBallAOTextureRV);
+	transform = new Transform({ 0.0f, 1.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 0.01f, 0.01f, 0.01f });
+	physicsModel = new RigidBody(100.0f, { 0.0f, 0.0f,0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 0.0f);
+	physicsModel->SetPhysicsMaterial(bounceyBall);
+	//collider = new AABB(transform, 0.5f, 1.0f, 2.0f);
+	collider = new Sphere(1.0f, transform);
+
+	gameObject = new Car("Car", appearance, transform, physicsModel, collider);
 	_gameObjects.push_back(gameObject);
 
 	for (int i = 0; i < 5; i++)
 	{
 		appearance = new Appearance(ballGeometry, shinyMaterial, _pBallDiffuseTextureRV, _pBallSpecularTextureRV, _pBallAOTextureRV);
 		transform = new Transform({ -5.0f + (i * 2.5f), 1.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 0.0f }, { 0.01f, 0.01f, 0.01f });
-		particle = new RigidBody(10.0f, { 0.0f, 0.0f, 0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 0.0001f);
-		particle->SetPhysicsMaterial(bounceyBall);
+		physicsModel = new RigidBody(10.0f, { 0.0f, 0.0f, 0.0f }, transform, { 0.0f, 1.0f, 0.0f }, 0.0001f);
+		physicsModel->SetPhysicsMaterial(bounceyBall);
 		collider = new Sphere(1.0f, transform);
 
-		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, particle, collider);
+		gameObject = new GameObject("Ball " + std::to_string(i), appearance, transform, physicsModel, collider);
 
 		_gameObjects.push_back(gameObject);
 	}

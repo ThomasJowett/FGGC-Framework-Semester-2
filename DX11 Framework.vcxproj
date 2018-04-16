@@ -374,6 +374,7 @@
     <ClCompile Include="Appearance.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Car.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="FreeLookCamera.cpp" />
@@ -384,6 +385,7 @@
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="ParticleModel.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SkySphere.cpp" />
@@ -401,6 +403,7 @@
     <ClInclude Include="Appearance.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Car.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Commons.h" />
@@ -408,11 +411,13 @@
     <ClInclude Include="FreeLookCamera.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GeometryGenerator.h" />
+    <ClInclude Include="iInput.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="ParticleModel.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Quaternion.h" />
     <CLInclude Include="resource.h" />

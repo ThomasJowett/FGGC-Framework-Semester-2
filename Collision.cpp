@@ -67,8 +67,8 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 	{
 		Vector3D velocityA;
 		Vector3D velocityB;
-		float massA = 0.0f;
-		float massB = 0.0f;
+		float massA = 0.0f, restitutionA;
+		float massB = 0.0f, restitutionB;
 
 		bool moveA, moveB;
 
@@ -77,6 +77,7 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 			velocityA = contact.A->GetPhysicsComponent()->GetVelocity();
 			massA = contact.A->GetPhysicsComponent()->GetMass();
 			moveA = true;
+			restitutionA = contact.A->GetPhysicsComponent()->GetPhysicsMaterial().elasticity;
 		}
 		else
 			moveA = false;
@@ -86,6 +87,7 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 			velocityB = contact.B->GetPhysicsComponent()->GetVelocity();
 			massB = contact.B->GetPhysicsComponent()->GetMass();
 			moveB = true;
+			restitutionB = contact.B->GetPhysicsComponent()->GetPhysicsMaterial().elasticity;
 		}
 		else
 			moveB = false;
@@ -96,13 +98,14 @@ void Collision::ResolveCollision(std::vector<Contact> contacts)
 		}
 		else if (moveA && moveB)
 		{
+			float coeffiecientOfRestitution = (restitutionA + restitutionB) / 2;
 			//Resolve Interpenertration
 			contact.A->GetTransform()->SetPosition(contact.A->GetTransform()->GetPosition() + ((contact.contactNormal*(contact.penetrationDepth)) * (massB / massA + massB)));
 			contact.B->GetTransform()->SetPosition(contact.B->GetTransform()->GetPosition() + ((contact.contactNormal*-(contact.penetrationDepth)) * (massA / massA + massB)));
 
-			//coeffiecient of restitution hard coded as 0.5
-			contact.A->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*0.5))) / (massA + massB)));
-			contact.B->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityA - velocityB)*(massA*0.5))) / (massA + massB)));
+			//add impulse
+			contact.A->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityB - velocityA)*(massB*coeffiecientOfRestitution))) / (massA + massB)));
+			contact.B->GetPhysicsComponent()->SetVelocity((((velocityA*massA) + (velocityB*massB) + ((velocityA - velocityB)*(massA*coeffiecientOfRestitution))) / (massA + massB)));
 		}
 		else if (moveA && !moveB)
 		{

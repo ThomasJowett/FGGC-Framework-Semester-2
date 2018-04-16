@@ -206,6 +206,13 @@ public:
 			r*q.k + k*q.r + i*q.j - j*q.i
 		);
 	}
+
+	Vector3D operator*(const Vector3D& multiplier)
+	{
+		Vector3D V = multiplier;
+		return RotateVectorByQuaternion(V);
+	}
+
 	/**
 	* Multiplies the quaternion by the given quaternion.
 	*
@@ -248,14 +255,14 @@ public:
 	}
 
 	//rotates this quaternion by vector
-	void rotateByVector(const Vector3D& vector)
+	void RotateByVector(const Vector3D& vector)
 	{
 		Quaternion q(0, vector.x, vector.y, vector.z);
 		(*this) *= q;
 	}
 
 	//rotate vector by this quaternion
-	Vector3D rotateVectorByQuaternion(Vector3D& vector)
+	Vector3D RotateVectorByQuaternion(Vector3D& vector)
 	{
 		Quaternion V(0, vector.x, vector.y, vector.z);
 		V = (*this * V * this->Conjugate());
