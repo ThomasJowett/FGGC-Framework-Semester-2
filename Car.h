@@ -7,7 +7,7 @@
 class Car: public GameObject , public iInput
 {
 public:
-	Car(string type, Appearance * appearance, Transform * transform, ParticleModel * particleModel, Collider* collider);
+	Car(string type, Appearance * appearance, Transform * transform, RigidBody * physicsmodel, Collider* collider);
 	~Car();
 	virtual void MoveRight(float deltaTime, float scale);
 	virtual void MoveForward(float deltaTime, float scale);
@@ -17,6 +17,7 @@ public:
 	virtual void Roll(float deltaTime, float scale);
 private:
 	float _maxSpeed;
+	float _rotationSpeed;
 	Vector3D _forward;
 
 };

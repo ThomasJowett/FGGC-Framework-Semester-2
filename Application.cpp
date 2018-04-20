@@ -215,7 +215,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	//collider = new AABB(transform, 0.5f, 1.0f, 2.0f);
 	collider = new Sphere(1.0f, transform);
 
-	gameObject = new Car("Car", appearance, transform, physicsModel, collider);
+	gameObject = new Car("Car", appearance, transform, (RigidBody*)physicsModel, collider);
+	_playerController = new PlayerController((Car*)gameObject, 0);
 	_gameObjects.push_back(gameObject);
 
 	for (int i = 0; i < 5; i++)
@@ -636,6 +637,7 @@ void Application::Cleanup()
 void Application::Update(float deltaTime)
 {
 	HandleInput(deltaTime);
+	_playerController->Update(deltaTime);
 
 	// Move gameobject
 	if (GetAsyncKeyState('1'))

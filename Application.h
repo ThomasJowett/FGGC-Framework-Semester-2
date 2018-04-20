@@ -92,6 +92,7 @@ private:
 	OrbitCamera _OrbitCamera;
 	FreeLookCamera _FreeLookCamera;
 	Camera * _camera;
+	PlayerController* _playerController;
 
 
 	float _cameraOrbitRadius = 7.0f;
