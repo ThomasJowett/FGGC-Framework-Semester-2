@@ -1,2 +1,254 @@
+<<<<<<< HEAD
 ﻿  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
   DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)
+=======
+﻿  Appearance.cpp
+  Application.cpp
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\application.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\application.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Camera.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.cpp(35): warning C4100: 'target': unreferenced formal parameter
+  Car.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(16): warning C4100: 'scale': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(16): warning C4100: 'deltaTime': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(23): warning C4239: nonstandard extension used: 'argument': conversion from 'Vector3D' to 'Vector3D &'
+  c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(23): note: A non-const reference may only be bound to an lvalue
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(21): warning C4100: 'deltaTime': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(27): warning C4100: 'deltaTime': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(35): warning C4100: 'scale': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(35): warning C4100: 'deltaTime': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(39): warning C4100: 'scale': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\car.cpp(39): warning C4100: 'deltaTime': unreferenced formal parameter
+  Collider.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\collider.cpp(73): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\collider.cpp(142): warning C4189: 'temp': local variable is initialized but not referenced
+  DDSTextureLoader.cpp
+  FreeLookCamera.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+  GeometryGenerator.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(190): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(191): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(200): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(201): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(202): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(204): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(205): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(206): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(216): warning C4244: 'argument': conversion from 'UINT' to 'const unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(217): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(218): warning C4244: 'argument': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(247): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(249): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(256): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(307): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(308): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(309): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(311): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(312): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(313): warning C4244: '=': conversion from 'UINT' to 'unsigned short', possible loss of data
+  Main.cpp
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\main.cpp(69): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
+  GameObject.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\gameobject.cpp(28): warning C4238: nonstandard extension used: class rvalue used as lvalue
+  OBJLoader.cpp
+  OrbitCamera.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(36): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(37): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(38): warning C4100: 'd': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(41): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\camera.h(42): warning C4100: 'angle': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\orbitcamera.cpp(35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\orbitcamera.cpp(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\orbitcamera.cpp(37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  ParticleModel.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\particlemodel.cpp(74): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  ParticleSystem.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  PlayerController.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\playercontroller.cpp(3): warning C4100: 'controllerID': unreferenced formal parameter
+  QuadTree.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+c:\users\j005627b\documents\fggc-framework-semester-2\quadtree.cpp(54): warning C4018: '>': signed/unsigned mismatch
+c:\users\j005627b\documents\fggc-framework-semester-2\quadtree.cpp(62): warning C4018: '<': signed/unsigned mismatch
+c:\users\j005627b\documents\fggc-framework-semester-2\quadtree.cpp(115): warning C4018: '<': signed/unsigned mismatch
+  RigidBody.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  SkySphere.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  Collision.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  Transform.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(268): warning C4189: 's': local variable is initialized but not referenced
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\quaternion.h(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\transform.h(19): warning C4100: 'j': unreferenced formal parameter
+  Generating Code...
+c:\users\j005627b\documents\fggc-framework-semester-2\collision.cpp(100): warning C4701: potentially uninitialized local variable 'restitutionA' used
+c:\users\j005627b\documents\fggc-framework-semester-2\collision.cpp(100): warning C4701: potentially uninitialized local variable 'restitutionB' used
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(366): warning C4700: uninitialized local variable 'vertexBuffer' used
+c:\users\j005627b\documents\fggc-framework-semester-2\geometrygenerator.cpp(385): warning C4700: uninitialized local variable 'indexBuffer' used
+  Compiling...
+  Vector.cpp
+c:\users\j005627b\documents\fggc-framework-semester-2\vector.cpp(20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\j005627b\documents\fggc-framework-semester-2\vector.cpp(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  LINK : C:\Users\j005627b\Documents\FGGC-Framework-Semester-2\Debug\DX11 Framework.exe not found or not built by the last incremental link; performing full link
+Appearance.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC-Framework-Semester-2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC-Framework-Semester-2\Debug\DX11 Framework.pdb (Full PDB)
+>>>>>>> origin/master
