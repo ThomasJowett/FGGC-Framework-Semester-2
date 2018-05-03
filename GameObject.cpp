@@ -31,5 +31,6 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Draw(ID3D11DeviceContext * pImmediateContext)
 {
-	_appearance->Draw(pImmediateContext);
+	if(_appearance)
+		_appearance->Draw(pImmediateContext);
 }

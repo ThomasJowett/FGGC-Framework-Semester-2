@@ -63,7 +63,7 @@ void FreeLookCamera::Yaw(float angle)
 	SetRight({ right.x, right.y, right.z });
 }
 
-void FreeLookCamera::Update()
+void FreeLookCamera::Update(Vector3D target)
 {
 	Vector3D R = GetRight();
 	Vector3D U;
@@ -80,5 +80,5 @@ void FreeLookCamera::Update()
 	SetUp(U);
 	SetLook(L);
 	
-	Camera::Update();
+	Camera::Update(target);
 }

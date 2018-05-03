@@ -13,24 +13,26 @@ public:
 
 	int MAXOBJECTS, MAXLEVELS;
 	QuadTree();
-	QuadTree(AABB* boundary, int level);
+	QuadTree(AABB* boundary, int level, int parentIndex);
 
 	~QuadTree();
 
-	bool Insert(GameObject* gameobject);
+	void Insert(GameObject* gameobject);
 	void Subdivide();
 	std::vector<GameObject*>QueryRange(AABB* range);
 	int GetIndex(GameObject* gameobject);
-	std::vector<GameObject*>Retrieve(GameObject* gameobject);
+	std::vector<GameObject*>Retrieve(std::vector<GameObject*> &returnObjects, GameObject* gameobject);
 
 	void Clear();
 
 private:
 	int _level;
+	int _parentIndex;
 	QuadTree* _nodes[4];
 
 	AABB* _boundary;
 
 	std::vector<GameObject*> _gameObjects;
+
 };
 #endif // !_QUADTREE_H

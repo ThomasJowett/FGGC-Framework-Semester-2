@@ -4,16 +4,19 @@
 class GameObjectPool
 {
 public:
-	GameObject* GetGameObject(GameObject* object)
+	GameObjectPool(GameObject initialiser) : _initialiser(initialiser){}
+
+	GameObject* GetGameObject()
 	{
 		if (_gameObjects.empty())
 		{
-			return new GameObject(*object);
+			Transform* transform = new Transform((_initialiser.GetTransform()->GetPosition()), _initialiser.GetTransform()->GetRotation(), _initialiser.GetTransform()->GetScale());
+			ParticleModel* particleModel = new ParticleModel(_initialiser.GetPhysicsComponent()->GetMass(), _initialiser.GetPhysicsComponent()->GetVelocity(), transform);
+			return new GameObject(_initialiser.GetType(),_initialiser.GetAppearance(),transform,particleModel,_initialiser.GetCollider());
 		}
 		else
 		{
 			GameObject* newObject = _gameObjects.front();
-			newObject = object;
 			_gameObjects.pop_front();
 			return newObject;
 		}
@@ -32,12 +35,21 @@ public:
 		_gameObjects.empty();
 	}
 
-	void RelesaseGameObject(GameObject* object)
+	void ReleaseGameObject(GameObject* object)
 	{
 		_gameObjects.remove(object);
 		delete object;
 	}
 
+	void PreloadGameObjects(int numberToLoad)
+	{
+		for (int i = 0; i < numberToLoad; i++)
+		{
+			ReturnGameObject(GetGameObject());
+		}
+	}
+
 private:
 	std::list<GameObject*>_gameObjects;
+	GameObject _initialiser;
 };

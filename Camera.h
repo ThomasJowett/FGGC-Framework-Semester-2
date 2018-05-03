@@ -41,7 +41,7 @@ public:
 	virtual void Pitch(float angle) {};
 	virtual void Yaw(float angle) {};
 
-	virtual void Update();
+	virtual void Update(Vector3D target);
 
 	XMFLOAT4X4 GetView() const { return _view; }
 	XMFLOAT4X4 GetProjection() const { return _projection; }

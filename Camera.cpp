@@ -32,7 +32,7 @@ void Camera::SetLens(float fovY, float windowHeight, float windowWidth, float ne
 	XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(fovY,  windowWidth / windowHeight, nearDepth, farDepth));
 }
 
-void Camera::Update()
+void Camera::Update(Vector3D target)
 {
     // Initialize the view matrix
 

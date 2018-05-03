@@ -11,25 +11,24 @@ public:
 	ParticleSystem(Appearance* appearance, float mass);
 	~ParticleSystem();
 
-	void AddParticle(GameObject* particle);
-	void Activate(Vector3D position, Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife);
+	void AddParticle();
+	void Activate(Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife);
 	void Deactivate();
 
 	void Render(ID3D11DeviceContext * pImmediateContext);
-	void Update(float deltaTime);
+	void Update(float deltaTime, Vector3D position);
 	bool IsAlive();
 
 	int GetCurrentParticleCount() const { return _particles.size(); }
 
 	vector<GameObject*> GetParticles() const { return _particles; }
 
-	void SetAppearance(Appearance* appearance) { _appearance = appearance;}
-
 	void SetLifeSpan(const float lifeSpan) { _lifeSpan = lifeSpan; }
 	float GetLifeSpan()const { return _lifeSpan; }
 
 private:
 	std::vector<GameObject*> _particles;
+	GameObject initialiser;
 	GameObjectPool* _particlePool;
 	float _lifeSpan;
 	float _totalTime;
@@ -42,14 +41,8 @@ private:
 	
 	bool _isAlive;
 
-	Vector3D _emitterLocation;
-
 	Vector3D _initialVelocity;
-
-	Appearance* _appearance;
-
-	float _mass;
-	float _radius;
+	
 
 	
 };

@@ -1,21 +1,2 @@
-﻿  Car.cpp
-c:\users\j005627b\documents\fggc\quaternion.h(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(106): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(107): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(291): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(292): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\quaternion.h(293): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\j005627b\documents\fggc\transform.h(19): warning C4100: 'j': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(15): warning C4100: 'scale': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(15): warning C4100: 'deltaTime': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(20): warning C4100: 'deltaTime': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(25): warning C4100: 'deltaTime': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(35): warning C4100: 'scale': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(35): warning C4100: 'deltaTime': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(39): warning C4100: 'scale': unreferenced formal parameter
-c:\users\j005627b\documents\fggc\car.cpp(39): warning C4100: 'deltaTime': unreferenced formal parameter
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC\Debug\DX11 Framework.exe
-  DX11 Framework.vcxproj -> C:\Users\j005627b\Documents\FGGC\Debug\DX11 Framework.pdb (Full PDB)
+﻿  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> F:\Documents\OneDrive - Staffordshire University\University Work\Further Games and Graphics Concepts\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

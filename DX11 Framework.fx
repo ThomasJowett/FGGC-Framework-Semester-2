@@ -131,7 +131,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
 
 	// Compute the ambient, diffuse, and specular terms separately.
 	specular += specularAmount * (surface.SpecularMtrl * light.SpecularLight).rgb * textureSpecular.r;
-	diffuse += diffuseAmount * (surface.DiffuseMtrl * light.DiffuseLight).rgb * textureColour.rgb;
+    diffuse += diffuseAmount * (surface.DiffuseMtrl * light.DiffuseLight).rgb * textureColour.rgb;
 	ambient += (surface.AmbientMtrl * light.AmbientLight).rgb * textureAO.b;
 
 	// Sum all the terms together and copy over the diffuse alpha.
