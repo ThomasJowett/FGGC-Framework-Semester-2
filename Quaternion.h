@@ -241,7 +241,7 @@ public:
 	* @param scale The amount of the vector to add.
 	*/
 	//------------------------------------------------------------------------------------------
-	void addScaledVector(const Vector3D& vector, float scale)
+	void AddScaledVector(const Vector3D& vector, float scale)
 	{
 		Quaternion q(0,
 			vector.x * scale,
@@ -264,6 +264,10 @@ public:
 	//rotate vector by this quaternion
 	Vector3D RotateVectorByQuaternion(Vector3D& vector)
 	{
+		Vector3D u = { i, j, k };
+		float s = r;
+
+		//vector = (u * 2.0f * Vector3D::Dot(u, vector)) + (vector * (s*s - Vector3D::Dot(u, vector))) + (Vector3D::Cross(u, vector) * 2.0f * s);
 		Quaternion V(0, vector.x, vector.y, vector.z);
 		V = (*this * V * this->Conjugate());
 		vector.x = V.i;
@@ -295,7 +299,7 @@ public:
 	}
 
 	//returns the euler angles of the quaternion
-	Vector3D euler_angles(bool homogenous = true)const
+	Vector3D EulerAngles(bool homogenous = true)const
 	{
 		Vector3D euler;
 

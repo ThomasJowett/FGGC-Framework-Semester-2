@@ -13,6 +13,6 @@ public:
 	void Pitch(float angle);
 	void Yaw(float angle);
 
-	void Update();
+	void Update(Vector3D target);
 };
 

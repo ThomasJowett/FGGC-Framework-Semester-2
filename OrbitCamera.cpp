@@ -27,8 +27,9 @@ void OrbitCamera::Yaw(float angle)
 		_yaw = 0;
 }
 
-void OrbitCamera::Update()
+void OrbitCamera::Update(Vector3D target)
 {
+	SetLookAt(target);
 	SetUp({ 0.0f, 1.0f, 0.0f });
 	Vector3D position;
 	position.x = GetLookAt().x + _distance * -sin(_yaw) * cos(_pitch);
@@ -40,7 +41,7 @@ void OrbitCamera::Update()
 	//SetUp(GetUp().Cross(GetLookAt(), GetRight()));
 	SetPosition(position);
 
-	Camera::Update();
+	Camera::Update(target);
 }
 
 void OrbitCamera::SetDistance(FLOAT d)

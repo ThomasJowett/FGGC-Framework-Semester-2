@@ -23,7 +23,7 @@ RigidBody::~RigidBody()
 void RigidBody::AddPointForce(Vector3D force, Vector3D point)
 {
 	Vector3D torque = Vector3D::Cross(force, point);
-	AddForce(force);
+	//AddForce(force);
 
 	_netTorque += torque;
 }
@@ -44,7 +44,9 @@ void RigidBody::Update(float deltaTime)
 {
 	ParticleModel::Update(deltaTime);
 
-	float inertia = GetInertia(_angularVelocity.GetNormalized());
+	AddTorque(_angularVelocity * -_angularDrag);
+
+	float inertia = GetInertia(_netTorque.GetNormalized());
 	Vector3D angularAcceleration;
 
 	if (inertia)
@@ -57,7 +59,7 @@ void RigidBody::Update(float deltaTime)
 
 	Quaternion rotation = _transform->GetRotation();
 
-	rotation.addScaledVector(_angularVelocity, deltaTime);
+	rotation.AddScaledVector(_angularVelocity, deltaTime);
 
 	rotation.Normalize();
 

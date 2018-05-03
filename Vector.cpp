@@ -17,7 +17,7 @@ Vector3D::Vector3D(float x, float y, float z)
 
 float Vector3D::GetMagnitude()
 {
-	return sqrtf(GetSqrMagnitude());
+	return sqrt(GetSqrMagnitude());
 }
 
 float Vector3D::GetSqrMagnitude()

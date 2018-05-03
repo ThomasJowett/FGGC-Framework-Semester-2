@@ -27,6 +27,9 @@ public:
 	Collider* GetCollider() const { return _collider; }
 	
 	void SetParent(GameObject * parent) { _parent = parent; }
+	void SetTransform(Transform* transform) { _transform = transform; }
+	void SetPhysicsComponent(ParticleModel* physicsComponent) { _physicsComponent = physicsComponent; }
+	void SetAppearance(Appearance* appearance) { _appearance = appearance; }
 
 	virtual void Update(float deltaTime);
 	void Draw(ID3D11DeviceContext * pImmediateContext);

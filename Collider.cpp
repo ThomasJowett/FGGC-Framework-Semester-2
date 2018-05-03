@@ -89,28 +89,28 @@ bool AABB::ContainsPoint(Vector3D point) const
 		? false : true;
 }
 
-bool AABB::TestXAxisValue(float value, bool greater)
+bool AABB::TestXAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetXMin() > value) ? true : false;
+		return (GetXMin() > value);
 	else
-		return (GetXMax() < value) ? true : false;
+		return (GetXMax() < value);
 }
 
-bool AABB::TestYAxisValue(float value, bool greater)
+bool AABB::TestYAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetYMin() > value) ? true : false;
+		return (GetYMin() > value);
 	else
-		return (GetYMax() < value) ? true : false;
+		return (GetYMax() < value);
 }
 
-bool AABB::TestZAxisValue(float value, bool greater)
+bool AABB::TestZAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetZMin() > value) ? true : false;
+		return (GetZMin() > value);
 	else
-		return (GetZMax() < value) ? true : false;
+		return (GetZMax() < value);
 }
 
 bool Sphere::IntersectsCollider(Collider * otherCollider, Vector3D & normal, float & penetrationDepth) const
@@ -188,28 +188,28 @@ bool Sphere::ContainsPoint(Vector3D point) const
 	return (distance.GetSqrMagnitude() > _radius * _radius) ? false : true;
 }
 
-bool Sphere::TestXAxisValue(float value, bool greater)
+bool Sphere::TestXAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetCentre().x - _radius > value) ? true : false;
+		return (GetCentre().x - _radius >= value);
 	else
-		return (GetCentre().x + _radius > value) ? true : false;
+		return (GetCentre().x + _radius <= value);
 }
 
-bool Sphere::TestYAxisValue(float value, bool greater)
+bool Sphere::TestYAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetCentre().y - _radius > value) ? true : false;
+		return (GetCentre().y - _radius >= value);
 	else
-		return (GetCentre().y + _radius > value) ? true : false;
+		return (GetCentre().y + _radius <= value);
 }
 
-bool Sphere::TestZAxisValue(float value, bool greater)
+bool Sphere::TestZAxisValue(float value, bool greater) const
 {
 	if (greater)
-		return (GetCentre().z - _radius > value) ? true : false;
+		return (GetCentre().z - _radius >= value);
 	else
-		return (GetCentre().z + _radius > value) ? true : false;
+		return (GetCentre().z + _radius <= value);
 }
 
 bool Collider::TestAxis(Vector3D axis, float minA, float maxA, float minB, float maxB, Vector3D & mtvAxis, float & mtvDistance) const

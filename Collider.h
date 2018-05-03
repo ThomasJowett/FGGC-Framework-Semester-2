@@ -18,9 +18,9 @@ public:
 
 	bool TestAxis(Vector3D axis, float minA, float maxA, float minB, float maxB, Vector3D& mtvAxis, float& mtvDistance) const;
 
-	virtual bool TestXAxisValue(float value, bool greater) = 0;
-	virtual bool TestYAxisValue(float value, bool greater) = 0;
-	virtual bool TestZAxisValue(float value, bool greater) = 0;
+	virtual bool TestXAxisValue(float value, bool greater)const = 0;
+	virtual bool TestYAxisValue(float value, bool greater)const = 0;
+	virtual bool TestZAxisValue(float value, bool greater)const = 0;
 
 protected:
 	Transform* _transform;
@@ -48,9 +48,9 @@ public:
 	float GetWidth()const { return _width; }
 	float GetDepth()const { return _depth; }
 
-	bool TestXAxisValue(float value, bool greater) override;
-	bool TestYAxisValue(float value, bool greater) override;
-	bool TestZAxisValue(float value, bool greater) override;
+	bool TestXAxisValue(float value, bool greater) const override;
+	bool TestYAxisValue(float value, bool greater) const override;
+	bool TestZAxisValue(float value, bool greater) const override;
 
 private:
 	float _height, _width, _depth;
@@ -69,9 +69,9 @@ public:
 	float GetBoundingRadius() const { return _radius; }
 	Vector3D GetCentre() const { return _transform->GetPosition(); }
 
-	bool TestXAxisValue(float value, bool greater) override;
-	bool TestYAxisValue(float value, bool greater) override;
-	bool TestZAxisValue(float value, bool greater) override;
+	bool TestXAxisValue(float value, bool greater) const override;
+	bool TestYAxisValue(float value, bool greater) const override;
+	bool TestZAxisValue(float value, bool greater) const override;
 	
 private:
 	float _radius;

@@ -13,12 +13,13 @@ QuadTree::QuadTree()
 	_nodes[3] = nullptr;
 
 	_gameObjects = std::vector<GameObject*>();
+	_parentIndex = -1;
 
-	MAXOBJECTS = 10;
-	MAXLEVELS = 5;
+	MAXOBJECTS = 1;
+	MAXLEVELS = 10;
 }
 
-QuadTree::QuadTree(AABB* boundary, int level) : _boundary(boundary), _level(level)
+QuadTree::QuadTree(AABB* boundary, int level, int parentIndex) : _boundary(boundary), _level(level), _parentIndex(parentIndex)
 {	
 	_nodes[0] = nullptr;
 	_nodes[1] = nullptr;
@@ -27,20 +28,16 @@ QuadTree::QuadTree(AABB* boundary, int level) : _boundary(boundary), _level(leve
 
 	_gameObjects = std::vector<GameObject*>();
 
-	MAXOBJECTS = 10;
-	MAXLEVELS = 5;
+	MAXOBJECTS = 5;
+	MAXLEVELS = 20;
 }
 
 QuadTree::~QuadTree()
 {
-	for (auto node : _nodes)
-		if (node != nullptr)
-		{
-			delete node;
-		}
+	Clear();
 }
 
-bool QuadTree::Insert(GameObject* gameObject)
+void QuadTree::Insert(GameObject* gameObject)
 {
 	if (_nodes[0] != nullptr) 
 	{
@@ -49,7 +46,7 @@ bool QuadTree::Insert(GameObject* gameObject)
 		if (index != -1) 
 		{
 			_nodes[index]->Insert(gameObject);
-			return true;
+			return;
 		}
 	}
 	_gameObjects.push_back(gameObject);
@@ -67,7 +64,8 @@ bool QuadTree::Insert(GameObject* gameObject)
 			int index = GetIndex(_gameObjects.at(i));
 			if (index != -1)
 			{
-				_nodes[index]->Insert(_gameObjects[i]);
+				_nodes[index]->Insert(_gameObjects.at(i));
+				_gameObjects.erase(_gameObjects.begin() + i);
 			}
 			else
 			{
@@ -84,22 +82,22 @@ void QuadTree::Subdivide()
 	
 	//north West
 	Transform * transform = new Transform(Vector3D(_boundary->GetCentre().x - halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z + halfDepth), {}, { 1.0f,1.0f,1.0f });
-	_nodes[0] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1);
+	_nodes[0] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1, 0);
 
 	//north East
 	transform = new Transform();
 	transform->SetPosition(Vector3D(_boundary->GetCentre().x + halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z + halfDepth));
-	_nodes[1] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1);
+	_nodes[1] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1, 1);
 
 	//South West
 	transform = new Transform();
-	transform->SetPosition(Vector3D(_boundary->GetCentre().x + halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z - halfDepth));
-	_nodes[2] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1);
+	transform->SetPosition(Vector3D(_boundary->GetCentre().x - halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z - halfDepth));
+	_nodes[2] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1, 2);
 
 	//South East
 	transform = new Transform();
-	transform->SetPosition(Vector3D(_boundary->GetCentre().x - halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z - halfDepth));
-	_nodes[3] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1);
+	transform->SetPosition(Vector3D(_boundary->GetCentre().x + halfWidth, _boundary->GetCentre().y, _boundary->GetCentre().z - halfDepth));
+	_nodes[3] = new QuadTree(new AABB(transform, halfWidth, _boundary->GetHeight(), halfDepth), _level + 1, 3);
 }
 
 std::vector<GameObject*> QuadTree::QueryRange(AABB* range)
@@ -141,36 +139,36 @@ std::vector<GameObject*> QuadTree::QueryRange(AABB* range)
 int QuadTree::GetIndex(GameObject * gameobject)
 {
 	int index = -1;
-	bool northHalf = (gameobject->GetCollider()->TestZAxisValue(_boundary->GetCentre().z,true) && 
-		gameobject->GetCollider()->TestZAxisValue(_boundary->GetZMax(), false));
-	bool southHalf = (gameobject->GetCollider()->TestZAxisValue(_boundary->GetCentre().z, false) &&
-		gameobject->GetCollider()->TestZAxisValue(_boundary->GetZMin(), true));
+	Collider* collider = gameobject->GetCollider();
+	bool northHalf = (collider->TestZAxisValue(_boundary->GetCentre().z,true) &&
+		collider->TestZAxisValue(_boundary->GetZMax(), false));
+	bool southHalf = (collider->TestZAxisValue(_boundary->GetCentre().z, false) &&
+		collider->TestZAxisValue(_boundary->GetZMin(), true));
 
-	if (gameobject->GetCollider()->TestXAxisValue(_boundary->GetCentre().x, true))
+	if (collider->TestXAxisValue(_boundary->GetCentre().x, true) && collider->TestXAxisValue(_boundary->GetXMax(),false))
 	{
 		if (northHalf)
-			index = 1;
+			index = 1;//North East
 		else if (southHalf)
-			index = 2;
+			index = 3; //South East
 	}
-	else if (gameobject->GetCollider()->TestXAxisValue(_boundary->GetCentre().x, false))
+	else if (collider->TestXAxisValue(_boundary->GetCentre().x, false) && collider->TestXAxisValue(_boundary->GetXMin(), true))
 	{
 		if (northHalf)
-			index = 0;
+			index = 0;//North West
 		else if(southHalf)
-			index = 3;
+			index = 2;//South West
 	}
 
 	return index;
 }
 
-std::vector<GameObject*> QuadTree::Retrieve(GameObject * gameobject)
+std::vector<GameObject*> QuadTree::Retrieve(std::vector<GameObject*>& returnObjects, GameObject * gameobject)
 {
 	int index = GetIndex(gameobject);
-	std::vector<GameObject*> returnObjects;
 	if (index != -1 && _nodes[0] != nullptr)
 	{
-		_nodes[index]->Retrieve(gameobject);
+		_nodes[index]->Retrieve(returnObjects, gameobject);
 	}
 
 	for (GameObject* gameObject : _gameObjects)

@@ -1,13 +1,16 @@
 #include "ParticleSystem.h"
 
 ParticleSystem::ParticleSystem(Appearance* appearance, float mass) 
-	:_appearance(appearance), _mass(mass)
 {
 	_isAlive = false;
 	_totalTime = 0.0f;
 	_spawnTime = 0.0f;
 	_destroyTime = 0.0f;
-	_particlePool = new GameObjectPool();
+	Transform* transform = new Transform();
+	initialiser = GameObject("Particle", appearance, transform, new ParticleModel(mass, {0.0f, 0.0f, 0.0f}, transform), nullptr);
+	_particlePool = new GameObjectPool(initialiser);
+
+	_particlePool->PreloadGameObjects(10);
 }
 
 
@@ -19,12 +22,12 @@ ParticleSystem::~ParticleSystem()
 	_particlePool->CleanUp();
 }
 
-void ParticleSystem::AddParticle(GameObject* particle)
+void ParticleSystem::AddParticle()
 {
-	_particles.push_back(_particlePool->GetGameObject(particle));
+	_particles.push_back(_particlePool->GetGameObject());
 }
 
-void ParticleSystem::Activate(Vector3D position, Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife)
+void ParticleSystem::Activate(Vector3D velocity, float variance, float lifeSpan, float particlesPerSecond, float particleLife)
 {
 	_lifeSpan = lifeSpan;
 	_particlesPerSecond = particlesPerSecond;
@@ -32,7 +35,7 @@ void ParticleSystem::Activate(Vector3D position, Vector3D velocity, float varian
 
 	_particleLife = particleLife;
 	_initialVelocity = velocity;
-	_emitterLocation = position;
+	
 	_isAlive = true;
 	_totalTime = 0.0f;
 }
@@ -50,7 +53,7 @@ void ParticleSystem::Render(ID3D11DeviceContext * pImmediateContext)
 	}
 }
 
-void ParticleSystem::Update(float deltaTime)
+void ParticleSystem::Update(float deltaTime, Vector3D position)
 {
 	_totalTime += deltaTime;
 
@@ -60,10 +63,13 @@ void ParticleSystem::Update(float deltaTime)
 
 		if (_spawnTime > 1.0f / _particlesPerSecond)
 		{
-			Transform* transform = new Transform(_emitterLocation, { 1,0,0, 0}, { 1,1,1 });
-			ParticleModel* particle = new ParticleModel(_mass, _initialVelocity+ Vector3D{ _variance * (float)rand() / (RAND_MAX)-_variance/2, _variance * (float)rand() / (RAND_MAX)-_variance / 2, _variance * (float)rand() / (RAND_MAX)-_variance / 2 }, transform);
+			AddParticle();
+			_particles.at(_particles.size()-1)->GetTransform()->SetPosition(position);
+			_particles.at(_particles.size() - 1)->GetPhysicsComponent()->SetVelocity(_initialVelocity + 
+				Vector3D{ _variance * (float)rand() / (RAND_MAX)-_variance / 2, 
+				_variance * (float)rand() / (RAND_MAX)-_variance / 2, 
+				_variance * (float)rand() / (RAND_MAX)-_variance / 2 });
 
-			AddParticle(new GameObject("Particle", _appearance, transform, particle, nullptr));
 			_spawnTime = 0.0f;
 		}
 	}
